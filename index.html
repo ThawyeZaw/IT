@@ -120,6 +120,44 @@
             border-color: var(--color-primary);
         }
 
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-toggle svg {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            padding: 1rem;
+            border: 1px solid var(--color-border);
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
         /* Content Area */
         .content {
             display: grid;
@@ -154,6 +192,7 @@
             padding: 2rem;
             border: 1px solid var(--color-border);
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .card:hover {
@@ -426,22 +465,11 @@
             }
 
             .sidebar {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 1rem;
-                height: auto;
-                padding: 1rem;
-                background: transparent;
-                border: none;
+                display: none;
             }
 
-            .sidebar h3 {
-                grid-column: 1 / -1;
-            }
-
-            .nav-btn {
-                padding: 0.75rem;
-                font-size: 0.9rem;
+            .mobile-nav-toggle {
+                display: flex;
             }
 
             .card {
@@ -566,7 +594,28 @@
         </header>
 
         <div class="main-content">
-            <!-- Sidebar Navigation -->
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <span>Browse Topics</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <ul class="nav-list">
+                    <li><button class="nav-btn active" data-topic="topic7">Topic 7: HTML</button></li>
+                    <li><button class="nav-btn" data-topic="topic8">Topic 8: CSS</button></li>
+                    <li><button class="nav-btn" data-topic="topic9">Topic 9: JavaScript</button></li>
+                    <li><button class="nav-btn" data-topic="topic10">Topic 10: Design</button></li>
+                    <li><button class="nav-btn" data-topic="topic11">Topic 11: Semantic</button></li>
+                    <li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
+                    <li><button class="nav-btn" data-topic="exam">🎯 Exam Mode</button></li>
+                </ul>
+            </div>
+
+            <!-- Sidebar Navigation (Desktop) -->
             <aside class="sidebar">
                 <h3>Topics</h3>
                 <ul class="nav-list">
@@ -651,7 +700,7 @@
                                     <h4>✓ Double Quotes</h4>
                                     <p>Use double quotes for attributes: class="container"</p>
                                 </div>
-                                <div class="conconcept-box">
+                                <div class="concept-box">
                                     <h4>✓ Self-closing Elements</h4>
                                     <p>Remove slash: &lt;img&gt; not &lt;img /&gt;</p>
                                 </div>
@@ -1603,6 +1652,14 @@ input.addEventListener('input', function(event) {
                     initFlashcards();
                 }
 
+                // Close mobile nav if open
+                const mobileNav = document.getElementById('mobileNav');
+                const mobileNavToggle = document.getElementById('mobileNavToggle');
+                if (mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                }
+
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
@@ -1625,6 +1682,15 @@ input.addEventListener('input', function(event) {
                 button.classList.add('active');
                 document.getElementById(tab).classList.add('active');
             });
+        });
+
+        // Mobile navigation toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            mobileNavToggle.classList.toggle('active');
         });
 
         // Flashcard data
