@@ -41,9 +41,9 @@
 				min-height: 100vh;
 			}
 
-      a {
-        color: var(--color-text);
-      }
+			a {
+				color: var(--color-text);
+			}
 
 			header {
 				background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
@@ -778,7 +778,7 @@
 			<header>
 				<h1><a href="./index.html">📚</a> IAL IT Unit 1 Master Dashboard</h1>
 				<p>Master Hardware, Software, Networks & IT Systems • Topics 1-6 • Interactive Learning & Exam Prep</p>
-        <p><a href="./index.html">( back to home )</a></p>
+				<p><a href="./index.html">( back to home )</a></p>
 			</header>
 
 			<div class="main-content">
@@ -839,7 +839,10 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Features vs Functions</h4>
-										<p>A feature is a distinctive characteristic of a device. Functions are ways a device can be used.</p>
+										<p>
+											A <strong>feature</strong> is a distinctive characteristic or part of a device, such as its size, weight, or biometric scanner. A <strong>function</strong> describes how a device operates or its purpose, like
+											making calls or browsing the internet.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>Key Features</h4>
@@ -851,106 +854,107 @@
 								<div class="example-box">
 									<strong>Key Technologies:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>GPS (Global Positioning System)</li>
-										<li>Biometrics (Fingerprint, facial recognition)</li>
-										<li>Touchscreen</li>
-										<li>Sensors (Light, accelerometer, motion, temperature)</li>
-										<li>Memory (RAM)</li>
-										<li>Storage</li>
-										<li>Battery Power</li>
-										<li>Miniaturisation</li>
-										<li>Processor</li>
-										<li>RFID</li>
-										<li>NFC</li>
-										<li>QR Codes</li>
-										<li>Connectivity Hardware</li>
+										<li><strong>GPS</strong>: Small satellite-based navigation increasing power usage but enabling location tracking and mapping.</li>
+										<li><strong>Biometrics</strong>: Devices like fingerprint and facial recognition provide strong security.</li>
+										<li><strong>Touchscreen</strong>: Combines display and input, saving space and improving usability.</li>
+										<li><strong>Sensors</strong>: Include light sensors for brightness adjustment, accelerometers for orientation, motion and temperature sensors for contextual operations.</li>
+										<li><strong>Memory (RAM)</strong>: Volatile memory affecting multitasking and speed; higher RAM generally improves performance but adds to size.</li>
+										<li><strong>Storage</strong>: Non-volatile storage devices like SSDs, HDDs, optical drives; type impacts speed, capacity, and portability.</li>
+										<li><strong>Battery Power</strong>: Balances device usage time vs size/weight; innovations include solid-state batteries for better efficiency.</li>
+										<li><strong>Miniaturisation</strong>: More transistors on integrated circuits allow smaller devices without losing performance e.g., Raspberry Pi.</li>
+										<li><strong>Processor</strong>: CPU speed (GHz) and cores determine processing power and multitasking capabilities.</li>
+										<li><strong>RFID</strong>: Tags for tracking items, useful for security and inventory.</li>
+										<li><strong>NFC</strong>: Near-field communication for secure short-range data sharing, contactless payments.</li>
+										<li><strong>QR Codes</strong>: Barcodes containing data accessible via device cameras for quick information access.</li>
+										<li><strong>Connectivity Hardware</strong>: Includes USB ports, HDMI, wireless network interface cards (WNIC), and Bluetooth chips affecting device size and performance.</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.3 - Technological Convergence</h3>
-								<p>When two or more devices are combined to create a single device or service.</p>
+								<p>Technological convergence is when two or more devices combine into one to offer multiple functionalities. This has led to the rise of the Internet of Things (IoT), connecting daily objects over the internet.</p>
 								<div class="example-box">
 									<strong>Examples:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Smart TV: TV + internet + apps + camera</li>
-										<li>Smartphone: Phone + camera + GPS + music player + computer</li>
-										<li>Tablet: Computer + touchscreen</li>
-										<li>Smart Watch: Watch + fitness tracker + phone notifications</li>
+										<li>Smart TV: Combines television, internet, apps, and sometimes built-in cameras.</li>
+										<li>Smartphone: Phone, camera, GPS, music player, and computer all integrated.</li>
+										<li>Tablet: Combines a computer with a touchscreen interface.</li>
+										<li>Smart Watch: Functions as a watch, fitness tracker, and phone notification device.</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.4 - Embedded Systems</h3>
-								<p>A system with a dedicated, single purpose. Has limited functions.</p>
+								<p>Embedded systems perform dedicated or limited functions, often within other devices. They use microprocessors to process data but have lower performance compared to general computers.</p>
 								<div class="example-box">
 									<strong>Characteristics:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Single function or limited functions</li>
+										<li>Single or limited functions</li>
 										<li>Dedicated hardware</li>
 										<li>Not easily reprogrammed by users</li>
-										<li>Built into a single electronic chip</li>
-										<li>Contains a microprocessor</li>
+										<li>Built into a single chip</li>
+										<li>Contains a microprocessor (small processor variant)</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.5 - Firmware</h3>
-								<p>Basic instructions that allow system to function, including startup and input/output tasks.</p>
+								<p>Firmware is essential software embedded in devices to control hardware startup and basic operations.</p>
 								<div class="example-box">
-									<strong>Contains:</strong>
+									<strong>Includes:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>BIOS (Basic Input/Output System): Instructions to boot up computer</li>
-										<li>Bootloader: Loads the operating system when computer turns on</li>
+										<li><strong>BIOS</strong>: Basic Input/Output System, initializes hardware during boot-up.</li>
+										<li><strong>Bootloader</strong>: Loads the operating system at startup.</li>
 									</ul>
+									<p><em>Stored in ROM in computers; stored within chip in embedded systems.</em></p>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.6 - Performance Assessment Factors</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Speed</h4>
-										<p>How quickly device processes instructions (measured in GHz)</p>
+										<p>Measured in GHz; faster clock speeds and more cores provide higher processing performance.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Capacity</h4>
-										<p>Amount of storage device can hold</p>
+										<p>Storage size; larger capacity supports more data, important for tasks like video editing or large databases.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Portability</h4>
-										<p>How easy to carry device around</p>
+										<p>Small, lightweight devices are more portable; essential for mobile phones and laptops but less for desktops.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Bandwidth</h4>
-										<p>Speed at which network transmits data (measured in Gbps or Mbps)</p>
+										<p>Network data transmission speed; affects performance where network connectivity matters.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Power Efficiency</h4>
-										<p>How slowly device uses energy</p>
+										<p>Slower energy usage leads to longer battery life, cost savings, and positive environmental impact.</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.7 - Binary and Denary Conversion</h3>
-								<p>Humans use DENARY (base 10): 0-9 values. Computers use BINARY (base 2): 0-1 values only.</p>
+								<p>Denary (decimal) uses base 10 (digits 0-9), binary uses base 2 (digits 0 and 1). Conversion involves using powers of 2 and marking binary digits accordingly.</p>
 								<div class="example-box">
-									<strong>Denary to Binary:</strong>
+									<strong>Denary to Binary Steps:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Use powers of 2: 128, 64, 32, 16, 8, 4, 2, 1</li>
-										<li>Mark 1 if value is used, 0 if not used</li>
-										<li>Work from highest to lowest</li>
-										<li>Subtract from remaining value</li>
-										<li>Example: 13 = 1101 (8+4+1)</li>
+										<li>Use powers of 2 (128, 64, 32, 16, 8, 4, 2, 1)</li>
+										<li>Mark '1' if power is included, '0' if not</li>
+										<li>Start with highest power less than or equal to the number</li>
+										<li>Example: 13 converts to 1101 (8 + 4 + 1)</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.1.8 - Data File Sizes</h3>
 								<div class="example-box">
-									<strong>IEC Units (for storage/transmission):</strong>
+									<strong>Units of Data:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>1 bit = smallest unit</li>
+										<li>1 bit = smallest unit of data</li>
 										<li>1 nibble = 4 bits</li>
 										<li>1 byte = 8 bits</li>
-										<li>1 KiB = 1024 bytes</li>
-										<li>1 MiB = 1024 KiB</li>
-										<li>1 GiB = 1024 MiB</li>
-										<li>1 TiB = 1024 GiB</li>
+										<li>1 KiB (kibibyte) = 1024 bytes</li>
+										<li>1 MiB (mebibyte) = 1024 KiB</li>
+										<li>1 GiB (gibibyte) = 1024 MiB</li>
+										<li>1 TiB (tebibyte) = 1024 GiB</li>
 									</ul>
+									<p>Important distinction from SI units (e.g., kB=1000 bytes). Use IEC units for accuracy in computing. Example Calculation: A 10 MiB file size implies 10 × 8 × 1024 × 1024 bits for transmission.</p>
 								</div>
 							</div>
 
@@ -959,13 +963,11 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>SYSTEMS SOFTWARE</h4>
-										<p>Purpose: Allow computer to run efficiently, maintain computer, perform tasks computer needs</p>
-										<p>Examples: Operating system, antivirus, firewall, drivers, disk defragmentation, compression software</p>
+										<p>Software that runs and maintains the computer itself. Examples include operating systems, antivirus, firewalls, drivers, disk defragmentation software.</p>
 									</div>
 									<div class="concept-box">
 										<h4>APPLICATION SOFTWARE</h4>
-										<p>Purpose: Provide services for user, allow user to carry out tasks</p>
-										<p>Examples: Word processor, spreadsheet, database, photo editor, video editor, web browser, games</p>
+										<p>Software designed for end-users to perform specific tasks. Examples include word processors, spreadsheets, databases, photo and video editors, web browsers, and games.</p>
 									</div>
 								</div>
 
@@ -973,35 +975,39 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Managing Devices</h4>
-										<p>Manages peripheral devices (keyboard, mouse, printer, monitor, scanner)</p>
+										<p>Operating system uses drivers to manage peripherals and process interrupts efficiently.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Managing Processes</h4>
-										<p>Moves data to/from storage and memory (RAM), allocates memory to tasks</p>
+										<p>Controls memory allocation, multitasking (switching between tasks), and data transfers between storage and RAM.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Managing Users</h4>
-										<p>Provides graphical user interface (GUI), allows multiple user accounts</p>
+										<p>Provides GUI, multiple user accounts, handles file operations, and controls user permissions.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Managing Security</h4>
-										<p>Sets username/password, access levels, runs antivirus, firewall</p>
+										<p>Maintains user authentication, data access levels, and runs security utilities like antivirus and firewalls.</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.2.3 - Software Sources</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
-										<h4>FREE SOFTWARE</h4>
-										<p>User can study, modify, and share source code. Can be distributed with or without fee.</p>
+										<h4>Free Software</h4>
+										<p>Can be studied, modified, and shared; can be free or paid.</p>
 									</div>
 									<div class="concept-box">
-										<h4>OPEN-SOURCE SOFTWARE</h4>
-										<p>User can study, modify, and share source code. Usually provided without fee.</p>
+										<h4>Open-Source Software</h4>
+										<p>Source code available for study and modification, usually free; community-driven development.</p>
 									</div>
 									<div class="concept-box">
-										<h4>PROPRIETARY SOFTWARE</h4>
-										<p>Source code NOT distributed and is protected. User cannot see, study, modify, or redistribute code.</p>
+										<h4>Proprietary Software</h4>
+										<p>Source code is closed and protected; user cannot modify or redistribute; typically supported by vendor.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Creative Commons</h4>
+										<p>Licenses that specify permissions for software use, such as attribution, non-commercial use, and share-alike conditions.</p>
 									</div>
 								</div>
 
@@ -1009,24 +1015,25 @@
 								<div class="example-box">
 									<strong>License Types:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Single User: One user, one computer only</li>
-										<li>Multiple User: Set number of computers</li>
-										<li>Institutional: All computers in organization</li>
-										<li>Fixed Term: Limited time period</li>
-										<li>Indefinite (Perpetual): Use indefinitely</li>
-										<li>Network: Software installed on server</li>
+										<li><em>Single User:</em> For one user on one device.</li>
+										<li><em>Multiple User:</em> Licensed for a fixed number of devices/users.</li>
+										<li><em>Institutional:</em> Organization-wide use, based on number of users or devices.</li>
+										<li><em>Fixed Term:</em> Limited time license, e.g., annual subscriptions.</li>
+										<li><em>Indefinite (Perpetual):</em> One-time purchase; use indefinitely without renewal fees.</li>
+										<li><em>Network:</em> Installed on a central server for network-wide access.</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">1.2.5 - Software Updates</h3>
-								<p>Reasons for updates: Fix bugs/errors, Add new features, Improve security, Change interface look</p>
+								<p>Updates improve software by fixing bugs, adding features, enhancing security, or modifying the user interface.</p>
 								<div class="example-box">
 									<strong>Update Types:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Patch: Quick-fix for errors or security vulnerabilities</li>
-										<li>Automatic Update: Updates without user consent</li>
-										<li>Upgrade: Whole new version with new features and functionality</li>
+										<li><em>Patch:</em> Quick fixes for urgent bugs or vulnerabilities.</li>
+										<li><em>Automatic Update:</em> Software updates installed without user intervention.</li>
+										<li><em>Upgrade:</em> Major new versions with new features that replace old versions.</li>
 									</ul>
+									<p>Compatibility issues can arise if updates do not support older hardware or software environments.</p>
 								</div>
 							</div>
 						</div>
@@ -1049,43 +1056,76 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>CLIENT-SERVER</h4>
-										<p>Central server provides services/data. Clients request from server. If server fails, clients cannot access services.</p>
+										<p>
+											Central server provides services/data to client computers. Server acts as a point of control. Benefits include centralized security, automatic updates, and centralized backups. Drawback: If server fails, clients
+											lose access.
+										</p>
+										<p><em>Examples: File servers, web servers, print servers</em></p>
 									</div>
 									<div class="concept-box">
 										<h4>PEER-TO-PEER (P2P)</h4>
-										<p>All computers have equal status. Computers can act as both client and server. No single point of failure.</p>
+										<p>
+											All computers (peers) have equal status. Each can act as both client and server, sharing files and resources. No single point of failure. Benefits: Cheap setup, no specialist technicians needed. Drawback: Less
+											secure, each user manages own security.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>AD HOC NETWORKS</h4>
-										<p>Temporary network created as needed. Devices connect directly without infrastructure.</p>
+										<p>Temporary network created spontaneously without infrastructure (no router needed). Devices connect directly. Used when sharing resources temporarily, e.g., students sharing project files in a park.</p>
 									</div>
 									<div class="concept-box">
 										<h4>TETHERING</h4>
-										<p>Mobile device shares its internet connection with other devices.</p>
+										<p>
+											Mobile device shares its internet connection with other devices (turns phone into a hotspot). Useful for internet access while travelling. Can be done via Wi-Fi, Bluetooth, or USB. Drawback: Drains battery and
+											uses mobile data plan.
+										</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">2.1.2 - Network Protocols</h3>
 								<div class="example-box">
-									<strong>Protocols:</strong>
+									<strong>Communication Protocols:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Wi-Fi: Wireless local network. 802.11 standard. Radius ~50-100m</li>
-										<li>ZigBee®: Low-power wireless. Used in home automation. Short range</li>
-										<li>Bluetooth®: Short-range wireless (typically 10m). Devices connect directly</li>
-										<li>Cellular (GSM/3G/4G): Mobile networks. Long range via cell towers</li>
-										<li>Infrared: Line-of-sight wireless. Short range. Used in remote controls</li>
-										<li>Ethernet: Wired connection. High speed. Used in LANs and servers</li>
+										<li><strong>Wi-Fi</strong>: Wireless LAN using radio waves. 802.11 standard. Uses 2.4 GHz (up to 45m range) or 5 GHz (up to 15m range, faster speeds up to 10 Gbps). Cheap, compatible with many devices.</li>
+										<li>
+											<strong>ZigBee®</strong>: Low-power wireless for home automation and IoT devices. Uses 2.4 GHz radio waves. Range up to 100m but slower speeds (250 Kbps). Requires ZigBee hub. Used for smart bulbs, thermostats.
+										</li>
+										<li>
+											<strong>Bluetooth®</strong>: Short-range wireless (10m). Uses 2.4 GHz radio waves. Up to 3 Mbps. Devices connect via "pairing" process. Used for headphones, keyboards, connecting phone to car. Can connect up to
+											7 devices to host device.
+										</li>
+										<li>
+											<strong>Cellular (GSM/3G/4G/5G)</strong>: Mobile networks using base stations arranged in honeycomb cells. Uses radio waves (phone to base station) and microwaves (between base stations). 2G (0.1 Mbps), 3G (42
+											Mbps), 4G (150 Mbps), 5G (10 Gbps).
+										</li>
+										<li><strong>Infrared</strong>: Line-of-sight wireless using infrared light. Short range, weak signal. Used in remote controls and rarely for peripheral connections (keyboards, mice).</li>
+										<li><strong>Ethernet</strong>: Wired connection for LANs. Uses twisted pair, coaxial, or fiber optic cables. Speeds up to 100 Gbps. Cheap, secure, reliable with error detection, easy to install.</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">2.1.3 - Network Standards</h3>
 								<div class="example-box">
-									<strong>Key Standards:</strong>
+									<strong>Key Standards and Protocols:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>TCP/IP (Transmission Control Protocol/Internet Protocol): Foundation of internet</li>
-										<li>VOIP (Voice Over Internet Protocol): Converts voice to data packets</li>
-										<li>SIP (Session Initiation Protocol): Establishes, maintains, and terminates communication sessions</li>
-										<li>OSI Model (7-Layer): Application, Presentation, Session, Transport, Network, Data Link, Physical</li>
+										<li>
+											<strong>TCP/IP</strong>: Foundation of internet. TCP ensures reliable data delivery by breaking data into segments, checking for errors, and requesting re-sends. IP handles addressing and routing using IP
+											addresses.
+										</li>
+										<li><strong>VOIP (Voice Over Internet Protocol)</strong>: Makes voice calls over the internet. Converts voice to digital data, compresses it, and transmits. Used by Skype, FaceTime.</li>
+										<li><strong>SIP (Session Initiation Protocol)</strong>: Works with VOIP. Establishes, maintains, and terminates communication sessions.</li>
+										<li>
+											<strong>OSI Model (7-Layer)</strong>: Theoretical framework for network communication.
+											<ul>
+												<li>7. Application: User interface, HTTP, FTP</li>
+												<li>6. Presentation: Data formatting, encoding, encryption, compression</li>
+												<li>5. Session: Opens, maintains, closes communication sessions</li>
+												<li>4. Transport: Segments data, controls transmission speed, error checking (TCP)</li>
+												<li>3. Network: Packets data, routes between networks using routers (IP)</li>
+												<li>2. Data Link: Frames data, MAC addresses, switches. Two sublayers: Logical Link Control and Media Access Control</li>
+												<li>1. Physical: Cables, wireless signals, transmits bits</li>
+											</ul>
+											<em>Memory tip: "All People Seem To Need Data Processing"</em>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -1095,65 +1135,91 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>WIRELESS MEDIA</h4>
-										<p>Microwave, Radio, Light, Satellite</p>
+										<ul>
+											<li><strong>Microwave</strong>: Point-to-point, line of sight. High frequency (1-300 GHz). Short wavelength. Used between cell towers.</li>
+											<li><strong>Radio</strong>: Omnidirectional, no line of sight needed. Lower frequency (3 kHz - 1 GHz). Travels through walls. Used in wireless LANs.</li>
+											<li><strong>Light (Infrared)</strong>: Line of sight required. Longer wavelength than visible light. Short range, weak signal.</li>
+											<li><strong>Satellite</strong>: Uses radio waves between ground station and satellite. Used in GPS (triangulation with 3+ satellites).</li>
+										</ul>
 									</div>
 									<div class="concept-box">
 										<h4>WIRED MEDIA</h4>
-										<p>Copper Twisted Pair, Copper Cable, Fibre, Powerline</p>
+										<ul>
+											<li>
+												<strong>Copper Twisted Pair</strong>: Two insulated copper wires twisted together. Electrical signals. Up to 10 Gbps. Cheap, easy to install. Prone to electromagnetic interference. Short distances. Used in
+												phone lines and LANs.
+											</li>
+											<li>
+												<strong>Copper Coaxial Cable</strong>: Central copper wire with insulation, metal conductor, plastic layer. Radio frequency signals. Up to 10 Mbps. Less interference than twisted pair. Stiff, hard to bend. Used
+												in cable TV and internet.
+											</li>
+											<li><strong>Fibre Optic</strong>: Glass/plastic strands transmit light. Up to 1 Gbps. Expensive, fragile. No electromagnetic interference. Long distances. Used for internet and long-distance transmission.</li>
+											<li><strong>Powerline</strong>: Uses existing electrical wiring. Up to 2 Gbps. Easy (plug into socket). Prone to interference, depends on wiring condition. Used to extend internet in large buildings.</li>
+										</ul>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">2.2.2 - Network Metrics</h3>
 								<div class="example-box">
-									<strong>Key Metrics:</strong>
+									<strong>Key Metrics for Performance Measurement:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Speed: How quickly data is transmitted (bps)</li>
-										<li>Bandwidth: Maximum data capacity per second (bps)</li>
-										<li>Throughput: Actual data transmitted vs maximum</li>
-										<li>Scalability: Can network expand to handle more users/devices?</li>
-										<li>Latency: Delay in data transmission (milliseconds)</li>
-										<li>Error Rate: How many data packets are corrupted</li>
-										<li>Packet Loss: Percentage of data packets lost</li>
-										<li>Availability: Percentage of time network is operational</li>
-										<li>Jitter: Variation in latency</li>
+										<li><strong>Speed</strong>: Rate of data transfer from one device to another (bps or Bps)</li>
+										<li><strong>Bandwidth</strong>: Maximum data capacity per second. Shared between devices on network. Higher bandwidth = faster speeds.</li>
+										<li><strong>Throughput</strong>: Actual data transmitted vs maximum bandwidth. Often less due to interference and congestion.</li>
+										<li><strong>Scalability</strong>: Network's ability to handle larger data volumes. Can bandwidth increase when needed? Important for events like online sales.</li>
+										<li><strong>Latency</strong>: Delay in transmission measured as round-trip time (send request, receive response). Lower latency = better performance.</li>
+										<li><strong>Error Rate</strong>: Percentage of errors (packet loss, corruption, collisions). High error rate reduces performance due to re-sends.</li>
+										<li><strong>Packet Loss</strong>: Percentage of packets sent but not received. Even 1% affects performance.</li>
+										<li><strong>Availability</strong>: Percentage of time network is operational. Measured as uptime vs expected uptime.</li>
+										<li><strong>Jitter</strong>: Variation in latency due to network congestion. Can cause packet loss.</li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">2.2.3 - Network Components</h3>
 								<div class="example-box">
-									<strong>Key Components:</strong>
+									<strong>Key Components and Their Roles:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Switch: Connects devices in LAN</li>
-										<li>Bridge: Connects two LANs</li>
-										<li>Gateway: Connects two different networks</li>
-										<li>Router: Directs traffic between networks using IP addresses</li>
-										<li>Multi-function Device: Combines router + switch + modem functions</li>
-										<li>Modem: Modulates/demodulates. Connects to ISP</li>
-										<li>Repeater: Extends signal range</li>
-										<li>Server: Provides services/data to clients</li>
-										<li>NIC (Network Interface Card): Hardware in device for network connection</li>
-										<li>Wireless Access Point: Allows devices to connect wirelessly to wired network</li>
-										<li>Hub: Basic device connecting network segments</li>
+										<li><strong>NIC (Network Interface Card)</strong>: Hardware allowing wired connection. WNIC allows wireless connection. Built into devices.</li>
+										<li><strong>Hub</strong>: Basic device connecting multiple devices in LAN. Sends data to ALL connected devices. Inefficient, causes data collisions. Wired connections (ethernet or USB).</li>
+										<li><strong>Switch</strong>: Improved hub. Records MAC addresses in table. Sends data only to intended destination device. Reduces traffic and collisions. More efficient than hub.</li>
+										<li><strong>Bridge</strong>: Connects two LANs to create larger LAN. Reads MAC addresses to forward data to correct LAN. Used in organizations with multiple building LANs.</li>
+										<li><strong>Gateway</strong>: Connects two different networks using different protocols. Translates between protocols (like a translator between languages). Connects LAN to WAN.</li>
+										<li><strong>Router</strong>: Forwards data between networks using IP addresses and routing table. Selects best route to destination. Connects LANs to internet.</li>
+										<li><strong>Multi-function Device</strong>: Home "router" often combines modem + router + gateway + wireless access point + switch.</li>
+										<li><strong>Modem (Modulator-Demodulator)</strong>: Converts between analogue and digital signals. Connects to ISP. Built into modern devices.</li>
+										<li><strong>Repeater</strong>: Boosts and reconstructs weakened electrical signals. Extends signal range across network.</li>
+										<li><strong>Server</strong>: Accepts and responds to requests for data/services. Examples: web server (stores web pages), file server, print server. Often stacked in racks.</li>
+										<li><strong>Wireless Access Point (WAP)</strong>: Transmits and receives radio wave signals for wireless connections. Devices with WNIC connect to WAP.</li>
 									</ul>
 								</div>
+
+								<h3 style="margin-top: 2rem">2.2.4 - Network Design</h3>
+								<p>When designing networks, consider location of devices, number of users, speed requirements, media type, reliability, cost, security, and maintenance accessibility. Design for current and future needs.</p>
 
 								<h3 style="margin-top: 2rem">2.2.5 - IP Addressing</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>IPv4</h4>
-										<p>32-bit addresses. Format: 192.168.1.1. Addresses are running out.</p>
+										<p>32-bit addresses in denary. Four sets of digits separated by dots. Example: 128.11.32.40. Addresses running out.</p>
 									</div>
 									<div class="concept-box">
 										<h4>IPv6</h4>
-										<p>128-bit addresses. More addresses available. Format: 2001:0db8:85a3::8a2e:0370:7334</p>
+										<p>128-bit addresses in hexadecimal. Eight sets of digits separated by colons. Example: AB01:EF01:2368:BB30:4324:10DB:0455:BA10. More addresses available.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Static IP</h4>
-										<p>Fixed address. Doesn't change. Used for servers.</p>
+										<p>Fixed address that doesn't change. Used for servers that need consistent addresses.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Dynamic IP</h4>
-										<p>Changes when device reconnects. Assigned temporarily by DHCP.</p>
+										<p>Changes when device reconnects. Temporarily assigned by DHCP (Dynamic Host Configuration Protocol). Router or dedicated DHCP server assigns IPs automatically.</p>
+									</div>
+									<div class="concept-box">
+										<h4>MAC Addressing</h4>
+										<p>
+											Physical hardware address assigned by manufacturer to NIC. 12 hexadecimal digits in pairs separated by colons. First 3 pairs = manufacturer ID, last 3 pairs = device serial number. Example: 3C:5A:B4:01:63:D2.
+											Used within LANs.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -1161,29 +1227,53 @@
 							<div id="network-security" class="tab-content">
 								<h3>2.3.1 - Network Security Threats</h3>
 								<div class="example-box">
-									<strong>Threats:</strong>
+									<strong>Threats and Impacts:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Unauthorized access: Without security, anyone can access network</li>
-										<li>Data theft: Sensitive information can be stolen</li>
-										<li>Malware: Viruses, ransomware, spyware can spread</li>
-										<li>Denial of Service: Network overloaded, becomes unavailable</li>
-										<li>Man-in-the-middle attacks: Hacker intercepts communications</li>
+										<li><strong>Unauthorized access (Hacking)</strong>: Gaining access without permission to steal or corrupt data</li>
+										<li><strong>Malware</strong>: Malicious software (viruses, ransomware, spyware, trojans) designed to damage device or data. Often downloaded unknowingly from infected files.</li>
+										<li><strong>Data theft</strong>: Sensitive information stolen for fraud, identity theft, or intellectual property theft</li>
+										<li><strong>Denial of Service (DoS)</strong>: Network overloaded, becomes unavailable</li>
+										<li><strong>Man-in-the-middle attacks</strong>: Hacker intercepts communications between two parties</li>
 									</ul>
+									<p><strong>Open Networks</strong>: Unsecured networks (no password) are particularly vulnerable. Anyone in range can connect. Common in shopping malls, restaurants.</p>
 								</div>
 
 								<h3 style="margin-top: 2rem">2.3.2 - Network Security Controls</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>HARDWARE CONTROLS</h4>
-										<p>Firewall: Monitors and controls network traffic. Blocks unauthorized access.</p>
+										<p>
+											<strong>Firewall</strong>: Physical device between computer and network. Examines incoming/outgoing traffic against criteria (blacklist/whitelist of IP addresses). Accepts or blocks traffic. Protects from
+											hackers and malware before reaching computer.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>SOFTWARE CONTROLS</h4>
-										<p>Security Settings, Anti-malware, User Controls/Access Rights, Authentication, Encryption</p>
+										<ul>
+											<li><strong>Software Firewall</strong>: Installed on computer. Examines traffic and dismisses malicious data after it enters.</li>
+											<li><strong>Security Settings</strong>: Configure privacy (who sees your data), enable two-factor authentication</li>
+											<li><strong>Anti-malware</strong>: Scans device for malware (viruses, spyware). Deletes or quarantines threats. Can scan files before download. Must update regularly for new malware.</li>
+											<li><strong>Access Rights</strong>: Attached to username. Limits what data users can see/edit. Prevents accidental deletion and limits hacker access.</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>AUTHENTICATION TYPES</h4>
+										<ul>
+											<li><strong>Passwords</strong>: Character-based. Strong passwords are long, complex (letters, numbers, symbols)</li>
+											<li><strong>Two-Factor (2FA)</strong>: Password + second verification (code sent to phone/app). Harder to hack.</li>
+											<li><strong>Biometrics</strong>: Biological data as password (fingerprint, iris, facial recognition, voice). Very difficult to fake.</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>ENCRYPTION</h4>
+										<p>
+											Scrambles data to make it meaningless without key. Symmetric encryption uses same key to encrypt/decrypt. Asymmetric uses different keys. Example: Move each letter 3 places forward (ICT is awesome → LFW lv
+											dzhvrph). Doesn't prevent theft but makes stolen data useless.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>PHYSICAL CONTROLS</h4>
-										<p>Restrict physical access to network equipment. Lock server rooms. Secure cables.</p>
+										<p>Physical security measures: Locks on doors, alarm systems, keycard entry, CCTV cameras. Acts as deterrent against device theft and unauthorized physical access. Common in workplaces.</p>
 									</div>
 								</div>
 							</div>
@@ -1197,162 +1287,153 @@
 							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how the internet works and its impact on society.</p>
 
 							<div class="tabs">
-								<button class="tab-btn active" data-tab="internet-www">3.1 Internet & WWW</button>
-								<button class="tab-btn" data-tab="operating-online">3.2 Operating Online</button>
-								<button class="tab-btn" data-tab="online-communities">3.3 Online Communities</button>
-								<button class="tab-btn" data-tab="cloud">3.4 The Cloud</button>
+								<button class="tab-btn active" data-tab="internet-www">3.1 Internet & WWW</button> <button class="tab-btn" data-tab="operating-online">3.2 Operating Online</button>
+								<button class="tab-btn" data-tab="online-communities">3.3 Online Communities</button> <button class="tab-btn" data-tab="cloud">3.4 The Cloud</button>
 							</div>
-
 							<div id="internet-www" class="tab-content active">
 								<h3>3.1.1 - Internet Structure</h3>
-								<p>Global network of interconnected computers using TCP/IP protocol.</p>
+								<p>The internet is a vast global network of interconnected computers and other devices using the TCP/IP protocol suite for communication.</p>
 								<div class="example-box">
 									<strong>Structure:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Based on IP addressing: Each device has IP address</li>
-										<li>Based on DNS (Domain Name System): Translates domain names to IP addresses</li>
-										<li>Example: www.google.com → 172.217.161.46</li>
+										<li>Each device connected to the internet is identified by a unique <strong>IP address</strong>.</li>
+										<li>
+											The <strong>Domain Name System (DNS)</strong> translates human-readable domain names (like <a href="https://www.google.com" target="_blank">www.google.com</a>) into IP addresses (e.g., 172.217.161.46) that
+											computers use to communicate.
+										</li>
+										<li>DNS is hierarchical with distributed servers to handle billions of domain names efficiently.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.1.2 - World Wide Web</h3>
-								<p>Service on top of internet using HTTP/HTTPS protocols. Collection of interconnected documents (web pages) and resources.</p>
+								<p>The World Wide Web is a service layered on top of the internet, consisting of interconnected webpages and resources accessed via HTTP or HTTPS protocols.</p>
 								<div class="example-box">
-									<strong>Potential:</strong>
+									<strong>Potential and Impact:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Global information sharing</li>
-										<li>E-commerce: Buying/selling online</li>
-										<li>Social connectivity: Social media, forums</li>
-										<li>Remote work and learning</li>
-										<li>Entertainment and streaming</li>
+										<li>Enables global sharing of information.</li>
+										<li>Supports e-commerce — buying and selling goods online.</li>
+										<li>Facilitates social connectivity via social media platforms and forums.</li>
+										<li>Supports remote education and remote work environments.</li>
+										<li>Entertainment through streaming services and online games.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.1.3 - Static vs Dynamic Web Pages</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>STATIC WEB PAGES</h4>
-										<p>Same content displayed to every user. Content doesn't change without manual editing. Created with HTML/CSS.</p>
+										<p>Static web pages display the same content to every user unless manually updated. They are built using HTML and CSS, are fast to load, easy to cache, and cost-effective to create.</p>
 									</div>
 									<div class="concept-box">
 										<h4>DYNAMIC WEB PAGES</h4>
-										<p>Content changes based on user input or other factors. Content generated on-demand. Require server processing.</p>
+										<p>
+											Content on dynamic web pages changes based on user input or other factors. They require server-side processing, generate personalized content (e.g., language, user preferences), and are scalable for large sites.
+										</p>
 									</div>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.1.4 - Client-Side Scripting</h3>
-								<p>Code executed on user's browser (client). Example: JavaScript.</p>
+								<p>Client-side scripts (commonly JavaScript) run in the user's browser. They enhance interactivity, validate forms, enable animations, and reduce server load.</p>
 								<div class="example-box">
 									<strong>Advantages:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Faster response (no server needed)</li>
-										<li>Reduces server load</li>
-										<li>Works offline</li>
-										<li>User can view source code</li>
+										<li>Faster user response since no server communication is needed.</li>
+										<li>Works offline after initial load.</li>
+										<li>Users can view and learn from the source code.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.1.5 - Server-Side Scripting</h3>
-								<p>Code executed on web server. Examples: PHP, Python, Node.js.</p>
+								<p>Server-side scripts (e.g., PHP, Python, Node.js) execute on the web server to generate dynamic content by processing user input, accessing databases, and managing sessions.</p>
 								<div class="example-box">
 									<strong>Advantages:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Hidden from user (secure)</li>
-										<li>Server can perform complex operations</li>
-										<li>Access to databases and server resources</li>
-										<li>Works regardless of client capabilities</li>
+										<li>Code is hidden from the user, increasing security.</li>
+										<li>Enables complex processing and database interaction.</li>
+										<li>Works regardless of client browser capabilities.</li>
 									</ul>
 								</div>
 							</div>
-
 							<div id="operating-online" class="tab-content">
 								<h3>3.2.1 - Online Environment Impact</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>IMPACT ON INDIVIDUALS</h4>
-										<p>Increased productivity, Access to information globally, Social connectivity, Shopping convenience, Cybersecurity risks</p>
+										<p>
+											Online environments increase productivity through remote collaboration, provide global information access, facilitate social interaction and convenience in shopping, but also expose users to cybersecurity risks.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>IMPACT ON ORGANIZATIONS</h4>
-										<p>Reach customers globally, Reduced overhead, 24/7 availability, Data accessibility from anywhere, Cyber attack risks</p>
+										<p>Organizations benefit from wider customer reach, cost savings from remote work, 24/7 availability, and easy access to data, but face risks from cyber attacks and data breaches.</p>
 									</div>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.2.2 - Personal Data Protection Online</h3>
 								<div class="example-box">
 									<strong>Protection Methods:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Strong passwords: Complex, unique, regularly changed</li>
-										<li>Two-factor authentication: Additional verification method</li>
-										<li>Antivirus/anti-malware: Detect threats</li>
-										<li>Firewalls: Prevent unauthorized access</li>
-										<li>Encryption: Scramble sensitive data</li>
-										<li>VPN: Encrypted tunnel for internet traffic</li>
-										<li>Secure websites: HTTPS, SSL certificates</li>
-										<li>Regular backups: Recover from data loss</li>
+										<li>Use strong, unique passwords and change them regularly.</li>
+										<li>Enable two-factor authentication (2FA) for additional security.</li>
+										<li>Use updated antivirus and anti-malware software.</li>
+										<li>Employ firewalls to prevent unauthorized access.</li>
+										<li>Use encryption to protect sensitive data.</li>
+										<li>Utilize VPNs to secure internet traffic.</li>
+										<li>Access websites with HTTPS and ensure SSL certificates.</li>
+										<li>Regularly back up data to recover from loss or attacks.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.2.3 - Digital Footprint</h3>
-								<p>All information about you online created by your online activities.</p>
+								<p>A digital footprint is a trail of all online activities, including browsing, posting, purchases, and data sharing.</p>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>ACTIVE FOOTPRINT</h4>
-										<p>Information you deliberately share: Social media posts, comments, photos, Online purchases, Website registrations, Emails</p>
+										<p>Data deliberately shared online such as posts, comments, photos, emails, and purchases.</p>
 									</div>
 									<div class="concept-box">
 										<h4>PASSIVE FOOTPRINT</h4>
-										<p>Information collected without your direct action: Cookies tracking browsing, IP logs, Location data, Metadata in photos/files</p>
+										<p>Data collected without direct user input such as cookies, IP logs, location data, and metadata.</p>
 									</div>
 								</div>
 							</div>
-
 							<div id="online-communities" class="tab-content">
 								<h3>3.3.1 - Online Community Concept</h3>
-								<p>Group of people connected via internet with common interests. Don't need to be geographically close.</p>
+								<p>An online community is a virtual space where people with common interests connect for social or professional purposes.</p>
 								<div class="example-box">
 									<strong>Purposes:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Social: Hobbies and interests, Entertainment, Friendship and socializing, Support networks, Gaming</li>
-										<li>Professional: Networking for career, Industry discussions, Professional development, Project collaboration, Knowledge sharing</li>
+										<li><strong>Social:</strong> Hobbies, entertainment, friendships, support networks, gaming.</li>
+										<li><strong>Professional:</strong> Career networking, industry groups, professional development, collaboration, knowledge sharing.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.3.3 - Monetisation</h3>
 								<div class="example-box">
 									<strong>Monetisation Methods:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Targeted Advertising: Show ads based on user interests/behavior</li>
-										<li>Pay-Per-Click Advertising: Revenue per ad click</li>
-										<li>Data Selling: Sell user data to marketers</li>
-										<li>Subscriptions (Paywalls): Premium content for paid subscribers</li>
-										<li>Sponsored Content: Brands pay for content placement</li>
+										<li>Targeted Advertising: Ads based on user behavior and interests within the community.</li>
+										<li>Pay-Per-Click Advertising: Revenue generated when users click on ads.</li>
+										<li>Data Selling: Community owners may sell user data to marketers with permission.</li>
+										<li>Subscriptions (Paywalls): Premium content access for paid members.</li>
+										<li>Sponsored Content: Brands pay for promotional content placements.</li>
 									</ul>
 								</div>
 							</div>
-
 							<div id="cloud" class="tab-content">
 								<h3>3.4.1 - Cloud Storage</h3>
-								<p>Store files on remote servers accessed via internet. Data stored in data centers, not on personal device.</p>
+								<p>Cloud storage stores data on remote servers accessible via the internet rather than local devices.</p>
 								<div class="example-box">
 									<strong>Benefits:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Accessibility from anywhere</li>
-										<li>Automatic backup</li>
-										<li>Easy sharing and collaboration</li>
-										<li>Scalability: Pay for what you use</li>
-										<li>No hardware maintenance</li>
+										<li>Access files from any device and location with internet.</li>
+										<li>Automatic backups handled by cloud providers.</li>
+										<li>Easy file sharing and collaborative editing.</li>
+										<li>Scalable storage where you pay for what you use.</li>
+										<li>Reduces hardware maintenance costs.</li>
 									</ul>
 								</div>
-
 								<h3 style="margin-top: 2rem">3.4.2 - Cloud Computing</h3>
-								<p>Use computing resources (processing power, software) on remote servers.</p>
+								<p>Cloud computing allows remote use of software and computing resources hosted on cloud servers.</p>
 								<div class="example-box">
 									<strong>Types:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>SaaS (Software as a Service): Use software online (e.g., Gmail, Slack)</li>
-										<li>PaaS (Platform as a Service): Develop applications on cloud platform</li>
-										<li>IaaS (Infrastructure as a Service): Rent computing infrastructure</li>
+										<li><strong>SaaS (Software as a Service):</strong> Online software access e.g., Gmail, Slack.</li>
+										<li><strong>PaaS (Platform as a Service):</strong> Platforms for building and deploying applications.</li>
+										<li><strong>IaaS (Infrastructure as a Service):</strong> Renting computing infrastructure like servers and storage.</li>
 									</ul>
 								</div>
 							</div>
@@ -1364,55 +1445,92 @@
 						<div class="card">
 							<h2>Topic 4: IT Systems</h2>
 							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how IT systems are designed and implemented.</p>
-
 							<div class="tabs">
 								<button class="tab-btn active" data-tab="systems-design">4.1 Systems Design</button>
 							</div>
 
 							<div id="systems-design" class="tab-content active">
-								<h3>4.1.1 - IT System Components</h3>
+								<h3>4 - IT System Components</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Hardware</h4>
-										<p>Physical devices (computers, peripherals, storage)</p>
+										<p>Physical devices that are part of the system such as computers, peripheral devices (keyboards, printers), and storage devices.</p>
+										<p><em>Example:</em> In an airport check-in system, hardware includes barcode scanners, weighing scales, computers, and printers.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Software</h4>
-										<p>Applications and systems software</p>
+										<p>Application and systems software used to operate the hardware and perform tasks.</p>
+										<p><em>Example:</em> Operating systems, databases, interfaces for entering information and managing bookings.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Processes</h4>
-										<p>Procedures and workflows. How data flows through system</p>
+										<p>Procedures and workflows defining how data flows through the system and how tasks are performed.</p>
+										<p><em>Example:</em> Scanning a boarding pass, weighing luggage, storing customer data.</p>
 									</div>
 									<div class="concept-box">
 										<h4>People</h4>
-										<p>Users, administrators, developers. User skills and training</p>
+										<p>Users, administrators, and developers who interact with or manage the system.</p>
+										<p><em>Example:</em> Passengers checking in, airline staff managing data, IT staff maintaining the system.</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">4.2.1 - Dataflow Diagrams</h3>
-								<p>Shows how data moves through system. Shows processes that transform data.</p>
+								<p>Dataflow diagrams (DFDs) visually represent how data moves through a system. They show data inputs, processing steps, data stores, and data outputs.</p>
 								<div class="example-box">
 									<strong>Symbols:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Rectangle (rounded): External entity (outside system)</li>
-										<li>Circle/bubble: Process (transforms data)</li>
-										<li>Rectangle: Data store (database, file)</li>
-										<li>Arrow: Data flow (direction of data)</li>
+										<li><strong>Rounded Rectangle:</strong> External entity (source or sink of data outside the system)</li>
+										<li><strong>Circle/Bubble:</strong> Process that transforms data</li>
+										<li><strong>Rectangle:</strong> Data store such as a database or file</li>
+										<li><strong>Arrow:</strong> Direction of data flow between elements</li>
 									</ul>
 								</div>
+								<p><em>Example:</em> For an airport check-in system, data flows from the barcode scanner (external entity), through processes such as scanning and weighing, to data stores with customer and luggage information.</p>
 
 								<h3 style="margin-top: 2rem">4.3.1 - Flowcharts</h3>
-								<p>Visual representation of process or algorithm. Shows sequence of steps.</p>
+								<p>Flowcharts visually represent the sequence of steps, decisions, inputs, and outputs within a process or system.</p>
 								<div class="example-box">
 									<strong>Symbols:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Oval: Start/End</li>
-										<li>Rectangle: Process (action)</li>
-										<li>Diamond: Decision (yes/no branch)</li>
-										<li>Arrow: Flow direction</li>
-										<li>Parallelogram: Input/Output</li>
+										<li><strong>Oval:</strong> Represents Start or End of process</li>
+										<li><strong>Rectangle:</strong> Represents a Process or action step</li>
+										<li><strong>Diamond:</strong> Decision point where yes/no or true/false branching occurs</li>
+										<li><strong>Arrow:</strong> Flow direction</li>
+										<li><strong>Parallelogram:</strong> Input/Output (data entry or display)</li>
 									</ul>
+								</div>
+								<p>Using these symbols correctly makes the flowchart easy to follow and helps visualize complex workflows.</p>
+								<p><em>Example:</em> A teacher’s music quiz system flowchart might start with inputting student names and scores, followed by decisions to determine certificate levels and outputs for printing certificates.</p>
+
+								<h3 style="margin-top: 2rem">4.4 - System Design and Evaluation</h3>
+								<p>When designing an IT system, decomposition helps break down a complex system into manageable sub-systems.</p>
+								<p><strong>Fit for Purpose</strong> means the system meets all its intended requirements as defined in the design brief.</p>
+								<p>Evaluating the system involves considering the included digital, peripheral, and storage devices, the processes it performs, and if all design goals are met.</p>
+								<p>
+									<em>Example:</em> A restaurant order system with QR codes for ordering should allow easy menu updates and order transmissions. Evaluation checks if the system is reliable, meets user needs, and is cost-effective.
+								</p>
+
+								<h3 style="margin-top: 2rem">4.5 - Advantages and Disadvantages of IT Systems</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Advantages</h4>
+										<ul>
+											<li>Automation reduces manual work and human errors</li>
+											<li>Speeds up processing and data access</li>
+											<li>Large data storage and easy access across locations</li>
+											<li>Improves consistency and integration of processes</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>Disadvantages</h4>
+										<ul>
+											<li>Initial high cost of setup</li>
+											<li>Staff require training</li>
+											<li>System failures disrupt business</li>
+											<li>Security and privacy risks</li>
+											<li>Dependence on technology may cause vulnerability</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1435,11 +1553,19 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>DATA</h4>
-										<p>Raw facts, numbers, text, images. Has no context or meaning. Example: 25, "John", "blue"</p>
+										<p>
+											Raw, unprocessed facts such as numbers, text, images, or sounds. Alone, data has no meaning or context.
+											<br />
+											<em>Example: 25, "John", "blue"</em>
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>INFORMATION</h4>
-										<p>Data that has been processed and organized. Has context and meaning. Can be used for decision-making. Example: "25-year-old John likes blue"</p>
+										<p>
+											Processed data given context and meaning, making it useful for decision-making.
+											<br />
+											<em>Example: "25-year-old John likes blue."</em>
+										</p>
 									</div>
 								</div>
 
@@ -1447,28 +1573,39 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>STRUCTURED DATA</h4>
-										<p>Organized in specific format. Follows defined schema. Easy to search and analyze. Example: Spreadsheet, database table</p>
+										<p>
+											Data organized in fixed formats (e.g., tables with rows and columns) that follow defined schemas for easy searching and analysis.
+											<br />
+											<em>Example: Spreadsheets, relational database tables.</em>
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>UNSTRUCTURED DATA</h4>
-										<p>No predefined format. Difficult to search and analyze. Variable content. Examples: Emails, documents, images, videos</p>
+										<p>
+											Data without a predefined format or structure. More challenging to analyze directly.
+											<br />
+											<em>Example: Emails, social media posts, videos, images.</em>
+										</p>
 									</div>
 								</div>
 							</div>
 
 							<div id="structured-data" class="tab-content">
 								<h3>5.2.1 - Databases</h3>
-								<p>Organized collection of related data. Designed for efficient storage and retrieval.</p>
+								<p>
+									Databases are organized collections of related structured data designed for efficient storage, retrieval, and management. They help maintain data integrity, allow multiple users to access data, and support backup
+									and security.
+								</p>
 								<div class="example-box">
-									<strong>Why Use Databases:</strong>
+									<strong>Benefits of Databases:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Efficient storage</li>
-										<li>Quick search and retrieval</li>
-										<li>Data integrity (accuracy)</li>
-										<li>Multiple user access</li>
-										<li>Security and access control</li>
-										<li>Backup and recovery</li>
-										<li>Data organization</li>
+										<li>Efficient data storage</li>
+										<li>Quick data searching and retrieval</li>
+										<li>Maintaining data accuracy</li>
+										<li>Multiple concurrent user access</li>
+										<li>Security controls for sensitive data</li>
+										<li>Backup and recovery options</li>
+										<li>Overall better data organization</li>
 									</ul>
 								</div>
 
@@ -1476,12 +1613,12 @@
 								<div class="example-box">
 									<strong>Key Concepts:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>TABLE: Matrix of data (like spreadsheet)</li>
-										<li>RECORD (Row): Single data entry</li>
-										<li>FIELD (Column): Category of data</li>
-										<li>PRIMARY KEY: Unique identifier for each record</li>
-										<li>FOREIGN KEY: Links to primary key in another table</li>
-										<li>COMPOSITE KEY: Primary key made of multiple fields</li>
+										<li><strong>Table:</strong> Data arranged in rows and columns (like a spreadsheet)</li>
+										<li><strong>Record (Row):</strong> Represents a single data item or entry</li>
+										<li><strong>Field (Column):</strong> Data category or attribute</li>
+										<li><strong>Primary Key:</strong> Unique identifier for records to prevent duplicates</li>
+										<li><strong>Foreign Key:</strong> Links to a primary key in a different table creating relationships</li>
+										<li><strong>Composite Key:</strong> A primary key made from multiple fields combined</li>
 									</ul>
 								</div>
 
@@ -1489,48 +1626,86 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>ONE-TO-ONE</h4>
-										<p>One record in Table A relates to one record in Table B. Example: Person has one Passport.</p>
+										<p>
+											One record in Table A links to one record in Table B.
+											<br />
+											<em>Example:</em> One student linked to one emergency contact.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>ONE-TO-MANY</h4>
-										<p>One record in Table A relates to many records in Table B. Example: One Teacher teaches many Students.</p>
+										<p>
+											One record in Table A links to many records in Table B.
+											<br />
+											<em>Example:</em> One teacher teaches many students.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>MANY-TO-MANY</h4>
-										<p>Many records in Table A relate to many in Table B. Requires junction/linking table. Example: Students enroll in many Courses, Courses have many Students.</p>
+										<p>
+											Many records in Table A link to many records in Table B via a joining table.
+											<br />
+											<em>Example:</em> Students enroll in many courses; courses have many students.
+										</p>
 									</div>
 								</div>
 							</div>
 
 							<div id="sql" class="tab-content">
 								<h3>5.3.1 - SQL Purpose</h3>
-								<p>Language for managing databases. Works with relational databases.</p>
+								<p>SQL (Structured Query Language) is the programming language used to manage and query data in relational databases.</p>
 								<div class="example-box">
-									<strong>Purposes:</strong>
+									<strong>Uses of SQL:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>Retrieve data (SELECT)</li>
-										<li>Add data (INSERT)</li>
-										<li>Modify data (UPDATE)</li>
-										<li>Remove data (DELETE)</li>
-										<li>Create table structure (CREATE TABLE)</li>
-										<li>Join tables (JOIN)</li>
-										<li>Aggregate data (COUNT, SUM, AVG)</li>
+										<li>Retrieve data (<code>SELECT</code>)</li>
+										<li>Add data (<code>INSERT</code>)</li>
+										<li>Modify data (<code>UPDATE</code>)</li>
+										<li>Remove data (<code>DELETE</code>)</li>
+										<li>Create or modify database structure (<code>CREATE TABLE</code>)</li>
+										<li>Combine tables (<code>JOIN</code>)</li>
+										<li>Aggregate functions like <code>COUNT</code>, <code>SUM</code>, <code>AVG</code></li>
 									</ul>
 								</div>
 
 								<h3 style="margin-top: 2rem">5.3.2 - SQL Commands</h3>
 								<div class="example-box">
-									<strong>Key Commands:</strong>
+									<strong>Key SQL Commands:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>SELECT: Retrieve data. Example: SELECT Name, Age FROM Students;</li>
-										<li>WHERE: Filter by condition. Example: SELECT Name FROM Students WHERE Age > 18;</li>
-										<li>INSERT: Add new record. Example: INSERT INTO Students (Name, Age) VALUES ('John', 25);</li>
-										<li>UPDATE: Modify existing data. Example: UPDATE Students SET Age = 26 WHERE Name = 'John';</li>
-										<li>DELETE: Remove records. Example: DELETE FROM Students WHERE Age < 18;</li>
-										<li>JOIN: Combine data from multiple tables</li>
-										<li>GROUP BY: Group records</li>
-										<li>ORDER BY: Sort results</li>
+										<li><code>SELECT</code>: Retrieve data from a table, e.g., <code>SELECT Name, Age FROM Students;</code></li>
+										<li><code>WHERE</code>: Filter results, e.g., <code>SELECT Name FROM Students WHERE Age &gt; 18;</code></li>
+										<li><code>INSERT INTO</code>: Add new records, e.g., <code>INSERT INTO Students (Name, Age) VALUES ('John', 25);</code></li>
+										<li><code>UPDATE</code>: Modify existing data, e.g., <code>UPDATE Students SET Age = 26 WHERE Name = 'John';</code></li>
+										<li><code>DELETE FROM</code>: Remove records, e.g., <code>DELETE FROM Students WHERE Age &lt; 18;</code></li>
+										<li><code>JOIN</code>: Combines rows from two or more tables based on a related column.</li>
+										<li><code>GROUP BY</code>: Groups rows sharing a property, e.g., count per category.</li>
+										<li><code>ORDER BY</code>: Sorts results in ascending (<code>ASC</code>) or descending (<code>DESC</code>) order.</li>
+										<li><code>LIKE</code>: Used with wildcards (%) to search patterns in text fields.</li>
 									</ul>
+								</div>
+
+								<p><em>Exam Tip:</em> Pay attention to correct spelling and capitalization of field names and tables in SQL commands for the queries to work correctly.</p>
+
+								<div class="example-box">
+									<strong>SQL Examples:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>
+											<strong>INNER JOIN:</strong><br />
+											<code>SELECT Students.Name, Courses.Title FROM Students INNER JOIN Enrollments ON Students.ID = Enrollments.StudentID INNER JOIN Courses ON Enrollments.CourseID = Courses.ID;</code>
+										</li>
+										<li>
+											<strong>GROUP BY:</strong><br />
+											<code>SELECT Department, COUNT(*) AS NumEmployees FROM Employees GROUP BY Department;</code>
+										</li>
+										<li>
+											<strong>ORDER BY:</strong><br />
+											<code>SELECT Name, Age FROM Students ORDER BY Age DESC;</code>
+										</li>
+										<li>
+											<strong>LIKE (pattern matching):</strong><br />
+											<code>SELECT Name FROM Customers WHERE Name LIKE 'A%';</code>
+										</li>
+									</ul>
+									<p style="margin-top: 1rem; color: var(--color-text-secondary)"><em>These queries show how to join tables, group results, sort data, and search for patterns in SQL.</em></p>
 								</div>
 							</div>
 						</div>
@@ -1553,15 +1728,21 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>CONSTRUCTION</h4>
-										<p>Raw materials extraction (mining), Manufacturing energy consumption, Transportation emissions, Packaging waste</p>
+										<p>
+											Building factories to create technology devices often involves clearing natural habitats, disrupting ecosystems, and causing pollution such as noise and harmful gases. Raw materials like precious metals (gold,
+											silver, palladium) are limited and their extraction pollutes soil and water.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>USE</h4>
-										<p>Electricity consumption, Data centers energy usage, Network equipment power, Cooling systems energy</p>
+										<p>Technology consumes significant electricity, especially data centers and network equipment. Many energy sources still rely on fossil fuels, contributing to carbon emissions and global warming.</p>
 									</div>
 									<div class="concept-box">
 										<h4>DISPOSAL</h4>
-										<p>Electronic waste (e-waste) toxic to environment, Precious metals recovery, Recycling processes, Landfill pollution</p>
+										<p>
+											E-waste (discarded electronics) can leak toxic substances into the environment if improperly disposed of in landfills. Recycling can recover precious materials but is not always implemented effectively, creating
+											pollution and health risks.
+										</p>
 									</div>
 								</div>
 
@@ -1569,15 +1750,15 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>ENVIRONMENTAL MONITORING</h4>
-										<p>Sensors collect environmental data (temperature, air quality, water quality). Early warning of problems.</p>
+										<p>Sensors collect data on air and water quality, temperature, and pollution levels, enabling early detection of environmental problems and promoting conservation efforts.</p>
 									</div>
 									<div class="concept-box">
 										<h4>SMART HOUSES</h4>
-										<p>Automated lighting, Thermostats, Appliances. Reduce energy consumption.</p>
+										<p>Automated systems control lighting, heating, and appliances to reduce unnecessary energy use, boosting efficiency and reducing carbon footprint.</p>
 									</div>
 									<div class="concept-box">
 										<h4>SMART CITIES</h4>
-										<p>Traffic optimization, Energy grid optimization, Public transportation monitoring, Waste management optimization.</p>
+										<p>IT systems optimize traffic flow, manage energy grids efficiently, monitor public transport, and improve waste management to reduce environmental impact and improve urban living.</p>
 									</div>
 								</div>
 							</div>
@@ -1587,39 +1768,44 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>DATA PROTECTION</h4>
-										<p>Regulations: GDPR (Europe), CCPA (California). Personal data collection and storage. Must get consent.</p>
+										<p>
+											Laws like GDPR (Europe) and CCPA (California) regulate the collection, storage, and use of personal data, ensuring consent, security, limited access, and data accuracy. Cross-border cloud storage can complicate
+											data protection.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>COPYRIGHT</h4>
-										<p>Protects original works (software, music, videos, text). Author has exclusive rights.</p>
+										<p>
+											Copyright protects creators' rights over artistic and intellectual works. Unauthorized copying or distribution without permission infringes rights and legal protections like the Berne Convention ensure
+											international recognition.
+										</p>
 									</div>
 									<div class="concept-box">
 										<h4>COMPUTER MISUSE</h4>
-										<p>Unauthorized access to systems. Hacking is illegal. Creating/spreading malware.</p>
+										<p>Laws deter unauthorized access (hacking), data interception, creation/spread of malware, and sabotage of systems. Proving intent is essential in prosecution.</p>
 									</div>
 									<div class="concept-box">
 										<h4>INTELLECTUAL PROPERTY</h4>
-										<p>Patents: Protect inventions. Trademarks: Protect names/logos. Trade secrets: Confidential business information.</p>
+										<p>Patents protect inventions, trademarks protect brand names and logos, and trade secrets protect confidential processes or information vital for competitive advantage.</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">6.2.2 - Ethical Issues</h3>
 								<div class="example-box">
-									<strong>Key Ethical Issues:</strong>
+									<strong>Key Ethical Concerns:</strong>
 									<ul style="margin-top: 0.5rem">
-										<li>PRIVACY: Right to keep personal information private</li>
-										<li>INCLUSION: Should everyone have access to technology?</li>
-										<li>CIVIL LIBERTIES: Freedom of expression online</li>
-										<li>ACCESS & ACCESSIBILITY: Can people with disabilities use technology?</li>
-										<li>EXPRESSION: Can people say what they want online?</li>
-										<li>ASSOCIATION: Right to online communities</li>
+										<li><strong>Privacy:</strong> Balancing convenience of data tracking (location, online activity) with individuals’ rights to control their information and avoid unauthorized surveillance.</li>
+										<li><strong>Inclusion:</strong> Ensuring equitable access to technology across different demographics and accommodating disabled users through accessibility features (screen readers, speech recognition).</li>
+										<li><strong>Civil Liberties:</strong> Freedom of expression online versus risks of censorship and harmful content moderation.</li>
+										<li><strong>Access & Accessibility:</strong> Addressing the digital divide to prevent exclusion of elderly, remote, or disadvantaged populations from essential digital services.</li>
+										<li><strong>Expression & Association:</strong> Protecting rights to express opinions and form online communities while combating extremism and harmful speech.</li>
 									</ul>
 								</div>
 							</div>
 
 							<div id="society" class="tab-content">
 								<h3>6.3.1 - Ubiquitous Wireless Access</h3>
-								<p>Wireless networks everywhere. Internet accessible from anywhere. IoT devices constantly connected.</p>
+								<p>Wireless internet access is widespread, enabling constant connectivity, supporting IoT devices, and powering smart cities.</p>
 								<div class="example-box">
 									<strong>Smart Cities Benefits:</strong>
 									<ul style="margin-top: 0.5rem">

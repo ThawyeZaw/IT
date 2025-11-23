@@ -242,7 +242,6 @@
 
 			.concept-box:hover {
 				transform: translateX(8px);
-				border-left-color: var(--color-success);
 			}
 
 			.concept-box h4 {
@@ -664,8 +663,23 @@
 									<li>Enables organizations to comply with legal requirements</li>
 								</ul>
 
+								<h3 style="margin-top: 2rem">Common Causes of Data Integrity Failures</h3>
+								<ul>
+									<li>Human error (incorrect entry or editing)</li>
+									<li>Software bugs or glitches</li>
+									<li>Hardware failure or data corruption</li>
+									<li>Lack of validation or inadequate controls</li>
+									<li>Malicious activities (e.g. hacking, sabotage)</li>
+								</ul>
+
 								<h3 style="margin-top: 2rem">Data Governance</h3>
 								<p>Data governance consists of systems, procedures, and policies designed to maintain data integrity.</p>
+								<ul>
+									<li><b>Access levels:</b> E.g., only managers can approve sensitive changes.</li>
+									<li><b>Audit logs:</b> Track who edited what, and when.</li>
+									<li><b>Data backup routines:</b> Nightly full backups, incremental backups during the day.</li>
+									<li><b>Legal compliance:</b> GDPR and similar require accuracy and correction procedures.</li>
+								</ul>
 
 								<h3 style="margin-top: 2rem">Components of Data Integrity</h3>
 								<div class="learning-grid">
@@ -725,6 +739,18 @@
 										<p>Detects errors in data entry or transmission</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">Validation Examples in Real-Life Scenarios</h4>
+								<ul>
+									<li><b>Presence Check:</b> No leaving “email” blank on sign-up.</li>
+									<li><b>Range Check:</b> Age must be between 13 and 120 on social media.</li>
+									<li><b>Format Check:</b> Email must contain “@” and end with .com, .net, etc.</li>
+									<li><b>Lookup Check:</b> Product code must exist in stock database.</li>
+									<li><b>Check Digit:</b> Used in bank account, ISBN, barcodes to spot typos.</li>
+								</ul>
+
+								<h4>Important Exam Tip</h4>
+								<p><strong>Validation is not verification.</strong> Validation checks if data is reasonable; verification ensures it matches the original source (e.g., double entry of email and checking both match).</p>
 							</div>
 
 							<div id="databases" class="tab-content">
@@ -739,6 +765,9 @@
 									<li>Maintenance issues</li>
 									<li>Update anomalies</li>
 								</ul>
+
+								<h4>Past Paper Key Insight</h4>
+								<p>Questions often ask you to identify problems caused by redundancy, or how normalisation solves them. Always mention “Update Anomalies”, “Inconsistency”, and “Wasted storage”.</p>
 
 								<h3 style="margin-top: 2rem">Normalization</h3>
 								<p>Normalization is the process of organizing data to remove redundancy and ensure data integrity.</p>
@@ -758,11 +787,26 @@
 										<p>Remove transitive dependencies</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 1.5rem">Worked Example: Applying 1NF, 2NF, 3NF</h4>
+								<ul>
+									<li><b>Un-Normalised:</b> <i>OrderID: 1, Name: Tom, Product: Apple, Banana, Date: 01/01/2024</i></li>
+									<li><b>1NF:</b> Split multiple products to separate rows; every cell stores only one value.</li>
+									<li><b>2NF:</b> Remove fields that don’t depend on the whole primary key (e.g. customer address split from order-product).</li>
+									<li><b>3NF:</b> Remove fields dependent on other non-key fields (e.g., town depends on postcode not customer).</li>
+								</ul>
+								<p><b>Tip:</b> Label every change clearly. Don’t mix up partial vs transitive dependencies in 2NF/3NF—this is a common exam error.</p>
 							</div>
 
 							<div id="big-data" class="tab-content">
 								<h3>12.3 Big Data</h3>
 								<p>Big Data refers to extremely large and complex datasets that are too large to manage with traditional data processing tools.</p>
+
+								<h3 style="margin-top: 2rem">Common Exam Traps</h3>
+								<ul>
+									<li>Don’t just list the 5Vs—explain each with an example.</li>
+									<li>Stress the <em>impact</em> of Big Data: “Big Data enables targeted adverts, real-time fraud detection, or analysis of health trends from millions of patients.”</li>
+								</ul>
 
 								<h3 style="margin-top: 2rem">The 5 V's of Big Data</h3>
 								<div class="learning-grid">
@@ -804,21 +848,25 @@
 									</div>
 								</div>
 
-								<h4>Three Types of Data Analytics</h4>
-								<div class="learning-grid">
-									<div class="concept-box">
-										<h4>Descriptive Analytics</h4>
-										<p>Summarize historical data to understand what happened</p>
-									</div>
-									<div class="concept-box">
-										<h4>Predictive Analytics</h4>
-										<p>Analyze patterns to make predictions about future</p>
-									</div>
-									<div class="concept-box">
-										<h4>Prescriptive Analytics</h4>
-										<p>Suggest actions to optimize outcomes based on predictions</p>
-									</div>
-								</div>
+								<h4>Examples in Exam Context</h4>
+								<ul>
+									<li><b>Data Mining:</b> Supermarket analyzes receipts to find products often bought together (“market basket analysis”).</li>
+									<li><b>Data Warehousing:</b> Schools store student results from all years in one central system for analysis.</li>
+									<li><b>Descriptive Analytics:</b> What were sales last quarter?</li>
+									<li><b>Predictive Analytics:</b> Which customers are likely to cancel subscriptions?</li>
+									<li><b>Prescriptive Analytics:</b> What marketing campaign will retain the most profitable customers?</li>
+								</ul>
+
+								<aside class="exam-tips" style="border-left: 4px solid #fdc400; padding: 1em; margin-top: 2em">
+									<b>EXAM SPECIAL:</b>
+									<ul>
+										<li>Always define database terms <b>first</b>.</li>
+										<li>In ‘construct a data dictionary’ or ‘normalisation’ questions, <b>use layouts/tables and show every step.</b></li>
+										<li>For validation/verification—give real-life scenarios for each rule.</li>
+										<li>If asked ‘why normalise’, always cover <b>reducing redundancy, improving consistency, making updates easier, and enhancing integrity.</b></li>
+										<li>For Big Data—link each “V” to a real-world business case (e.g. volume in social media, veracity in medical data).</li>
+									</ul>
+								</aside>
 							</div>
 						</div>
 					</section>
@@ -844,19 +892,23 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Cost Savings</h4>
-										<p>Multiple virtual machines on one server; reduced hardware needs</p>
+										<p>Multiple virtual machines on one server; significantly reduced hardware and energy costs.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Resource Efficiency</h4>
-										<p>Better hardware utilization; dynamic resource allocation</p>
+										<p>Improves hardware utilization by allocating resources dynamically based on demand.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Scalability</h4>
-										<p>Easy to add/remove virtual resources as needed</p>
+										<p>Easily add or remove virtual resources to match workload requirements.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Disaster Recovery</h4>
-										<p>Quick backup and recovery of entire systems</p>
+										<p>Enables quick backup, migration, and recovery of entire systems with minimal downtime.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Environment Isolation</h4>
+										<p>Virtual machines or containers operate in isolated environments reducing conflicts and risks.</p>
 									</div>
 								</div>
 
@@ -864,36 +916,44 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Containerisation</h4>
-										<p>Lightweight, portable packages containing application + all dependencies</p>
+										<p>Lightweight, portable packages containing an application plus all its dependencies, sharing the host OS (e.g., Docker).</p>
 									</div>
 									<div class="concept-box">
 										<h4>Virtual Machines (VMs)</h4>
-										<p>Full OS virtualization where each VM has complete operating system</p>
+										<p>Full OS virtualization, where each VM runs its complete operating system on virtualized hardware.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">Virtualisation Use Cases</h4>
+								<ul>
+									<li>Testing software in isolated environments without affecting production.</li>
+									<li>Server consolidation to reduce physical space and energy consumption.</li>
+									<li>Disaster recovery setups with rapid failover.</li>
+									<li>Cloud computing infrastructure supporting multiple tenants securely.</li>
+								</ul>
 							</div>
 
 							<div id="distributed" class="tab-content">
 								<h3>13.2 Distributed Systems</h3>
-								<p>Distributed system: Computing spread across multiple machines/nodes communicating over networks, working together as single logical system.</p>
+								<p>A distributed system is computing spread across multiple machines/nodes communicating over networks, working together as a single logical system.</p>
 
 								<h3 style="margin-top: 2rem">Why Needed?</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Scalability</h4>
-										<p>Handle more users/data by adding more machines</p>
+										<p>Handle growing amounts of data or users by adding more nodes.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Redundancy</h4>
-										<p>If one node fails, others continue operating</p>
+										<p>If one node fails, others take over, increasing system availability.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Resource Sharing</h4>
-										<p>Share databases, computing power across organization</p>
+										<p>Share databases, computation, and storage resources across organization.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Performance</h4>
-										<p>Solve complex problems faster with parallel processing</p>
+										<p>Parallel processing enables faster problem solving and data analysis.</p>
 									</div>
 								</div>
 
@@ -901,40 +961,47 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Failure</h4>
-										<p>Detecting partial failures is difficult; network partitions create uncertainty</p>
+										<p>Hard to detect partial failures; network partitions can cause inconsistencies.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Concurrency</h4>
-										<p>Multiple nodes accessing and modifying same data simultaneously</p>
+										<p>Multiple nodes accessing/modifying data simultaneously can cause race conditions or data corruption.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Replication</h4>
-										<p>Keeping copies of data synchronized across nodes</p>
+										<p>Keeping copies of data synchronized is complex and may lead to delays or conflicts.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Performance</h4>
-										<p>Network latency and delays impact responsiveness</p>
+										<p>Network latency and communication overheads reduce responsiveness.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">Distributed Systems Examples</h4>
+								<ul>
+									<li>Cloud storage systems distributing data across multiple servers.</li>
+									<li>Search engines crawling and indexing web data distributed across data centers.</li>
+									<li>Financial systems processing transactions on multiple redundant nodes.</li>
+								</ul>
 							</div>
 
 							<div id="hci" class="tab-content">
 								<h3>13.3 Human Computer Interaction (HCI)</h3>
-								<p>Good HCI improves usability, efficiency, user satisfaction, reduces errors and frustration.</p>
+								<p>Good HCI improves usability, efficiency, user satisfaction, and reduces errors and frustration.</p>
 
 								<h3 style="margin-top: 2rem">Three Ways HCI is Implemented</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Visual</h4>
-										<p>Screen layouts and organization, color schemes, icons</p>
+										<p>Screen layouts, icons, colors, typography, and animations for intuitive interfaces.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Audio</h4>
-										<p>Sound notifications and alerts, voice feedback</p>
+										<p>Sound alerts, voice commands, and feedback to enhance interaction and accessibility.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Haptic</h4>
-										<p>Vibrations, tactile feedback, force feedback</p>
+										<p>Vibrations and tactile feedback to provide physical sensations during user inputs.</p>
 									</div>
 								</div>
 
@@ -942,38 +1009,57 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Comfort</h4>
-										<p>Reduce physical strain; proper posture support</p>
+										<p>Reduce physical strain; support good posture to avoid injuries.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Efficiency</h4>
-										<p>Minimize effort required; optimize workflow</p>
+										<p>Minimize effort required; optimize workflows and navigation.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Health</h4>
-										<p>Prevent repetitive strain injury, eye strain, fatigue</p>
+										<p>Prevent eye strain, repetitive strain injuries, and fatigue.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Accessibility</h4>
-										<p>Design for users with different abilities</p>
+										<p>Design inclusive interfaces for users with diverse abilities.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">Good HCI Enhances</h4>
+								<ul>
+									<li>Faster task completion.</li>
+									<li>Lower error rates.</li>
+									<li>Improved user satisfaction and adoption.</li>
+									<li>Reduced training time and frustration.</li>
+								</ul>
 							</div>
 
 							<div id="encryption" class="tab-content">
 								<h3>13.5 Encryption</h3>
 								<h4>13.5.1 Symmetric Encryption</h4>
-								<p>Same key encrypts AND decrypts data. Fast and efficient but key distribution is a problem.</p>
+								<p>Same key encrypts and decrypts data. Fast and efficient but key distribution is a problem.</p>
 
 								<h4 style="margin-top: 1.5rem">13.5.2 Asymmetric (Public-Key) Encryption</h4>
 								<p>Two keys: public key (encrypts) and private key (decrypts). Solves key distribution problem but slower than symmetric.</p>
 
 								<h4 style="margin-top: 1.5rem">13.5.3 Certificate-Based Encryption</h4>
 								<p>Digital certificates verify identity and contain public key. Used for secure websites (SSL/TLS), email, code signing.</p>
+
+								<h4 style="margin-top: 2rem">Encryption Applications</h4>
+								<ul>
+									<li>Securing data transmissions over the internet (HTTPS).</li>
+									<li>Email encryption ensuring privacy and authenticity.</li>
+									<li>Authentication using public-key certificates.</li>
+									<li>Protecting sensitive files using encryption software.</li>
+								</ul>
+
+								<h4>Past Paper Tips</h4>
+								<p>When explaining encryption types, include advantages and limitations, e.g., symmetric is fast but key distribution is an issue; asymmetric solves key distribution but slower.</p>
 							</div>
 						</div>
 					</section>
 
-					<!-- Topic 14: IT Systems in Organisations -->
+					<!-- Topic 14: Using IT Systems in Organisations -->
 					<section id="topic14" class="topic-section">
 						<div class="card">
 							<h2>Topic 14: Using IT Systems in Organisations</h2>
@@ -990,127 +1076,134 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Operational Support</h4>
-										<p>Run daily operations efficiently</p>
+										<p>Run daily operations efficiently including inventory, scheduling, and payment processing to keep business flowing smoothly.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Collaboration</h4>
-										<p>Enable teamwork across locations</p>
+										<p>Enable effective teamwork across locations via communication tools, shared document management, and project platforms.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Knowledge Management</h4>
-										<p>Store, organize, retrieve organizational knowledge</p>
+										<p>Store, organize, and retrieve organizational knowledge, preserving best practices, documentation, and training materials.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Product Development</h4>
-										<p>Design, prototype, test new products</p>
+										<p>Design, prototype, test, and improve new products through CAD software, simulation tools, and project management systems.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Service Delivery</h4>
-										<p>Deliver services to customers</p>
+										<p>Deliver services to customers efficiently via online platforms, mobile apps, and automated fulfillment.</p>
 									</div>
 								</div>
 
-								<h3 style="margin-top: 2rem">14.1.2 TRANSACTION PROCESSING (TP) SYSTEMS</h3>
-								<p>Transaction processing systems handle day-to-day financial and business transactions.</p>
+								<h3 style="margin-top: 2rem">14.1.2 Transaction Processing (TP) Systems</h3>
+								<p>TP systems handle reliable, secure, and fast processing of daily business transactions, recording every operation.</p>
 
 								<h4>TP System Types:</h4>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Electronic Point of Sale (EPOS)</h4>
-										<p>Retail checkouts, process sales, update inventory</p>
+										<p>Retail checkout systems processing sales, updating inventory and handling payments in real time.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Order Processing</h4>
-										<p>Process customer orders from start to finish</p>
+										<p>Manages customer orders from entry, payment, warehouse picking to shipment and tracking.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Financial Transactions</h4>
-										<p>Banking and payment systems</p>
+										<p>Handles banking operations, transfers, deposits and withdrawals with high security and accuracy.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Bacs</h4>
-										<p>UK automated system for bank-to-bank payments</p>
+										<p>UK’s automated clearing system enabling bank-to-bank payments in batches like payroll and supplier payments.</p>
 									</div>
 								</div>
 							</div>
 
 							<div id="crm" class="tab-content">
-								<h3>14.1.3 CUSTOMER RELATIONSHIP MANAGEMENT (CRM)</h3>
-								<p>CRM systems manage customer interactions and relationships to improve satisfaction, retention, and business growth.</p>
+								<h3>14.1.3 Customer Relationship Management (CRM)</h3>
+								<p>CRM systems manage customer interactions throughout the lifecycle with a focus on satisfaction, retention, and business growth.</p>
 
 								<h4>Six Key CRM Functions:</h4>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Synchronise Marketing</h4>
-										<p>Ensure consistent messaging across all channels</p>
+										<p>Coordinate marketing campaigns across channels to deliver consistent messaging and maximize impact.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Loyalty Schemes</h4>
-										<p>Track customer loyalty and rewards</p>
+										<p>Track customer loyalty and reward program participation to enhance retention and repeat purchases.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Buying Trends Analysis</h4>
-										<p>Analyze purchase patterns and preferences</p>
+										<p>Analyze patterns and preferences to tailor marketing strategies and stock decisions.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Customer Service</h4>
-										<p>Track and resolve customer issues</p>
+										<p>Track support requests and resolve issues efficiently to improve customer satisfaction.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Customer Retention</h4>
-										<p>Keep existing customers engaged</p>
+										<p>Implement strategies to keep existing customers engaged and reduce churn.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Upselling</h4>
-										<p>Recommend upgrades or additional products</p>
+										<p>Recommend complementary or premium products to increase sales value per customer.</p>
 									</div>
 								</div>
 							</div>
 
 							<div id="operational" class="tab-content">
-								<h3>14.2 OPERATIONAL ISSUES</h3>
-								<h4>14.2.1 IT GOVERNANCE & POLICY</h4>
-								<p>Governance: Framework for IT management and decision-making</p>
+								<h3>14.2 Operational Issues</h3>
+								<h4>14.2.1 IT Governance & Policy</h4>
+								<p>Governance structures ensure effective IT management, risk mitigation, and compliance with policies.</p>
 
 								<h4 style="margin-top: 1.5rem">Four Key Components:</h4>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Business Continuity</h4>
-										<p>Keep operations running during disruptions</p>
+										<p>Plans to maintain operations during disruptions through redundancy and failover systems.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Disaster Recovery</h4>
-										<p>Recover from major incidents</p>
+										<p>Procedures to restore IT systems and data following major incidents with minimal downtime.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Risk Management</h4>
-										<p>Identify IT risks and implement mitigation strategies</p>
+										<p>Identifying IT threats and implementing controls to reduce vulnerabilities and potential impact.</p>
 									</div>
 									<div class="concept-box">
 										<h4>User Policy</h4>
-										<p>Acceptable use policy, security policies</p>
+										<p>Defines acceptable use, security measures, and compliance requirements for IT system users.</p>
 									</div>
 								</div>
 
-								<h3 style="margin-top: 2rem">14.2.2 IT CHANGEOVER METHODS</h3>
+								<h3 style="margin-top: 2rem">14.2.2 IT Changeover Methods</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Phased</h4>
-										<p>Gradual transition in stages</p>
+										<p>Gradual migration in stages, reducing risk at the cost of longer implementation time.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Direct</h4>
-										<p>Stop old, start new immediately</p>
+										<p>Instant replacement of old with new system, fast but higher risk of failure or disruption.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Parallel</h4>
-										<p>Run old and new simultaneously</p>
+										<p>Run old and new systems simultaneously, enabling testing but doubling resource requirements.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Pilot</h4>
-										<p>Test on small group first, then full rollout</p>
+										<p>Testing new system with a small group before full rollout, minimizing large scale failures.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">Additional Operational Considerations</h4>
+								<ul>
+									<li><b>System Maintenance:</b> Includes corrective (fix errors), adaptive (change to environment), and perfective (enhancement) maintenance.</li>
+									<li><b>Archiving Data:</b> Moving old/infrequently accessed data to secondary storage to optimize performance and comply with legal retention policies.</li>
+									<li><b>Disaster Recovery Plan:</b> Should include identification of critical data, risk analysis, clear team roles, and management commitment.</li>
+								</ul>
 							</div>
 						</div>
 					</section>
@@ -1129,72 +1222,93 @@
 
 							<div id="project" class="tab-content active">
 								<h3>15.1 PROJECT MANAGEMENT</h3>
-								<p>Success/failure of IT projects depends on project management skills. Proper planning prevents poor performance.</p>
+								<p>Success or failure of IT projects depends heavily on project management skills. Proper planning prevents poor outcomes and maximizes resource use.</p>
 
 								<h3 style="margin-top: 2rem">Characteristics of Successful IT Projects</h3>
 								<ul>
-									<li>Clear, documented objectives and requirements</li>
-									<li>Realistic timelines and deadlines</li>
-									<li>Adequate resources and budget</li>
-									<li>Effective communication and reporting</li>
-									<li>Risk management and contingency planning</li>
-									<li>Quality assurance and testing</li>
-									<li>Stakeholder involvement and satisfaction</li>
+									<li>Clear, documented objectives and requirements agreed by stakeholders</li>
+									<li>Realistic and achievable timelines and deadlines</li>
+									<li>Adequate budget and resources allocated</li>
+									<li>Effective communication and regular reporting among teams and stakeholders</li>
+									<li>Risk management strategies and contingency plans in place</li>
+									<li>Quality assurance and thorough testing to detect and fix issues early</li>
+									<li>Stakeholder involvement and user acceptance testing to ensure requirements met</li>
 								</ul>
 
 								<h3 style="margin-top: 2rem">15.1.3-15.1.4 SMART TARGETS</h3>
-								<h4>Goals must be Specific (clear), Measurable (quantifiable), Achievable (realistic), Relevant (aligned with goals), Time-bound (deadline)</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Specific</h4>
+										<p>Goals must be precise and clear, defining exactly what to achieve.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Measurable</h4>
+										<p>Progress and success can be tracked using concrete criteria.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Achievable</h4>
+										<p>Goals must be realistic and attainable, considering available resources.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Relevant</h4>
+										<p>Goals should align directly with overall project or business objectives.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Time-bound</h4>
+										<p>Set deadlines to focus efforts and allow scheduling.</p>
+									</div>
+								</div>
 
-								<h3 style="margin-top: 2rem">15.1.5-15.1.6 PROJECT MANAGEMENT TOOLS</h3>
+								<h3 style="margin-top: 2rem">15.1.5-15.1.6 Project Management Tools</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Gantt Charts</h4>
-										<p>Visual timeline showing tasks, duration, dependencies</p>
+										<p>Visual timelines showing tasks, durations, dependencies, and progress.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Requirements</h4>
-										<p>Functional and non-functional requirements</p>
+										<p>Both functional and non-functional requirements documented and approved.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Critical Path Analysis</h4>
-										<p>Identify longest sequence of dependent tasks</p>
+										<p>Identifies the sequence of tasks that determine the shortest project duration.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Precedence Tables</h4>
-										<p>Lists tasks and their dependencies</p>
+										<p>List tasks and their dependencies specifying what must be completed first.</p>
 									</div>
 								</div>
 							</div>
 
 							<div id="waterfall" class="tab-content">
 								<h3>15.2 WATERFALL METHOD</h3>
-								<p>Linear, sequential development where each phase must be completed before next begins.</p>
+								<p>A traditional linear, sequential development method where each phase must be completed before the next begins.</p>
 
 								<h3 style="margin-top: 2rem">Six Phases:</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Requirements/Analysis</h4>
-										<p>Gather and document ALL requirements</p>
+										<p>Gather and formally document ALL system requirements from stakeholders.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Design</h4>
-										<p>Create system architecture, database design</p>
+										<p>Create the system architecture, user interfaces, and database design.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Implementation</h4>
-										<p>Write code, build system components</p>
+										<p>Develop and code the system components per the design specifications.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Testing/Debugging</h4>
-										<p>Test thoroughly, find and fix bugs</p>
+										<p>Thoroughly test the system, find defects, and correct them.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Installation</h4>
-										<p>Deploy to production, user training</p>
+										<p>Deploy the system live, including user training and data migration.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Maintenance</h4>
-										<p>Fix issues after launch, updates</p>
+										<p>Ongoing support: fixing issues, performance tuning, and updates.</p>
 									</div>
 								</div>
 
@@ -1202,57 +1316,114 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Strengths</h4>
-										<p>Comprehensive planning, clear documentation, good for fixed requirements</p>
+										<p>Thorough documentation, ideal for well-defined projects with fixed requirements.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Weaknesses</h4>
-										<p>Changes difficult, problems found late, inflexible</p>
+										<p>Inflexible to changes, with problems found late causing costly fixes.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">When to Use Waterfall</h4>
+								<ul>
+									<li>Projects with clear, stable requirements and minimal changes expected.</li>
+									<li>Highly regulated industries like finance or healthcare, requiring exhaustive documentation.</li>
+									<li>Large projects where phases require formal handoffs and approvals.</li>
+								</ul>
 							</div>
 
 							<div id="agile" class="tab-content">
 								<h3>15.3 AGILE APPROACH</h3>
-								<p>Iterative, incremental development in short cycles (sprints), flexible and adaptive to changes.</p>
+								<p>Iterative and incremental development in short cycles (sprints), allowing flexibility and continuous feedback incorporation.</p>
 
-								<h3 style="margin-top: 2rem">Five Phases (repeating cycles):</h3>
+								<h3 style="margin-top: 2rem">Five Phases (Repeating Cycles):</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Requirements</h4>
-										<p>Define features for current iteration</p>
+										<p>Define prioritized features to build during the sprint.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Plan</h4>
-										<p>Break requirements into tasks, estimate effort</p>
+										<p>Break features into tasks and estimate effort required.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Design</h4>
-										<p>Design for current iteration</p>
+										<p>Create design for current iteration with scope for adaptations.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Develop</h4>
-										<p>Build features (usually 2-4 week sprint)</p>
+										<p>Build working components during the sprint (usually 2-4 weeks).</p>
 									</div>
 									<div class="concept-box">
 										<h4>Release</h4>
-										<p>Demo to stakeholders, gather feedback</p>
+										<p>Demonstrate completed work and gather stakeholder feedback.</p>
 									</div>
 								</div>
 
 								<h3 style="margin-top: 2rem">Scrum Framework</h3>
-								<p>Common Agile framework with defined roles (Product Owner, Scrum Master, Development Team) and ceremonies (daily standups, sprint review, retrospective).</p>
+								<p>Agile framework assigning roles like Product Owner, Scrum Master, and Team with ceremonies such as daily standups, sprint reviews, and retrospectives.</p>
 
 								<h3 style="margin-top: 2rem">Characteristics of Agile</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Strengths</h4>
-										<p>Flexible, customer feedback incorporated, working software early</p>
+										<p>Flexible to changes, early delivery of working software, close customer collaboration.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Weaknesses</h4>
-										<p>Less formal documentation, requires active customer involvement</p>
+										<p>Requires active customer involvement, less focus on formal documentation, harder to estimate timelines.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">When to Use Agile</h4>
+								<ul>
+									<li>Projects with evolving or unclear requirements.</li>
+									<li>Environments requiring frequent releases and rapid adaptations.</li>
+									<li>Teams that collaborate closely and customers willing to participate actively.</li>
+								</ul>
+
+								<h4 style="margin-top: 2rem">Waterfall vs Agile Comparison</h4>
+								<table class="comparison-table" style="width: 100%; border-collapse: collapse; text-align: left">
+									<thead>
+										<tr>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Aspect</th>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Waterfall</th>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Agile</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Requirements</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Fixed upfront</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Evolving</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Timeline</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Linear phases</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Short sprints</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Testing</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">After implementation</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Continuous and iterative</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Customer Feedback</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">At end</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Frequent and ongoing</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Documentation</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Comprehensive</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Minimal and flexible</td>
+										</tr>
+										<tr>
+											<td style="padding: 8px">Change Flexibility</td>
+											<td style="padding: 8px">Difficult and costly</td>
+											<td style="padding: 8px">Welcomed and expected</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</section>
@@ -1277,123 +1448,139 @@
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Supervised Learning</h4>
-										<p>Learning from labeled data (correct answers provided)</p>
+										<p>Learning from labeled data (correct answers provided), training the system to classify or predict.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Unsupervised Learning</h4>
-										<p>Learning from unlabeled data (no correct answers provided)</p>
+										<p>Learning from unlabeled data, discovering hidden patterns or groupings without prior knowledge.</p>
 									</div>
 								</div>
 
-								<h3 style="margin-top: 2rem">16.1.2 IMPACT & APPLICATIONS OF MACHINE LEARNING</h3>
+								<h3 style="margin-top: 2rem">16.1.2 Impact & Applications of Machine Learning</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
-										<h4>Natural Language Processing</h4>
-										<p>Understanding and generating human language</p>
+										<h4>Natural Language Processing (NLP)</h4>
+										<p>Understanding, interpreting, and generating human language—used in chatbots, translation, and sentiment analysis.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Speech Recognition</h4>
-										<p>Converting audio speech to text</p>
+										<p>Converting spoken language into text for voice commands and transcription.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Image Recognition</h4>
-										<p>Identifying objects, patterns, faces in images</p>
+										<p>Identifying objects, faces, or patterns in images—applications in security and healthcare.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Pattern Recognition</h4>
-										<p>Detecting patterns and anomalies in data</p>
+										<p>Detecting trends, anomalies, or recurring sequences in datasets—used in fraud detection and recommendations.</p>
 									</div>
 								</div>
+
+								<h4>Exam Tip</h4>
+								<p>Explain clearly the differences between supervised and unsupervised learning with examples relevant to real-world applications.</p>
 							</div>
 
 							<div id="vr-ar" class="tab-content">
-								<h3>16.2 VIRTUAL AND AUGMENTED REALITY</h3>
-								<h4>16.2.1 VIRTUAL REALITY (VR)</h4>
-								<p>Fully immersive digital environment using headset. User completely immersed (physical world replaced).</p>
+								<h3>16.2 Virtual and Augmented Reality</h3>
+
+								<h4>16.2.1 Virtual Reality (VR)</h4>
+								<p>Fully immersive digital environment using headsets that entirely replace the user's physical surroundings.</p>
 
 								<h4 style="margin-top: 1.5rem">Uses:</h4>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Entertainment</h4>
-										<p>Games, movies, interactive experiences</p>
+										<p>Immersive games and interactive media experiences.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Training</h4>
-										<p>Flight simulators, medical training, emergency response</p>
+										<p>Flight simulators, medical surgery practice, emergency responder drills.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Education</h4>
-										<p>Immersive learning, virtual field trips</p>
+										<p>Virtual field trips and simulations for hands-on learning.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Design</h4>
-										<p>Architectural walkthroughs, product visualization</p>
+										<p>Architectural walkthroughs, prototype visualizations, and modeling.</p>
 									</div>
 								</div>
 
-								<h3 style="margin-top: 2rem">16.2.2 AUGMENTED REALITY (AR)</h3>
-								<p>Digital content overlaid on real world viewed through camera. Real world still visible.</p>
+								<h3 style="margin-top: 2rem">16.2.2 Augmented Reality (AR)</h3>
+								<p>Digital information or images overlaid on the real world, still allowing the user to see their real environment.</p>
 
 								<h4 style="margin-top: 1.5rem">Uses:</h4>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Navigation</h4>
-										<p>Real-world directions overlaid on camera</p>
+										<p>Real-world directions and landmarks enhanced through phone or AR glasses.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Gaming</h4>
-										<p>Pokémon GO (catch creatures in real locations)</p>
+										<p>Games like Pokémon GO mixing virtual objects with real locations.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Education</h4>
-										<p>3D models overlaid on textbooks, interactive learning</p>
+										<p>Interactive 3D models over textbooks and immersive learning tools.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Maintenance</h4>
-										<p>Repair instructions overlaid on machinery</p>
+										<p>Overlaying repair instructions directly onto machinery for technicians.</p>
 									</div>
 								</div>
+
+								<h4>Key Difference:</h4>
+								<p>VR fully immerses users in a virtual environment, while AR supplements the real world with virtual overlays.</p>
 							</div>
 
 							<div id="iot" class="tab-content">
-								<h3>16.3 INTERNET OF THINGS (IoT)</h3>
-								<p>Network of physical devices with sensors, embedded systems, and network connectivity, collecting and sharing data over internet.</p>
+								<h3>16.3 Internet of Things (IoT)</h3>
+								<p>A network of physical devices embedded with sensors, software, and connectivity enabling them to collect and exchange data.</p>
 
-								<h3 style="margin-top: 2rem">16.3.2 IMPACT OF IoT</h3>
+								<h3 style="margin-top: 2rem">16.3.2 Impact of IoT</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>On Individuals</h4>
-										<p>Automation, convenience, health monitoring, cost savings</p>
+										<p>Automated homes, health monitoring wearables, improved convenience and cost savings.</p>
 									</div>
 									<div class="concept-box">
 										<h4>On Organisations</h4>
-										<p>Equipment monitoring, operational efficiency, data collection</p>
+										<p>Equipment monitoring for predictive maintenance, operational efficiency, and enhanced decision-making through data.</p>
 									</div>
 									<div class="concept-box">
 										<h4>On Data</h4>
-										<p>Volume, variety, velocity, privacy concerns</p>
+										<p>Massive data volume, variety, and velocity pose challenges on storage, processing, and privacy.</p>
 									</div>
 								</div>
 
-								<h3 style="margin-top: 2rem">16.3.4 IoT SECURITY ISSUES</h3>
+								<h3 style="margin-top: 2rem">16.3.4 IoT Security Issues</h3>
 								<div class="learning-grid">
 									<div class="concept-box">
 										<h4>Vulnerable Devices</h4>
-										<p>Many IoT devices have weak security</p>
+										<p>Many devices have weak security and default passwords, making them targets for hackers.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Network Attacks</h4>
-										<p>Intercept data transmission, man-in-the-middle attacks</p>
+										<p>Interception, man-in-the-middle attacks, and denial of service attacks threaten IoT networks.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Data Privacy</h4>
-										<p>Sensitive location and behavioral data collected</p>
+										<p>Collection of sensitive personal data raises concerns around consent and misuse.</p>
 									</div>
 									<div class="concept-box">
 										<h4>Firmware Updates</h4>
-										<p>Devices often not updated regularly</p>
+										<p>Many IoT devices lack mechanisms for automatic updates, leaving security gaps unpatched.</p>
 									</div>
 								</div>
+
+								<h4 style="margin-top: 2rem">IoT Security Best Practices</h4>
+								<ul>
+									<li>Change default passwords immediately</li>
+									<li>Use strong encryption for data transmission and storage</li>
+									<li>Segment IoT networks to isolate trusted devices</li>
+									<li>Monitor network traffic for unusual activity</li>
+									<li>Regularly update device firmware</li>
+								</ul>
 							</div>
 						</div>
 					</section>
