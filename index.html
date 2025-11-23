@@ -1,378 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edexcel IAL IT Study Hub</title>
-    <style>
-        :root {
-            --color-primary: #10b981;
-            --color-primary-dark: #059669;
-            --color-primary-light: #6ee7b7;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-error: #ef4444;
-            --color-bg: #0f172a;
-            --color-surface: #1e293b;
-            --color-surface-light: #334155;
-            --color-text: #f1f5f9;
-            --color-text-secondary: #cbd5e1;
-            --color-border: #475569;
-            --radius: 12px;
-            --transition: all 0.3s ease;
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edexcel IAL IT Study Hub</title>
+		<style>
+			:root {
+				--color-primary: #10b981;
+				--color-primary-dark: #059669;
+				--color-primary-light: #6ee7b7;
+				--color-success: #10b981;
+				--color-warning: #f59e0b;
+				--color-error: #ef4444;
+				--color-bg: #0f172a;
+				--color-surface: #1e293b;
+				--color-surface-light: #334155;
+				--color-text: #f1f5f9;
+				--color-text-secondary: #cbd5e1;
+				--color-border: #475569;
+				--radius: 12px;
+				--transition: all 0.3s ease;
+			}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-        }
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				background-color: var(--color-bg);
+				color: var(--color-text);
+				line-height: 1.6;
+			}
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+			.container {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
 
-        /* Header Styling */
-        header {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            padding: 3rem 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
+			/* Header Styling */
+			header {
+				background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+				padding: 3rem 2rem;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+				text-align: center;
+			}
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+			header h1 {
+				font-size: 2.5rem;
+				margin-bottom: 0.5rem;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			}
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-        }
+			header p {
+				font-size: 1.1rem;
+				opacity: 0.95;
+			}
 
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
+			/* Main Content */
+			main {
+				flex: 1;
+				padding: 3rem 2rem;
+				max-width: 1200px;
+				margin: 0 auto;
+				width: 100%;
+			}
 
-        /* Hero Section */
-        .hero {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+			/* Hero Section */
+			.hero {
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				margin-bottom: 3rem;
+				text-align: center;
+			}
 
-        .hero h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--color-primary-light);
-        }
+			.hero h2 {
+				font-size: 1.8rem;
+				margin-bottom: 1rem;
+				color: var(--color-primary-light);
+			}
 
-        .hero p {
-            font-size: 1.05rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
-        }
+			.hero p {
+				font-size: 1.05rem;
+				color: var(--color-text-secondary);
+				margin-bottom: 1.5rem;
+			}
 
-        /* Units Grid */
-        .units-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+			/* Units Grid */
+			.units-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
 
-        /* Unit Card */
-        .unit-card {
-            background: var(--color-surface);
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
+			/* Unit Card */
+			.unit-card {
+				background: var(--color-surface);
+				border: 2px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				transition: var(--transition);
+				display: flex;
+				flex-direction: column;
+				cursor: pointer;
+				position: relative;
+				overflow: hidden;
+			}
 
-        .unit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-        }
+			.unit-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 4px;
+				background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+			}
 
-        .unit-card:hover {
-            border-color: var(--color-primary);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
-            transform: translateY(-2px);
-        }
+			.unit-card:hover {
+				border-color: var(--color-primary);
+				box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+				transform: translateY(-2px);
+			}
 
-        .unit-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-primary);
-        }
+			.unit-card h3 {
+				font-size: 1.5rem;
+				margin-bottom: 0.5rem;
+				color: var(--color-primary);
+			}
 
-        .unit-card .status {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--color-surface-light);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 1rem;
-            width: fit-content;
-        }
+			.unit-card .status {
+				display: inline-block;
+				padding: 0.5rem 1rem;
+				background: var(--color-surface-light);
+				border-radius: 20px;
+				font-size: 0.85rem;
+				color: var(--color-text-secondary);
+				margin-bottom: 1rem;
+				width: fit-content;
+			}
 
-        .unit-card p {
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
+			.unit-card p {
+				color: var(--color-text-secondary);
+				margin-bottom: 1.5rem;
+				flex-grow: 1;
+			}
 
-        /* Link Button */
-        .unit-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            gap: 0.5rem;
-        }
+			/* Link Button */
+			.unit-link {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				background: var(--color-primary);
+				color: white;
+				padding: 0.75rem 1.5rem;
+				border-radius: 6px;
+				text-decoration: none;
+				font-weight: 600;
+				transition: var(--transition);
+				border: none;
+				cursor: pointer;
+				gap: 0.5rem;
+			}
 
-        .unit-link:hover {
-            background: var(--color-primary-dark);
-            transform: translateX(4px);
-        }
+			.unit-link:hover {
+				background: var(--color-primary-dark);
+				transform: translateX(4px);
+			}
 
-        .unit-link::after {
-            content: '→';
-            font-size: 1.2rem;
-        }
+			.unit-link::after {
+				content: '→';
+				font-size: 1.2rem;
+			}
 
-        /* Coming Soon Section */
-        .coming-soon {
-            background: var(--color-surface);
-            border: 2px dashed var(--color-surface-light);
-            border-radius: var(--radius);
-            padding: 2rem;
-            text-align: center;
-            opacity: 0.7;
-        }
+			/* Coming Soon Section */
+			.coming-soon {
+				background: var(--color-surface);
+				border: 2px dashed var(--color-surface-light);
+				border-radius: var(--radius);
+				padding: 2rem;
+				text-align: center;
+				opacity: 0.7;
+			}
 
-        .coming-soon h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-text-secondary);
-        }
+			.coming-soon h3 {
+				font-size: 1.3rem;
+				margin-bottom: 0.5rem;
+				color: var(--color-text-secondary);
+			}
 
-        .coming-soon p {
-            color: var(--color-text-secondary);
-            font-size: 0.95rem;
-        }
+			.coming-soon p {
+				color: var(--color-text-secondary);
+				font-size: 0.95rem;
+			}
 
-        /* Info Section */
-        .info-section {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
+			/* Info Section */
+			.info-section {
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				margin-bottom: 2rem;
+			}
 
-        .info-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
+			.info-section h3 {
+				font-size: 1.3rem;
+				margin-bottom: 1rem;
+				color: var(--color-primary);
+			}
 
-        .info-section p {
-            color: var(--color-text-secondary);
-            line-height: 1.8;
-        }
+			.info-section p {
+				color: var(--color-text-secondary);
+				line-height: 1.8;
+			}
 
-        /* Footer */
-        footer {
-            background: var(--color-surface);
-            border-top: 1px solid var(--color-border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--color-text-secondary);
-            margin-top: auto;
-        }
+			/* Footer */
+			footer {
+				background: var(--color-surface);
+				border-top: 1px solid var(--color-border);
+				padding: 2rem;
+				text-align: center;
+				color: var(--color-text-secondary);
+				margin-top: auto;
+			}
 
-        footer p {
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-        }
+			footer p {
+				margin: 0.5rem 0;
+				font-size: 0.9rem;
+			}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
+			/* Responsive Design */
+			@media (max-width: 768px) {
+				header h1 {
+					font-size: 1.8rem;
+				}
 
-            header p {
-                font-size: 0.95rem;
-            }
+				header p {
+					font-size: 0.95rem;
+				}
 
-            main {
-                padding: 1.5rem 1rem;
-            }
+				main {
+					padding: 1.5rem 1rem;
+				}
 
-            .hero {
-                padding: 1.5rem;
-            }
+				.hero {
+					padding: 1.5rem;
+				}
 
-            .hero h2 {
-                font-size: 1.4rem;
-            }
+				.hero h2 {
+					font-size: 1.4rem;
+				}
 
-            .units-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+				.units-grid {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+				}
 
-            .unit-card {
-                padding: 1.5rem;
-            }
-        }
+				.unit-card {
+					padding: 1.5rem;
+				}
+			}
 
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+			/* Animation */
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
 
-        .unit-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
+			.unit-card {
+				animation: fadeIn 0.5s ease-out forwards;
+			}
 
-        .unit-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
+			.unit-card:nth-child(2) {
+				animation-delay: 0.1s;
+			}
 
-        .unit-card:nth-child(3) {
-            animation-delay: 0.2s;
-        }
+			.unit-card:nth-child(3) {
+				animation-delay: 0.2s;
+			}
 
-        .unit-card:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Edexcel IAL Information Technology</h1>
-            <p>Complete Study Notes & Resources</p>
-        </header>
+			.unit-card:nth-child(4) {
+				animation-delay: 0.3s;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Edexcel IAL Information Technology</h1>
+				<p>Complete Study Notes & Resources</p>
+			</header>
 
-        <main>
-            <!-- Hero Section -->
-            <section class="hero">
-                <h2>Welcome to Your Study Hub</h2>
-                <p>Comprehensive notes for all units of the Edexcel International Advanced Level Information Technology course. Navigate through each unit to study key topics, concepts, and exam preparation materials.</p>
-            </section>
+			<main>
+				<!-- Hero Section -->
+				<section class="hero">
+					<h2>Welcome to Your Study Hub</h2>
+					<p>Comprehensive notes for all units of the Edexcel International Advanced Level Information Technology course. Navigate through each unit to study key topics, concepts, and exam preparation materials.</p>
+				</section>
 
-            <!-- Units Grid -->
-            <section class="units-grid">
-                <!-- Unit 1 -->
-                <div class="unit-card">
-                    <h3>Unit 1</h3>
-                    <span class="status">Available</span>
-                    <p><strong>Hardware, Software & Networks</strong></p>
-                    <p>Explore the fundamentals of computer systems, including hardware components, software types, operating systems, and basic networking concepts.</p>
-                    <a href="unit_1.html" class="unit-link">Study Unit 1</a>
-                </div>
+				<!-- Units Grid -->
+				<section class="units-grid">
+					<!-- Unit 1 -->
+					<div class="unit-card">
+						<h3>Unit 1</h3>
+						<span class="status">Available</span>
+						<p><strong>Hardware, Software & Networks</strong></p>
+						<p>
+							Understand fundamental digital technologies including hardware components, systems software, applications, and network models. Learn how devices connect, communicate and are secured, and explore ethical, legal, and
+							environmental impacts of IT.
+						</p>
+						<a href="unit_1.html" class="unit-link">Study Unit 1</a>
+					</div>
+					<!-- Unit 2 -->
+					<div class="unit-card">
+						<h3>Unit 2</h3>
+						<span class="status">Available</span>
+						<p><strong>Online Environment & Web Development</strong></p>
+						<p>
+							Master web development concepts: HTML, CSS, and JavaScript. Understand web page design principles, interactive features, semantic code, accessibility, and the evolving online environment including the semantic web.
+						</p>
+						<a href="unit_2.html" class="unit-link">Study Unit 2</a>
+					</div>
+					<!-- Unit 3 -->
+					<div class="unit-card">
+						<h3>Unit 3</h3>
+						<span class="status">Available</span>
+						<p><strong>Data Storage, Processing & Management</strong></p>
+						<p>
+							Explore data integrity, relational databases, normalization, Big Data, encryption, and human-computer interaction. Understand IT systems’ role in organisations and methods to maintain, store, and secure data
+							efficiently.
+						</p>
+						<a href="unit_3.html" class="unit-link">Study Unit 3</a>
+					</div>
+					<!-- Unit 4 -->
+					<div class="unit-card">
+						<h3>Unit 4</h3>
+						<span class="status">Available</span>
+						<p><strong>Systems Design & Cybersecurity</strong></p>
+						<p>
+							Delve into systems design including decomposition and modeling, software development life cycle, project management methods, cybersecurity threats and defences, and the practical application of databases and
+							relational data structures.
+						</p>
+						<a href="unit_4.html" class="unit-link">Study Unit 4</a>
+					</div>
+				</section>
+				<!-- Info Section -->
+				<section class="info-section">
+					<h3>📚 How to Use This Study Hub</h3>
+					<p>
+						Click on any available unit above to access comprehensive study notes organized by topics. Each unit covers the key concepts, definitions, and examples you need for your Edexcel IAL Information Technology exams. You
+						can easily add Unit 3 and Unit 4 by creating similar HTML files and updating the links above.
+					</p>
+				</section>
 
-                <!-- Unit 2 -->
-                <div class="unit-card">
-                    <h3>Unit 2</h3>
-                    <span class="status">Available</span>
-                    <p><strong>The Online Environment & Web Development</strong></p>
-                    <p>Master web technologies including HTML, CSS, JavaScript, the internet structure, online security, and how to build interactive web applications.</p>
-                    <a href="unit_2.html" class="unit-link">Study Unit 2</a>
-                </div>
+				<section class="info-section">
+					<h3>✨ Features</h3>
+					<p>
+						• Well-organized topics with clear explanations<br />
+						• Navigation sidebar for easy content browsing<br />
+						• Modern, responsive design for all devices<br />
+						• Searchable content for quick reference<br />
+						• Exam-focused study materials
+					</p>
+				</section>
+			</main>
 
-                <!-- Unit 3 (Placeholder) -->
-                <div class="unit-card coming-soon">
-                    <h3>Unit 3</h3>
-                    <span class="status">Coming Soon</span>
-                    <p><strong>Advanced Topics</strong></p>
-                    <p>More content will be added soon. Check back for updates!</p>
-                </div>
-
-                <!-- Unit 4 (Placeholder) -->
-                <div class="unit-card coming-soon">
-                    <h3>Unit 4</h3>
-                    <span class="status">Coming Soon</span>
-                    <p><strong>Practical Applications</strong></p>
-                    <p>More content will be added soon. Check back for updates!</p>
-                </div>
-            </section>
-
-            <!-- Info Section -->
-            <section class="info-section">
-                <h3>📚 How to Use This Study Hub</h3>
-                <p>
-                    Click on any available unit above to access comprehensive study notes organized by topics. Each unit covers the key concepts, definitions, and examples you need for your Edexcel IAL Information Technology exams. You can easily add Unit 3 and Unit 4 by creating similar HTML files and updating the links above. 
-                </p>
-            </section>
-
-            <section class="info-section">
-                <h3>✨ Features</h3>
-                <p>
-                    • Well-organized topics with clear explanations<br>
-                    • Navigation sidebar for easy content browsing<br>
-                    • Modern, responsive design for all devices<br>
-                    • Searchable content for quick reference<br>
-                    • Exam-focused study materials
-                </p>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <p><strong>Edexcel IAL IT Study Hub</strong></p>
-            <p>Study materials for Information Technology (9626)</p>
-            <p style="margin-top: 1rem; opacity: 0.7;">Last updated: November 2025</p>
-        </footer>
-    </div>
-</body>
+			<!-- Footer -->
+			<footer>
+				<p><strong>Edexcel IAL IT Study Hub</strong></p>
+				<p style="margin-top: 1rem; opacity: 0.7">Last updated: November 2025 by @ThawyeZaw</p>
+			</footer>
+		</div>
+	</body>
 </html>
