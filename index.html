@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IAL IT Unit 2 - Learning Dashboard</title>
+    <title>Edexcel IAL IT Study Hub</title>
     <style>
         :root {
-            --color-primary: #3b82f6;
-            --color-primary-dark: #1e40af;
+            --color-primary: #10b981;
+            --color-primary-dark: #059669;
+            --color-primary-light: #6ee7b7;
             --color-success: #10b981;
             --color-warning: #f59e0b;
             --color-error: #ef4444;
@@ -34,146 +35,239 @@
             line-height: 1.6;
         }
 
-        /* Main Layout */
         .container {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
         }
 
+        /* Header Styling */
         header {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            padding: 2rem;
+            padding: 3rem 2rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         header h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         header p {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             opacity: 0.95;
         }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1400px;
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 3rem 2rem;
+            max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
 
-        /* Sidebar Navigation */
-        .sidebar {
+        /* Hero Section */
+        .hero {
             background: var(--color-surface);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            height: fit-content;
             border: 1px solid var(--color-border);
-            position: sticky;
-            top: 20px;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
         }
 
-        .sidebar h3 {
-            font-size: 1rem;
+        .hero h2 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-primary);
+            color: var(--color-primary-light);
         }
 
-        .nav-list {
-            list-style: none;
-        }
-
-        .nav-list li {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--color-surface-light);
-            border: 2px solid transparent;
+        .hero p {
+            font-size: 1.05rem;
             color: var(--color-text-secondary);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: left;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .nav-btn:hover {
-            background: var(--color-border);
-            transform: translateX(5px);
-        }
-
-        .nav-btn.active {
-            background: var(--color-primary);
-            color: white;
-            border-color: var(--color-primary);
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 1rem;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-nav-toggle svg {
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-nav-toggle.active svg {
-            transform: rotate(180deg);
-        }
-
-        .mobile-nav {
-            display: none;
-            background: var(--color-surface);
-            border-radius: var(--radius);
-            padding: 1rem;
-            border: 1px solid var(--color-border);
             margin-bottom: 1.5rem;
         }
 
-        .mobile-nav.active {
-            display: block;
-        }
-
-        /* Content Area */
-        .content {
+        /* Units Grid */
+        .units-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .topic-section {
-            display: none;
-            animation: fadeIn 0.3s ease;
+        /* Unit Card */
+        .unit-card {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .topic-section.active {
-            display: grid;
-            gap: 2rem;
+        .unit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
         }
 
+        .unit-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .unit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .unit-card .status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--color-surface-light);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .unit-card p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Link Button */
+        .unit-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+
+        .unit-link:hover {
+            background: var(--color-primary-dark);
+            transform: translateX(4px);
+        }
+
+        .unit-link::after {
+            content: '→';
+            font-size: 1.2rem;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            background: var(--color-surface);
+            border: 2px dashed var(--color-surface-light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .coming-soon h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .coming-soon p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .info-section p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 0.95rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero {
+                padding: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+
+            .units-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .unit-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -185,1638 +279,100 @@
             }
         }
 
-        /* Card Components */
-        .card {
-            background: var(--color-surface);
-            border-radius: var(--radius);
-            padding: 2rem;
-            border: 1px solid var(--color-border);
-            transition: var(--transition);
-            overflow: hidden;
+        .unit-card {
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
-        .card:hover {
-            border-color: var(--color-primary);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.1);
+        .unit-card:nth-child(2) {
+            animation-delay: 0.1s;
         }
 
-        .card h2 {
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .unit-card:nth-child(3) {
+            animation-delay: 0.2s;
         }
 
-        .card h3 {
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--color-text);
-            font-size: 1.1rem;
-        }
-
-        .card h3:first-child {
-            margin-top: 0;
-        }
-
-        /* Learning Section */
-        .learning-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .concept-box {
-            background: var(--color-surface-light);
-            border-left: 4px solid var(--color-primary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .concept-box:hover {
-            transform: translateX(8px);
-            border-left-color: var(--color-success);
-        }
-
-        .concept-box h4 {
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .concept-box p {
-            color: var(--color-text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Code Block */
-        .code-block {
-            background: #0d1117;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            white-space: pre;
-        }
-
-        .code-block code {
-            color: #79c0ff;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: var(--color-primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--color-surface-light);
-            color: var(--color-text);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-border);
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-        }
-
-        /* Flashcard */
-        .flashcard-container {
-            perspective: 1000px;
-            cursor: pointer;
-            height: 300px;
-        }
-
-        .flashcard {
-            width: 100%;
-            height: 100%;
-            background: var(--color-surface-light);
-            border: 2px solid var(--color-primary);
-            border-radius: var(--radius);
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-content {
-            backface-visibility: hidden;
-        }
-
-        .flashcard-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            padding: 2rem;
-            text-align: center;
-            color: var(--color-success);
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--color-border);
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 1rem 1.5rem;
-            background: transparent;
-            border: none;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition);
-            position: relative;
-            bottom: -1px;
-        }
-
-        .tab-btn:hover {
-            color: var(--color-text);
-        }
-
-        .tab-btn.active {
-            color: var(--color-primary);
-            border-bottom-color: var(--color-primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Lists */
-        ul {
-            margin-left: 1.5rem;
-            color: var(--color-text-secondary);
-        }
-
-        ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        /* Example Box */
-        .example-box {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--color-success);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .example-box strong {
-            color: var(--color-success);
-        }
-
-        /* Progress Indicator */
-        .progress-bar {
-            height: 8px;
-            background: var(--color-surface-light);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-success) 100%);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            .sidebar {
-                position: relative;
-                top: 0;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 1.5rem;
-            }
-
-            header h1 {
-                font-size: 1.25rem;
-            }
-
-            header p {
-                font-size: 0.9rem;
-            }
-
-            .main-content {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-                gap: 1rem;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: flex;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .learning-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tabs {
-                gap: 0.5rem;
-            }
-
-            .tab-btn {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .flashcard {
-                height: 250px;
-                padding: 1rem;
-            }
-
-            .concept-box {
-                padding: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 1rem;
-            }
-
-            header h1 {
-                font-size: 1.1rem;
-            }
-
-            header p {
-                font-size: 0.85rem;
-            }
-
-            .main-content {
-                padding: 0.5rem;
-                gap: 0.5rem;
-            }
-
-            .card {
-                padding: 1rem;
-            }
-
-            .btn {
-                padding: 0.65rem 1.25rem;
-                font-size: 0.85rem;
-            }
-
-            .code-block {
-                padding: 1rem;
-                font-size: 0.8rem;
-            }
-
-            .tabs {
-                gap: 0.25rem;
-            }
-
-            .tab-btn {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
-            }
-
-            .flashcard {
-                height: 220px;
-                padding: 1rem;
-                font-size: 1rem;
-            }
-
-            .concept-box {
-                padding: 0.75rem;
-                border-left-width: 3px;
-            }
-
-            .concept-box h4 {
-                font-size: 0.9rem;
-            }
-
-            .concept-box p {
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Utility */
-        .hidden {
-            display: none !important;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--color-primary);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background: var(--color-success);
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+        .unit-card:nth-child(4) {
+            animation-delay: 0.3s;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📚 IAL IT Unit 2 Master Dashboard</h1>
-            <p>Master HTML, CSS, JavaScript & Web Design • Topics 7-11 • Interactive Learning & Exam Prep</p>
+            <h1>Edexcel IAL Information Technology</h1>
+            <p>Complete Study Notes & Resources</p>
         </header>
 
-        <div class="main-content">
-            <!-- Mobile Navigation Toggle -->
-            <button class="mobile-nav-toggle" id="mobileNavToggle">
-                <span>Browse Topics</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <!-- Mobile Navigation -->
-            <div class="mobile-nav" id="mobileNav">
-                <ul class="nav-list">
-                    <li><button class="nav-btn active" data-topic="topic7">Topic 7: HTML</button></li>
-                    <li><button class="nav-btn" data-topic="topic8">Topic 8: CSS</button></li>
-                    <li><button class="nav-btn" data-topic="topic9">Topic 9: JavaScript</button></li>
-                    <li><button class="nav-btn" data-topic="topic10">Topic 10: Design</button></li>
-                    <li><button class="nav-btn" data-topic="topic11">Topic 11: Semantic</button></li>
-                    <li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
-                    <li><button class="nav-btn" data-topic="exam">🎯 Exam Mode</button></li>
-                </ul>
-            </div>
-
-            <!-- Sidebar Navigation (Desktop) -->
-            <aside class="sidebar">
-                <h3>Topics</h3>
-                <ul class="nav-list">
-                    <li><button class="nav-btn active" data-topic="topic7">Topic 7: HTML</button></li>
-                    <li><button class="nav-btn" data-topic="topic8">Topic 8: CSS</button></li>
-                    <li><button class="nav-btn" data-topic="topic9">Topic 9: JavaScript</button></li>
-                    <li><button class="nav-btn" data-topic="topic10">Topic 10: Design</button></li>
-                    <li><button class="nav-btn" data-topic="topic11">Topic 11: Semantic</button></li>
-                    <li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
-                    <li><button class="nav-btn" data-topic="exam">🎯 Exam Mode</button></li>
-                </ul>
-            </aside>
-
-            <!-- Main Content -->
-            <main class="content">
-                <!-- Topic 7: HTML -->
-                <section id="topic7" class="topic-section active">
-                    <div class="card">
-                        <h2>Topic 7: Understanding HTML</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">HyperText Markup Language is the foundation of all web pages. Learn document structure, semantic elements, and web components.</p>
-
-                        <!-- Document Structure -->
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="html-structure">7.1 Document Structure</button>
-                            <button class="tab-btn" data-tab="html-markup">7.2 Structural Markup</button>
-                            <button class="tab-btn" data-tab="html-components">7.3 Page Components</button>
-                        </div>
-
-                        <!-- Tab 1: Document Structure -->
-                        <div id="html-structure" class="tab-content active">
-                            <h3>7.1.1 - HTML Fundamentals</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>DOCTYPE & Elements</h4>
-                                    <p>Every HTML document starts with &lt;!DOCTYPE html&gt; to declare HTML5. Elements are the building blocks made of tags.</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Tags & Attributes</h4>
-                                    <p>Tags tell browsers how to display content. Attributes provide additional info: &lt;img src="file.jpg" alt="text"&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Document Language</h4>
-                                    <p>Declare language with: &lt;html lang="en"&gt; for accessibility and search engines.</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">7.1.3 - Head Element</h3>
-                            <div class="example-box">
-                                <strong>What goes in &lt;head&gt;:</strong>
-                                <ul style="margin-top: 0.5rem;">
-                                    <li>Metadata (charset, viewport)</li>
-                                    <li>Page title via &lt;title&gt;</li>
-                                    <li>Links to stylesheets</li>
-                                    <li>Scripts and external resources</li>
-                                </ul>
-                            </div>
-
-                            <div class="code-block"><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Page Title&lt;/title&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;!-- Content here --&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></div>
-
-                            <h3>7.1.4 - Syntax Rules</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>✓ Lowercase Letters</h4>
-                                    <p>Use lowercase: &lt;body&gt; not &lt;BODY&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>✓ Proper Indentation</h4>
-                                    <p>Indent nested elements for readability</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>✓ Double Quotes</h4>
-                                    <p>Use double quotes for attributes: class="container"</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>✓ Self-closing Elements</h4>
-                                    <p>Remove slash: &lt;img&gt; not &lt;img /&gt;</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">7.1.5 - Global Attributes</h3>
-                            <div class="example-box">
-                                <strong>Key Global Attributes:</strong>
-                                <ul style="margin-top: 0.5rem;">
-                                    <li><strong>class</strong> - Multiple classes for styling</li>
-                                    <li><strong>id</strong> - Unique identifier (use one per element)</li>
-                                    <li><strong>style</strong> - Inline CSS styles</li>
-                                    <li><strong>lang</strong> - Element language</li>
-                                    <li><strong>tabindex</strong> - Tab navigation order</li>
-                                    <li><strong>data-*</strong> - Custom data attributes</li>
-                                    <li><strong>hidden</strong> - Hide elements</li>
-                                    <li><strong>accesskey</strong> - Keyboard shortcut</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Tab 2: Structural Markup -->
-                        <div id="html-markup" class="tab-content">
-                            <h3>7.2.1 - Block vs Inline Elements</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Block Elements</h4>
-                                    <p>Take full width, start new line: &lt;div&gt;, &lt;p&gt;, &lt;h1&gt;-&lt;h6&gt;, &lt;section&gt;, &lt;article&gt;, &lt;header&gt;, &lt;footer&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Inline Elements</h4>
-                                    <p>Take only needed width, flow in text: &lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;img&gt;, &lt;button&gt;</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">7.2.3 - Key Structural Elements</h3>
-                            <div class="example-box">
-                                <strong>Text Structure Elements:</strong>
-                                <ul style="margin-top: 0.5rem;">
-                                    <li>&lt;article&gt; - Independent content</li>
-                                    <li>&lt;section&gt; - Thematic grouping</li>
-                                    <li>&lt;h1&gt;-&lt;h6&gt; - Headings (one H1 per page)</li>
-                                    <li>&lt;p&gt; - Paragraphs</li>
-                                    <li>&lt;hr&gt; - Thematic break</li>
-                                    <li>&lt;strong&gt; - Strong importance</li>
-                                    <li>&lt;em&gt; - Emphasis (italic)</li>
-                                </ul>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">7.2.4 - Lists</h3>
-                            <div class="code-block"><code>&lt;!-- Unordered List --&gt;
-&lt;ul&gt;
-    &lt;li&gt;Item 1&lt;/li&gt;
-    &lt;li&gt;Item 2&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!-- Ordered List --&gt;
-&lt;ol start="1" type="a"&gt;
-    &lt;li&gt;First&lt;/li&gt;
-    &lt;li&gt;Second&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;!-- Definition List --&gt;
-&lt;dl&gt;
-    &lt;dt&gt;HTML&lt;/dt&gt;
-    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
-&lt;/dl&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">7.2.5 - Links</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Internal Links</h4>
-                                    <p>&lt;a href="page.html"&gt;Link&lt;/a&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>External Links</h4>
-                                    <p>&lt;a href="https://site.com" target="_blank" rel="noopener noreferrer"&gt;Link&lt;/a&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Email Links</h4>
-                                    <p>&lt;a href="mailto:user@example.com"&gt;Email&lt;/a&gt;</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Page Anchors</h4>
-                                    <p>&lt;a href="#section"&gt;Jump to Section&lt;/a&gt;</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tab 3: Page Components -->
-                        <div id="html-components" class="tab-content">
-                            <h3>7.3.1 - Images</h3>
-                            <div class="example-box">
-                                <strong>Image Best Practices:</strong>
-                                <ul style="margin-top: 0.5rem;">
-                                    <li>Use appropriate format (JPEG for photos, PNG for graphics)</li>
-                                    <li>Specify width and height to prevent layout shift</li>
-                                    <li>Maintain aspect ratio: width="400" height="300"</li>
-                                    <li>Always include descriptive alt text</li>
-                                    <li>Use CSS to position and style</li>
-                                </ul>
-                            </div>
-
-                            <div class="code-block"><code>&lt;img src="image.jpg" alt="Description of image" width="400" height="300"&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">7.3.2 - Tables</h3>
-                            <div class="code-block"><code>&lt;table&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Header 1&lt;/th&gt;
-            &lt;th&gt;Header 2&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Data 1&lt;/td&gt;
-            &lt;td rowspan="2"&gt;Spanning 2 rows&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-    &lt;tfoot&gt;
-        &lt;tr&gt;&lt;td&gt;Footer&lt;/td&gt;&lt;/tr&gt;
-    &lt;/tfoot&gt;
-&lt;/table&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">7.3.3 - Forms</h3>
-                            <div class="code-block"><code>&lt;form method="POST" action="submit.php"&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Contact Details&lt;/legend&gt;
-        &lt;label for="name"&gt;Name:&lt;/label&gt;
-        &lt;input type="text" id="name" name="name" required&gt;
-
-        &lt;label for="email"&gt;Email:&lt;/label&gt;
-        &lt;input type="email" id="email" name="email"&gt;
-
-        &lt;label for="message"&gt;Message:&lt;/label&gt;
-        &lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;
-
-        &lt;select name="category"&gt;
-            &lt;option&gt;Select...&lt;/option&gt;
-            &lt;option value="bug"&gt;Bug Report&lt;/option&gt;
-        &lt;/select&gt;
-
-        &lt;button type="submit"&gt;Send&lt;/button&gt;
-    &lt;/fieldset&gt;
-&lt;/form&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">7.3.5 - Audio & Video</h3>
-                            <div class="code-block"><code>&lt;video width="400" height="300" controls&gt;
-    &lt;source src="video.mp4" type="video/mp4"&gt;
-    &lt;source src="video.webm" type="video/webm"&gt;
-    Your browser doesn't support HTML5 video.
-&lt;/video&gt;
-
-&lt;audio controls&gt;
-    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
-    &lt;source src="audio.ogg" type="audio/ogg"&gt;
-&lt;/audio&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">7.3.6 - Inline Frames (iframes)</h3>
-                            <div class="code-block"><code>&lt;iframe src="https://example.com" width="400" height="300" title="External content"&gt;&lt;/iframe&gt;</code></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Topic 8: CSS -->
-                <section id="topic8" class="topic-section">
-                    <div class="card">
-                        <h2>Topic 8: Understanding CSS</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Cascading Style Sheets control the visual design and layout of web pages. Master selectors, the box model, and responsive design.</p>
-
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="css-writing">8.1 Writing CSS</button>
-                            <button class="tab-btn" data-tab="css-styling">8.2 Styling Pages</button>
-                            <button class="tab-btn" data-tab="css-positioning">8.3 Positioning</button>
-                            <button class="tab-btn" data-tab="css-animations">8.4 Animations</button>
-                        </div>
-
-                        <div id="css-writing" class="tab-content active">
-                            <h3>8.1.1 - Purpose of CSS</h3>
-                            <ul>
-                                <li>Control page layout (positioning, spacing)</li>
-                                <li>Ensure consistent design across pages</li>
-                                <li>Separate content (HTML) from presentation (CSS)</li>
-                            </ul>
-
-                            <h3 style="margin-top: 2rem;">8.1.2 - Referencing CSS</h3>
-                            <div class="code-block"><code>&lt;!-- Inline Styles --&gt;
-&lt;p style="color: blue; font-size: 16px;"&gt;Text&lt;/p&gt;
-
-&lt;!-- Internal Stylesheet --&gt;
-&lt;style&gt;
-    p { color: blue; }
-&lt;/style&gt;
-
-&lt;!-- External Stylesheet (Best Practice) --&gt;
-&lt;link rel="stylesheet" href="css/style.css"&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">8.1.3 - CSS Rules</h3>
-                            <div class="code-block"><code>selector {
-    property: value;
-    color: blue;
-    font-size: 16px;
-}</code></div>
-
-                            <h3 style="margin-top: 2rem;">8.1.4 - CSS Selectors</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Type Selector</h4>
-                                    <p>p { } - targets all paragraphs</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Class Selector</h4>
-                                    <p>.highlight { } - targets class="highlight"</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>ID Selector</h4>
-                                    <p>#header { } - targets id="header"</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Descendant</h4>
-                                    <p>article p { } - targets p inside article</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Child Combinator</h4>
-                                    <p>ul > li { } - direct children only</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Attribute Selector</h4>
-                                    <p>input[type="email"] { }</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">8.1.6 - The Box Model</h3>
-                            <div class="example-box">
-                                <strong>Box Model Layers (outside to inside):</strong>
-                                <ul style="margin-top: 0.5rem;">
-                                    <li><strong>Margin</strong> - Space outside border</li>
-                                    <li><strong>Border</strong> - Around padding</li>
-                                    <li><strong>Padding</strong> - Space inside border</li>
-                                    <li><strong>Content</strong> - Actual element content</li>
-                                </ul>
-                            </div>
-
-                            <div class="code-block"><code>.box {
-    margin: 20px;
-    border: 2px solid black;
-    padding: 15px;
-    width: 300px; /* Total: 300 + 30 (padding) + 4 (border) + 40 (margin) */
-}</code></div>
-                        </div>
-
-                        <div id="css-styling" class="tab-content">
-                            <h3>8.2.1 - Specifying Colors</h3>
-                            <div class="code-block"><code>/* Color Names */
-color: blue;
-
-/* Hexadecimal */
-color: #0066ff;
-
-/* RGB */
-color: rgb(0, 102, 255);
-
-/* Opacity/Alpha */
-color: rgba(0, 102, 255, 0.5);
-
-/* HSL */
-color: hsl(220, 100%, 50%);</code></div>
-
-                            <h3 style="margin-top: 2rem;">8.2.3 - Length Values</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Absolute Lengths</h4>
-                                    <p>px (pixels) - fixed size</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Relative Lengths</h4>
-                                    <p>em (relative to font), rem (relative to root), % (percentage)</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">8.2.4 - Styling Elements</h3>
-                            <ul>
-                                <li>Text layout: text-align, line-height, letter-spacing</li>
-                                <li>Fonts: font-family, font-size, font-weight, @import</li>
-                                <li>Links: :hover, :visited, :active pseudo-classes</li>
-                                <li>Lists: list-style-type, list-style-image</li>
-                                <li>Tables: border-collapse, table-layout</li>
-                                <li>Forms: input styling, focus states</li>
-                                <li>Images: max-width, object-fit</li>
-                            </ul>
-                        </div>
-
-                        <div id="css-positioning" class="tab-content">
-                            <h3>8.3.1 - Positioning Elements</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Static (default)</h4>
-                                    <p>Normal document flow</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Relative</h4>
-                                    <p>Relative to normal position</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Absolute</h4>
-                                    <p>Relative to positioned parent</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Fixed</h4>
-                                    <p>Relative to viewport (stays in place)</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">8.3.3 - Responsive Design Layouts</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Fixed Width</h4>
-                                    <p>Set width in pixels (less responsive)</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Liquid/Fluid</h4>
-                                    <p>Use percentages to adapt to screen width</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>CSS Grid</h4>
-                                    <p>Two-dimensional layout system</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Flexbox</h4>
-                                    <p>One-dimensional flexible layouts</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">8.3.4 - Responsive Design</h3>
-                            <div class="code-block"><code>/* Mobile-First Approach */
-.container {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
-}
-
-/* Tablet and larger */
-@media (min-width: 768px) {
-    .container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    }
-}
-
-/* Desktop and larger */
-@media (min-width: 1024px) {
-    .container {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    }
-}</code></div>
-                        </div>
-
-                        <div id="css-animations" class="tab-content">
-                            <h3>8.4.1 - CSS Transitions</h3>
-                            <div class="code-block"><code>.button {
-    background: blue;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.button:hover {
-    background: darkblue;
-    transform: scale(1.1);
-}</code></div>
-
-                            <h3 style="margin-top: 2rem;">CSS Transforms</h3>
-                            <div class="code-block"><code>/* 2D Transforms */
-transform: rotate(45deg);
-transform: scale(1.5);
-transform: translate(50px, 100px);
-transform: skew(10deg, 20deg);
-
-/* 3D Transforms */
-transform: rotateX(45deg);
-transform: perspective(1000px) rotateY(45deg);</code></div>
-
-                            <h3 style="margin-top: 2rem;">Keyframe Animations</h3>
-                            <div class="code-block"><code>@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.element {
-    animation: slideIn 0.5s ease-out;
-}</code></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Topic 9: JavaScript -->
-                <section id="topic9" class="topic-section">
-                    <div class="card">
-                        <h2>Topic 9: Understanding JavaScript</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">JavaScript adds interactivity to web pages. Learn DOM manipulation, events, and programming fundamentals.</p>
-
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="js-dom">9.1 DOM</button>
-                            <button class="tab-btn" data-tab="js-regex">9.2 Regular Expressions</button>
-                            <button class="tab-btn" data-tab="js-functionality">9.3 Functionality</button>
-                        </div>
-
-                        <div id="js-dom" class="tab-content active">
-                            <h3>9.1.1 - Document Object Model</h3>
-                            <p>The DOM is a tree representation of the HTML page that JavaScript can access and modify.</p>
-
-                            <div class="code-block"><code>// Selecting Elements
-document.getElementById('myId');
-document.querySelector('.className');
-document.querySelectorAll('p');
-
-// Modifying Content
-element.textContent = "New text";
-element.innerHTML = "&lt;strong&gt;Bold&lt;/strong&gt;";
-
-// Changing Attributes
-element.setAttribute('class', 'active');
-element.removeAttribute('disabled');
-
-// Adding/Removing Classes
-element.classList.add('highlight');
-element.classList.remove('highlight');
-element.classList.toggle('active');</code></div>
-                        </div>
-
-                        <div id="js-regex" class="tab-content">
-                            <h3>9.2.1 - Regular Expressions</h3>
-                            <p>Patterns for matching and validating text.</p>
-
-                            <div class="code-block"><code>// Email validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// Phone number (10 digits)
-const phoneRegex = /^\d{10}$/;
-
-// Uppercase letters
-const uppercase = /[A-Z]/g;
-
-// Numbers
-const numbers = /\d+/g;
-
-// Testing patterns
-if (emailRegex.test(userEmail)) {
-    console.log("Valid email");
-}</code></div>
-                        </div>
-
-                        <div id="js-functionality" class="tab-content">
-                            <h3>9.3.1 - Adding JavaScript</h3>
-                            <div class="code-block"><code>&lt;!-- Inline --&gt;
-&lt;button onclick="myFunction()"&gt;Click&lt;/button&gt;
-
-&lt;!-- Internal --&gt;
-&lt;script&gt;
-    function myFunction() {
-        console.log("Clicked!");
-    }
-&lt;/script&gt;
-
-&lt;!-- External (Best Practice) --&gt;
-&lt;script src="js/script.js"&gt;&lt;/script&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">9.3.2 - Programming Fundamentals</h3>
-                            <div class="code-block"><code>// Variables
-let name = "John";
-const PI = 3.14159;
-
-// Data Structures
-const array = [1, 2, 3, 4];
-const object = { name: "John", age: 30 };
-
-// Selection (if/else)
-if (score >= 70) {
-    console.log("Pass");
-} else {
-    console.log("Fail");
-}
-
-// Repetition (loops)
-for (let i = 0; i < 5; i++) {
-    console.log(i);
-}
-
-// Iteration
-array.forEach(item => console.log(item));
-
-// Functions
-function calculateArea(width, height) {
-    return width * height;
-}
-
-// Arrow Functions
-const add = (a, b) => a + b;</code></div>
-
-                            <h3 style="margin-top: 2rem;">9.3.3 - JavaScript Events</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>UI Events</h4>
-                                    <p>load, unload, resize, scroll</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Keyboard Events</h4>
-                                    <p>keydown, keyup, keypress</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Mouse Events</h4>
-                                    <p>click, dblclick, mouseenter, mouseleave</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Form Events</h4>
-                                    <p>submit, reset, change, focus, blur</p>
-                                </div>
-                            </div>
-
-                            <div class="code-block"><code>// Adding Event Listeners
-button.addEventListener('click', function(event) {
-    console.log("Button clicked!");
-});
-
-// Form Validation
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop default submission
-    if (validateForm()) {
-        form.submit();
-    }
-});
-
-// Input Event
-input.addEventListener('input', function(event) {
-    console.log(event.target.value);
-});</code></div>
-
-                            <h3 style="margin-top: 2rem;">9.3.4 - Interactive Components</h3>
-                            <ul>
-                                <li>Slideshows - cycling through images automatically</li>
-                                <li>Modal boxes - overlay dialogs</li>
-                                <li>Filter/Sort lists - dynamic data manipulation</li>
-                                <li>Tabbed content - switching between sections</li>
-                                <li>Pop-ups - notification windows</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Topic 10: Design -->
-                <section id="topic10" class="topic-section">
-                    <div class="card">
-                        <h2>Topic 10: Designing Web Pages</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Master design principles, accessibility, and usability for effective web pages.</p>
-
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="design-principles">10.1 Design</button>
-                            <button class="tab-btn" data-tab="design-accessibility">10.2 Accessibility</button>
-                            <button class="tab-btn" data-tab="design-usability">10.3 Usability</button>
-                        </div>
-
-                        <div id="design-principles" class="tab-content active">
-                            <h3>10.1.1 - Design Process</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Wireframes</h4>
-                                    <p>Low-fidelity layouts showing structure</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Mock-ups</h4>
-                                    <p>High-fidelity visual designs</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Style Guide</h4>
-                                    <p>Color schemes, fonts, spacing</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Prototyping</h4>
-                                    <p>Interactive clickable models</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">10.1.3 - Design Principles</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Visual Hierarchy</h4>
-                                    <p>Guide users to important content through size, color, position</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Flow</h4>
-                                    <p>Natural path through page (top to bottom, left to right)</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Color Theory</h4>
-                                    <p>Complementary colors, contrast, emotional impact</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Balance & Contrast</h4>
-                                    <p>Symmetrical/asymmetrical layouts with visual interest</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">10.1.2 - Typography</h3>
-                            <ul>
-                                <li><strong>Web-safe fonts:</strong> Arial, Verdana, Georgia (default system fonts)</li>
-                                <li><strong>Web fonts:</strong> Google Fonts, custom @font-face declarations</li>
-                                <li><strong>Font pairing:</strong> Combine complementary typefaces</li>
-                                <li><strong>Readability:</strong> Adequate size, line-height, contrast</li>
-                            </ul>
-                        </div>
-
-                        <div id="design-accessibility" class="tab-content">
-                            <h3>10.2.1 - WCAG Guidelines</h3>
-                            <ul>
-                                <li><strong>Perceivable:</strong> Content visible/audible to all users</li>
-                                <li><strong>Operable:</strong> Keyboard navigable, no seizure risks</li>
-                                <li><strong>Understandable:</strong> Clear language, predictable navigation</li>
-                                <li><strong>Robust:</strong> Compatible with assistive technologies</li>
-                            </ul>
-
-                            <h3 style="margin-top: 2rem;">Accessibility Best Practices</h3>
-                            <ul>
-                                <li>Alt text on all images</li>
-                                <li>Semantic HTML elements</li>
-                                <li>Color contrast ratio 4.5:1 for text</li>
-                                <li>Keyboard navigation (Tab, Enter, Escape)</li>
-                                <li>Screen reader compatible</li>
-                                <li>Form labels properly associated</li>
-                                <li>Skip navigation links</li>
-                            </ul>
-                        </div>
-
-                        <div id="design-usability" class="tab-content">
-                            <h3>10.3.1 - Navigation Systems</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>Horizontal Menu</h4>
-                                    <p>Main navigation across top</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Vertical Menu</h4>
-                                    <p>Side navigation panel</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Dropdown</h4>
-                                    <p>Hierarchical menu structure</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>Breadcrumb</h4>
-                                    <p>Shows current location in hierarchy</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">10.3.2 - Cross-browser Testing</h3>
-                            <ul>
-                                <li><strong>Functionality:</strong> All features work across browsers</li>
-                                <li><strong>Usability:</strong> User experience consistent</li>
-                                <li><strong>Validation:</strong> HTML/CSS passes W3C validators</li>
-                                <li><strong>Developer Tools:</strong> Browser DevTools for debugging</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Topic 11: Semantic Web -->
-                <section id="topic11" class="topic-section">
-                    <div class="card">
-                        <h2>Topic 11: The Semantic Web</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Write meaningful code that describes content for browsers, search engines, and assistive technologies.</p>
-
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="semantic-coding">11.1 Semantic Code</button>
-                        </div>
-
-                        <div id="semantic-coding" class="tab-content active">
-                            <h3>11.1.1 - Semantic Markup Importance</h3>
-                            <ul>
-                                <li>Describes content meaning (not just appearance)</li>
-                                <li>Improves SEO (search engines understand structure)</li>
-                                <li>Enhances accessibility (screen readers announce structure)</li>
-                                <li>Easier to maintain and understand</li>
-                                <li>Benefits mobile devices and assistive tech</li>
-                            </ul>
-
-                            <h3 style="margin-top: 2rem;">11.1.2 - Semantic Structural Elements</h3>
-                            <div class="code-block"><code>&lt;!-- Good semantic structure --&gt;
-&lt;header&gt;
-    &lt;h1&gt;Site Title&lt;/h1&gt;
-    &lt;nav&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/nav&gt;
-&lt;/header&gt;
-
-&lt;main&gt;
-    &lt;article&gt;
-        &lt;h2&gt;Article Title&lt;/h2&gt;
-        &lt;p&gt;Content...&lt;/p&gt;
-    &lt;/article&gt;
-
-    &lt;aside&gt;
-        &lt;h3&gt;Related Links&lt;/h3&gt;
-    &lt;/aside&gt;
-&lt;/main&gt;
-
-&lt;footer&gt;
-    &lt;p&gt;&copy; 2024 Company&lt;/p&gt;
-&lt;/footer&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">Semantic Elements Reference</h3>
-                            <div class="learning-grid">
-                                <div class="concept-box">
-                                    <h4>&lt;header&gt;</h4>
-                                    <p>Introductory content, navigation</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;nav&gt;</h4>
-                                    <p>Navigation links</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;main&gt;</h4>
-                                    <p>Main content (one per page)</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;article&gt;</h4>
-                                    <p>Self-contained content</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;section&gt;</h4>
-                                    <p>Thematic grouping with heading</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;aside&gt;</h4>
-                                    <p>Sidebar, related content</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;footer&gt;</h4>
-                                    <p>Footer content, meta info</p>
-                                </div>
-                                <div class="concept-box">
-                                    <h4>&lt;figure&gt;</h4>
-                                    <p>Self-contained illustration, diagram, photo</p>
-                                </div>
-                            </div>
-
-                            <h3 style="margin-top: 2rem;">11.1.3 - Non-semantic Grouping</h3>
-                            <div class="code-block"><code>&lt;!-- div for grouping (when no semantic tag applies) --&gt;
-&lt;div class="container"&gt;
-    &lt;p&gt;Content&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- span for inline grouping --&gt;
-&lt;p&gt;This is &lt;span class="highlight"&gt;important&lt;/span&gt; text.&lt;/p&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">11.1.5 - Semantic Text Markup</h3>
-                            <div class="code-block"><code>&lt;!-- Importance --&gt;
-&lt;strong&gt;Important text&lt;/strong&gt;
-
-&lt;!-- Emphasis --&gt;
-&lt;em&gt;Emphasized text&lt;/em&gt;
-
-&lt;!-- Quotations --&gt;
-&lt;blockquote cite="source"&gt;Quote&lt;/blockquote&gt;
-&lt;q&gt;Short quote&lt;/q&gt;
-
-&lt;!-- Abbreviations --&gt;
-&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;
-
-&lt;!-- Citations --&gt;
-&lt;cite&gt;Article Title&lt;/cite&gt;
-
-&lt;!-- Definition --&gt;
-&lt;dfn&gt;Term being defined&lt;/dfn&gt;
-
-&lt;!-- Address --&gt;
-&lt;address&gt;Contact info&lt;/address&gt;
-
-&lt;!-- Mark --&gt;
-&lt;mark&gt;Highlighted text&lt;/mark&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">11.1.6 - Figure and Caption</h3>
-                            <div class="code-block"><code>&lt;figure&gt;
-    &lt;img src="diagram.png" alt="Process flow diagram"&gt;
-    &lt;figcaption&gt;Figure 1: Development Process&lt;/figcaption&gt;
-&lt;/figure&gt;</code></div>
-
-                            <h3 style="margin-top: 2rem;">11.1.7 - ARIA Accessibility</h3>
-                            <ul>
-                                <li><strong>Roles:</strong> Define what element does (role="button")</li>
-                                <li><strong>States:</strong> Current state (aria-pressed="true")</li>
-                                <li><strong>Properties:</strong> Characteristics (aria-label, aria-describedby)</li>
-                                <li><strong>Live regions:</strong> Dynamic content updates (aria-live="polite")</li>
-                                <li><strong>Keyboard navigation:</strong> tabindex for tab order</li>
-                            </ul>
-
-                            <h3 style="margin-top: 2rem;">11.1.4 - SEO & Semantic Code</h3>
-                            <ul>
-                                <li>Search engines use semantic tags to understand structure</li>
-                                <li>Proper heading hierarchy improves ranking</li>
-                                <li>Schema markup provides rich snippets</li>
-                                <li>Semantic code + quality content = better SEO</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Flashcards Section -->
-                <section id="flashcards" class="topic-section">
-                    <div class="card">
-                        <h2>⭐ Interactive Flashcards</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Click cards to flip. Test your knowledge with key concepts from all topics.</p>
-
-                        <div style="margin-bottom: 2rem;">
-                            <label for="flashcard-category" style="color: var(--color-text); margin-right: 1rem; font-weight: 600;">Select Topic:</label>
-                            <select id="flashcard-category" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-light); color: var(--color-text);">
-                                <option value="all">All Topics</option>
-                                <option value="html">Topic 7: HTML</option>
-                                <option value="css">Topic 8: CSS</option>
-                                <option value="js">Topic 9: JavaScript</option>
-                                <option value="design">Topic 10: Design</option>
-                                <option value="semantic">Topic 11: Semantic</option>
-                            </select>
-                        </div>
-
-                        <div class="flashcard-container" id="flashcard">
-                            <div class="flashcard">
-                                <div class="flashcard-content" id="flashcard-question">
-                                    Click to load flashcard...
-                                </div>
-                                <div class="flashcard-back" id="flashcard-answer">
-                                    Answer appears here
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
-                            <button class="btn btn-secondary" id="prev-card">← Previous</button>
-                            <span id="card-counter" style="align-self: center; font-weight: 600;">Card 1 of N</span>
-                            <button class="btn btn-secondary" id="next-card">Next →</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Exam Mode -->
-                <section id="exam" class="topic-section">
-                    <div class="card">
-                        <h2>🎯 Exam Preparation Mode</h2>
-                        <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Quick reference guide with exam-focused summaries and essential facts.</p>
-
-                        <div class="learning-grid">
-                            <div class="concept-box">
-                                <h4>✓ Remember: DOCTYPE & Language</h4>
-                                <p>Always start with &lt;!DOCTYPE html&gt; and &lt;html lang="en"&gt;</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ Semantic First</h4>
-                                <p>Use &lt;article&gt;, &lt;section&gt;, &lt;header&gt;, &lt;footer&gt;, &lt;nav&gt; for structure</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ Box Model</h4>
-                                <p>Margin → Border → Padding → Content (remember the order)</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ Responsive Design</h4>
-                                <p>Use @media queries, Flexbox, Grid. Mobile-first approach.</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ Accessibility</h4>
-                                <p>Alt text, semantic HTML, color contrast 4.5:1, keyboard navigation</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ JavaScript Events</h4>
-                                <p>addEventListener for click, submit, input, change, focus events</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ Form Validation</h4>
-                                <p>Check input types, required fields, email format validation</p>
-                            </div>
-                            <div class="concept-box">
-                                <h4>✓ SEO Practices</h4>
-                                <p>Semantic HTML, proper headings (one H1), descriptive alt text</p>
-                            </div>
-                        </div>
-
-                        <h3 style="margin-top: 2rem;">Quick Syntax Checklist</h3>
-                        <div class="example-box">
-                            <strong>HTML:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>Always lowercase tags and attributes</li>
-                                <li>Proper indentation for nesting</li>
-                                <li>Double quotes on attributes</li>
-                                <li>Remove slash from self-closing: &lt;img&gt; not &lt;img /&gt;</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box" style="margin-top: 1rem;">
-                            <strong>CSS:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>Selectors: type, class (.), id (#), attribute [type="text"]</li>
-                                <li>Specificity: inline &gt; ID &gt; class &gt; type</li>
-                                <li>Always use var() for colors (design system)</li>
-                                <li>Media queries for responsive: @media (min-width: 768px)</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box" style="margin-top: 1rem;">
-                            <strong>JavaScript:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>Select elements: getElementById, querySelector, querySelectorAll</li>
-                                <li>Event listeners: addEventListener('event', function)</li>
-                                <li>preventDefault() stops default behavior</li>
-                                <li>Validate forms before submission</li>
-                            </ul>
-                        </div>
-
-                        <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--color-primary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
-                            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Exam Tip 💡</h4>
-                            <p>Focus on understanding WHY each element/property is used, not just memorizing syntax. Examiners test conceptual understanding through scenario-based questions.</p>
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </div>
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2>Welcome to Your Study Hub</h2>
+                <p>Comprehensive notes for all units of the Edexcel International Advanced Level Information Technology course. Navigate through each unit to study key topics, concepts, and exam preparation materials.</p>
+            </section>
+
+            <!-- Units Grid -->
+            <section class="units-grid">
+                <!-- Unit 1 -->
+                <div class="unit-card">
+                    <h3>Unit 1</h3>
+                    <span class="status">Available</span>
+                    <p><strong>Hardware, Software & Networks</strong></p>
+                    <p>Explore the fundamentals of computer systems, including hardware components, software types, operating systems, and basic networking concepts.</p>
+                    <a href="unit_1.html" class="unit-link">Study Unit 1</a>
+                </div>
+
+                <!-- Unit 2 -->
+                <div class="unit-card">
+                    <h3>Unit 2</h3>
+                    <span class="status">Available</span>
+                    <p><strong>The Online Environment & Web Development</strong></p>
+                    <p>Master web technologies including HTML, CSS, JavaScript, the internet structure, online security, and how to build interactive web applications.</p>
+                    <a href="unit_2.html" class="unit-link">Study Unit 2</a>
+                </div>
+
+                <!-- Unit 3 (Placeholder) -->
+                <div class="unit-card coming-soon">
+                    <h3>Unit 3</h3>
+                    <span class="status">Coming Soon</span>
+                    <p><strong>Advanced Topics</strong></p>
+                    <p>More content will be added soon. Check back for updates!</p>
+                </div>
+
+                <!-- Unit 4 (Placeholder) -->
+                <div class="unit-card coming-soon">
+                    <h3>Unit 4</h3>
+                    <span class="status">Coming Soon</span>
+                    <p><strong>Practical Applications</strong></p>
+                    <p>More content will be added soon. Check back for updates!</p>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <h3>📚 How to Use This Study Hub</h3>
+                <p>
+                    Click on any available unit above to access comprehensive study notes organized by topics. Each unit covers the key concepts, definitions, and examples you need for your Edexcel IAL Information Technology exams. You can easily add Unit 3 and Unit 4 by creating similar HTML files and updating the links above. 
+                </p>
+            </section>
+
+            <section class="info-section">
+                <h3>✨ Features</h3>
+                <p>
+                    • Well-organized topics with clear explanations<br>
+                    • Navigation sidebar for easy content browsing<br>
+                    • Modern, responsive design for all devices<br>
+                    • Searchable content for quick reference<br>
+                    • Exam-focused study materials
+                </p>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Edexcel IAL IT Study Hub</strong></p>
+            <p>Study materials for Information Technology (9626)</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">Last updated: November 2025</p>
+        </footer>
     </div>
-
-    <script>
-        // Navigation functionality
-        const navButtons = document.querySelectorAll('.nav-btn');
-        const topicSections = document.querySelectorAll('.topic-section');
-
-        navButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const topic = button.dataset.topic;
-
-                // Remove active from all
-                navButtons.forEach(btn => btn.classList.remove('active'));
-                topicSections.forEach(section => section.classList.remove('active'));
-
-                // Add active to clicked
-                button.classList.add('active');
-                document.getElementById(topic).classList.add('active');
-
-                // Reset flashcards if switching from flashcard view
-                if (topic === 'flashcards') {
-                    initFlashcards();
-                }
-
-                // Close mobile nav if open
-                const mobileNav = document.getElementById('mobileNav');
-                const mobileNavToggle = document.getElementById('mobileNavToggle');
-                if (mobileNav.classList.contains('active')) {
-                    mobileNav.classList.remove('active');
-                    mobileNavToggle.classList.remove('active');
-                }
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-
-        // Tab functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tab = button.dataset.tab;
-                const tabGroup = button.parentElement;
-
-                // Find all tabs in this group
-                const tabs = tabGroup.parentElement.querySelectorAll(`[id^="${tab.split('-')[0]}"]`);
-                const buttons = tabGroup.querySelectorAll('.tab-btn');
-
-                buttons.forEach(btn => btn.classList.remove('active'));
-                tabs.forEach(t => t.classList.remove('active'));
-
-                button.classList.add('active');
-                document.getElementById(tab).classList.add('active');
-            });
-        });
-
-        // Mobile navigation toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            mobileNavToggle.classList.toggle('active');
-        });
-
-        // Flashcard data
-        const flashcardData = {
-            all: [
-                { q: "What does HTML stand for?", a: "HyperText Markup Language" },
-                { q: "How do you declare the document language in HTML?", a: "<html lang=\"en\">" },
-                { q: "What is the purpose of the <head> element?", a: "Supplies metadata, title, scripts, styles, and links to external files" },
-                { q: "Name 4 global attributes in HTML.", a: "class, id, style, lang, tabindex, data-*, hidden, accesskey" },
-                { q: "What is the difference between block and inline elements?", a: "Block elements take full width and start new line; inline elements take only needed width" },
-                { q: "What are semantic HTML elements?", a: "Elements that describe their meaning to browsers and screen readers (header, nav, article, footer, etc.)" },
-                { q: "How do you create a link that opens in a new tab?", a: "<a href=\"url\" target=\"_blank\" rel=\"noopener noreferrer\">Link</a>" },
-                { q: "What is the CSS Box Model?", a: "Margin (outside) → Border → Padding → Content (inside)" },
-                { q: "What does the cascade in CSS mean?", a: "Rules applied in order; later rules override earlier ones with same specificity" },
-                { q: "How do you make a website responsive?", a: "Use @media queries, Flexbox, CSS Grid, and relative units (%, em, rem)" },
-                { q: "What is the DOM?", a: "Document Object Model - a tree representation of HTML that JavaScript can access and modify" },
-                { q: "How do you select an element by ID in JavaScript?", a: "document.getElementById('id') or document.querySelector('#id')" },
-                { q: "What is form validation?", a: "Checking that user input meets requirements before submission" },
-                { q: "Name 3 JavaScript event types.", a: "click, submit, input, change, focus, blur, mouseenter, keydown" },
-                { q: "What is CSS specificity?", a: "System to determine which CSS rule applies: inline > ID > class > type" },
-            ],
-            html: [
-                { q: "What does DOCTYPE do?", a: "Declares the document as HTML5 to the browser" },
-                { q: "List 5 semantic HTML elements.", a: "header, nav, main, article, section, aside, footer, figure" },
-                { q: "How do you add alt text to an image?", a: "<img src=\"image.jpg\" alt=\"Description of image\">" },
-                { q: "What is the purpose of the <meta> tag?", a: "Provides metadata about the HTML document (charset, viewport, keywords)" },
-                { q: "How do you create a table with merged cells?", a: "Use rowspan=\"2\" or colspan=\"2\" attributes on <td> or <th>" },
-                { q: "What attributes do you use for ordered lists?", a: "start (starting number) and type (a, A, i, I, 1)" },
-                { q: "How do you link to a specific part of a page?", a: "Use anchor with id: <a href=\"#section\">Jump</a> and <h2 id=\"section\">" },
-                { q: "What is the purpose of <fieldset> in forms?", a: "Groups related form elements with a <legend> label" },
-            ],
-            css: [
-                { q: "What are the 3 ways to reference CSS?", a: "Inline styles (style attribute), internal stylesheet (<style>), external stylesheet (<link>)" },
-                { q: "What is the difference between Flexbox and Grid?", a: "Flexbox is one-dimensional (rows or columns); Grid is two-dimensional (rows AND columns)" },
-                { q: "How do you write a media query?", a: "@media (min-width: 768px) { /* styles */ }" },
-                { q: "Name 5 CSS selectors.", a: "type (p), class (.class), ID (#id), descendant (div p), child (div > p), attribute [type=\"text\"]" },
-                { q: "What is the difference between margin and padding?", a: "Margin is outside the border; padding is inside the border" },
-                { q: "How do you change the display property for responsiveness?", a: "display: flex; for flexible layouts or display: grid; for two-dimensional layouts" },
-                { q: "What does z-index control?", a: "The stacking order of overlapping elements (higher values are on top)" },
-                { q: "How do you add a transition effect?", a: "transition: property duration timing-function; example: transition: background 0.3s ease;" },
-            ],
-            js: [
-                { q: "How do you add an event listener in JavaScript?", a: "element.addEventListener('event', function() { /* code */ });" },
-                { q: "What is preventDefault() used for?", a: "Stops the default action of an event (e.g., prevents form submission)" },
-                { q: "How do you select all elements with a class?", a: "document.querySelectorAll('.className')" },
-                { q: "What is a regular expression used for?", a: "Pattern matching and validation (email, phone numbers, text patterns)" },
-                { q: "How do you validate an email format?", a: "Use regex: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/" },
-                { q: "What are the 4 types of JavaScript events?", a: "UI events (load, resize), keyboard events (keydown), mouse events (click), form events (submit)" },
-                { q: "How do you change an element's content?", a: "element.textContent = \"new text\" or element.innerHTML = \"<strong>bold</strong>\"" },
-                { q: "What is a closure in JavaScript?", a: "A function that has access to variables in its outer scope" },
-            ],
-            design: [
-                { q: "What are the 4 steps of the design process?", a: "Wireframes, mock-ups, style guide, prototyping" },
-                { q: "What is visual hierarchy?", a: "Guiding users to important content through size, color, and position" },
-                { q: "What is the minimum color contrast ratio for accessibility?", a: "4.5:1 for normal text (WCAG AA standard)" },
-                { q: "What are the 4 principles of the WCAG?", a: "Perceivable, Operable, Understandable, Robust" },
-                { q: "Name 3 navigation types.", a: "Horizontal menu, vertical menu, dropdown menu, breadcrumb navigation" },
-                { q: "What is responsive design?", a: "Designing websites that adapt to different screen sizes and devices" },
-                { q: "What should be in the footer of a website?", a: "Copyright, links, contact info, sitemap, social media links" },
-                { q: "How do you test for cross-browser compatibility?", a: "Test functionality and appearance across different browsers and devices" },
-            ],
-            semantic: [
-                { q: "Why should you use semantic HTML?", a: "Improves accessibility, SEO, readability, and maintainability" },
-                { q: "What is the difference between <div> and <section>?", a: "<section> groups related content with a heading; <div> is for layout grouping with no semantic meaning" },
-                { q: "When should you use <article>?", a: "For self-contained content (blog post, news article, comment)" },
-                { q: "What does <main> contain?", a: "The main content of the page (only one per page, not inside header/footer)" },
-                { q: "What is the purpose of <figure> and <figcaption>?", a: "<figure> wraps self-contained content; <figcaption> provides a caption" },
-                { q: "What are ARIA attributes used for?", a: "Providing additional semantics and accessibility information to assistive technologies" },
-                { q: "What does role=\"button\" do?", a: "Tells assistive technologies that an element functions as a button" },
-                { q: "How does semantic HTML improve SEO?", a: "Search engines use semantic tags to understand page structure and content meaning" },
-            ]
-        };
-
-        let currentCard = 0;
-        let currentCategory = 'all';
-        let currentCards = [];
-
-        function initFlashcards() {
-            currentCard = 0;
-            currentCategory = document.getElementById('flashcard-category').value;
-            currentCards = flashcardData[currentCategory];
-            displayCard();
-        }
-
-        function displayCard() {
-            if (currentCards.length === 0) return;
-
-            const card = currentCards[currentCard];
-            const flashcardContainer = document.getElementById('flashcard');
-
-            // Reset flip state
-            flashcardContainer.querySelector('.flashcard').classList.remove('flipped');
-            document.getElementById('flashcard-question').textContent = card.q;
-            document.getElementById('flashcard-answer').textContent = card.a;
-            document.getElementById('card-counter').textContent = `Card ${currentCard + 1} of ${currentCards.length}`;
-        }
-
-        // Flashcard flip
-        document.getElementById('flashcard').addEventListener('click', function() {
-            this.querySelector('.flashcard').classList.toggle('flipped');
-        });
-
-        // Navigation
-        document.getElementById('next-card').addEventListener('click', () => {
-            if (currentCard < currentCards.length - 1) {
-                currentCard++;
-                displayCard();
-            }
-        });
-
-        document.getElementById('prev-card').addEventListener('click', () => {
-            if (currentCard > 0) {
-                currentCard--;
-                displayCard();
-            }
-        });
-
-        document.getElementById('flashcard-category').addEventListener('change', initFlashcards);
-
-        // Initialize first tab as active
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstTabBtn = document.querySelector('.tab-btn');
-            if (firstTabBtn) {
-                firstTabBtn.classList.add('active');
-            }
-        });
-    </script>
 </body>
 </html>
