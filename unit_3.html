@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IAL IT Unit 3 Study Dashboard</title>
+		<style>
+			:root {
+				--color-primary: #f0c12e;
+				--color-primary-dark: #d4a416;
+				--color-primary-light: #fcd34d;
+				--color-success: #10b981;
+				--color-warning: #f59e0b;
+				--color-error: #ef4444;
+				--color-bg: #0f172a;
+				--color-surface: #1e293b;
+				--color-surface-light: #334155;
+				--color-text: #f1f5f9;
+				--color-text-secondary: #cbd5e1;
+				--color-border: #475569;
+				--radius: 12px;
+				--transition: all 0.3s ease;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				background-color: var(--color-bg);
+				color: var(--color-text);
+				line-height: 1.6;
+			}
+
+			/* Main Layout */
+			.container {
+				display: grid;
+				grid-template-columns: 1fr;
+				min-height: 100vh;
+			}
+
+			a {
+				color: var(--color-text);
+			}
+
+			header {
+				background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+				padding: 1.5rem;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+				position: relative;
+				top: 0;
+				z-index: 100;
+			}
+
+			header h1 {
+				font-size: 1.5rem;
+				margin-bottom: 0.5rem;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			}
+
+			header p {
+				font-size: 0.9rem;
+				opacity: 0.95;
+			}
+
+			.main-content {
+				display: grid;
+				grid-template-columns: 280px 1fr;
+				gap: 2rem;
+				padding: 2rem;
+				max-width: 1400px;
+				margin: 0 auto;
+				width: 100%;
+			}
+
+			/* Sidebar Navigation */
+			.sidebar {
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 1.5rem;
+				height: fit-content;
+				border: 1px solid var(--color-border);
+				position: sticky;
+				top: 100px;
+			}
+
+			.sidebar h3 {
+				font-size: 1rem;
+				margin-bottom: 1rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--color-primary);
+			}
+
+			.nav-list {
+				list-style: none;
+			}
+
+			.nav-list li {
+				margin-bottom: 0.5rem;
+			}
+
+			.nav-btn {
+				width: 100%;
+				padding: 1rem;
+				background: var(--color-surface-light);
+				border: 2px solid transparent;
+				color: var(--color-text-secondary);
+				border-radius: 8px;
+				cursor: pointer;
+				transition: var(--transition);
+				text-align: left;
+				font-size: 0.95rem;
+				font-weight: 500;
+			}
+
+			.nav-btn:hover {
+				background: var(--color-border);
+				transform: translateX(5px);
+			}
+
+			.nav-btn.active {
+				background: var(--color-primary);
+				color: var(--color-bg);
+				border-color: var(--color-primary);
+			}
+
+			/* Mobile Navigation */
+			.mobile-nav-toggle {
+				display: none;
+				background: var(--color-primary);
+				color: var(--color-bg);
+				border: none;
+				border-radius: 8px;
+				padding: 1rem 1.5rem;
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				width: 100%;
+				margin-bottom: 1rem;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.mobile-nav-toggle svg {
+				transition: transform 0.3s ease;
+			}
+
+			.mobile-nav-toggle.active svg {
+				transform: rotate(180deg);
+			}
+
+			.mobile-nav {
+				display: none;
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 1rem;
+				border: 1px solid var(--color-border);
+				margin-bottom: 1.5rem;
+			}
+
+			.mobile-nav.active {
+				display: block;
+			}
+
+			/* Content Area */
+			.content {
+				display: grid;
+				gap: 2rem;
+			}
+
+			.topic-section {
+				display: none;
+				animation: fadeIn 0.3s ease;
+			}
+
+			.topic-section.active {
+				display: grid;
+				gap: 2rem;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Card Components */
+			.card {
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 2rem;
+				border: 1px solid var(--color-border);
+				transition: var(--transition);
+				overflow: hidden;
+			}
+
+			.card:hover {
+				border-color: var(--color-primary);
+				box-shadow: 0 8px 24px rgba(240, 193, 46, 0.1);
+			}
+
+			.card h2 {
+				color: var(--color-primary);
+				margin-bottom: 1rem;
+				font-size: 1.5rem;
+			}
+
+			.card h3 {
+				margin-top: 1.5rem;
+				margin-bottom: 0.75rem;
+				color: var(--color-text);
+				font-size: 1.1rem;
+			}
+
+			.card h3:first-child {
+				margin-top: 0;
+			}
+
+			/* Learning Section */
+			.learning-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 1.5rem;
+			}
+
+			.concept-box {
+				background: var(--color-surface-light);
+				border-left: 4px solid var(--color-primary);
+				padding: 1.5rem;
+				border-radius: 8px;
+				transition: var(--transition);
+			}
+
+			.concept-box:hover {
+				transform: translateX(8px);
+			}
+
+			.concept-box h4 {
+				color: var(--color-primary);
+				margin-bottom: 0.5rem;
+				font-size: 1rem;
+			}
+
+			.concept-box p {
+				color: var(--color-text-secondary);
+				font-size: 0.95rem;
+				line-height: 1.5;
+			}
+
+			/* Code Block */
+			.code-block {
+				background: #0d1117;
+				border: 1px solid var(--color-border);
+				border-radius: 8px;
+				padding: 1.5rem;
+				overflow-x: auto;
+				margin: 1rem 0;
+				font-family: 'Courier New', monospace;
+				font-size: 0.9rem;
+				white-space: pre;
+			}
+
+			.code-block code {
+				color: #79c0ff;
+			}
+
+			/* Buttons */
+			.btn {
+				display: inline-block;
+				padding: 0.75rem 1.5rem;
+				background: var(--color-primary);
+				color: var(--color-bg);
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 0.95rem;
+				font-weight: 600;
+				transition: var(--transition);
+				text-decoration: none;
+			}
+
+			.btn:hover {
+				background: var(--color-primary-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(240, 193, 46, 0.3);
+			}
+
+			.btn-secondary {
+				background: var(--color-surface-light);
+				color: var(--color-text);
+			}
+
+			.btn-secondary:hover {
+				background: var(--color-border);
+			}
+
+			.btn-small {
+				padding: 0.5rem 1rem;
+				font-size: 0.85rem;
+			}
+
+			/* Flashcard */
+			.flashcard-container {
+				perspective: 1000px;
+				cursor: pointer;
+				height: 300px;
+			}
+
+			.flashcard {
+				width: 100%;
+				height: 100%;
+				background: var(--color-surface-light);
+				border: 2px solid var(--color-primary);
+				border-radius: var(--radius);
+				padding: 2rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				font-size: 1.1rem;
+				font-weight: 600;
+				transition: transform 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
+			}
+
+			.flashcard.flipped {
+				transform: rotateY(180deg);
+			}
+
+			.flashcard-content {
+				backface-visibility: hidden;
+			}
+
+			.flashcard-back {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transform: rotateY(180deg);
+				backface-visibility: hidden;
+				padding: 2rem;
+				text-align: center;
+				color: var(--color-success);
+			}
+
+			/* Tabs */
+			.tabs {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 2rem;
+				border-bottom: 1px solid var(--color-border);
+				flex-wrap: wrap;
+			}
+
+			.tab-btn {
+				padding: 1rem 1.5rem;
+				background: transparent;
+				border: none;
+				color: var(--color-text-secondary);
+				cursor: pointer;
+				font-size: 1rem;
+				font-weight: 600;
+				border-bottom: 3px solid transparent;
+				transition: var(--transition);
+				position: relative;
+				bottom: -1px;
+			}
+
+			.tab-btn:hover {
+				color: var(--color-text);
+			}
+
+			.tab-btn.active {
+				color: var(--color-primary);
+				border-bottom-color: var(--color-primary);
+			}
+
+			.tab-content {
+				display: none;
+			}
+
+			.tab-content.active {
+				display: block;
+			}
+
+			/* Lists */
+			ul {
+				margin-left: 1.5rem;
+				color: var(--color-text-secondary);
+			}
+
+			ul li {
+				margin-bottom: 0.75rem;
+			}
+
+			/* Example Box */
+			.example-box {
+				background: rgba(16, 185, 129, 0.1);
+				border-left: 4px solid var(--color-success);
+				padding: 1rem;
+				border-radius: 8px;
+				margin: 1rem 0;
+			}
+
+			.example-box strong {
+				color: var(--color-success);
+			}
+
+			/* Progress Indicator */
+			.progress-bar {
+				height: 8px;
+				background: var(--color-surface-light);
+				border-radius: 4px;
+				overflow: hidden;
+				margin-bottom: 1rem;
+			}
+
+			.progress-fill {
+				height: 100%;
+				background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-success) 100%);
+				width: 0%;
+				transition: width 0.3s ease;
+			}
+
+			/* Responsive Design */
+			@media (max-width: 1024px) {
+				.main-content {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+					padding: 1.5rem;
+				}
+
+				.sidebar {
+					position: relative;
+					top: 0;
+				}
+
+				header h1 {
+					font-size: 1.5rem;
+				}
+			}
+
+			@media (max-width: 768px) {
+				header {
+					padding: 1.5rem;
+				}
+
+				header h1 {
+					font-size: 1.25rem;
+				}
+
+				header p {
+					font-size: 0.9rem;
+				}
+
+				.main-content {
+					grid-template-columns: 1fr;
+					padding: 1rem;
+					gap: 1rem;
+				}
+
+				.sidebar {
+					display: none;
+				}
+
+				.mobile-nav-toggle {
+					display: flex;
+				}
+
+				.card {
+					padding: 1.5rem;
+				}
+
+				.learning-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.tabs {
+					gap: 0.5rem;
+				}
+
+				.tab-btn {
+					padding: 0.75rem 1rem;
+					font-size: 0.9rem;
+				}
+
+				.flashcard {
+					height: 250px;
+					padding: 1rem;
+				}
+
+				.concept-box {
+					padding: 1rem;
+				}
+			}
+
+			@media (max-width: 480px) {
+				header {
+					padding: 1rem;
+				}
+
+				header h1 {
+					font-size: 1.1rem;
+				}
+
+				header p {
+					font-size: 0.85rem;
+				}
+
+				.main-content {
+					padding: 0.5rem;
+					gap: 0.5rem;
+				}
+
+				.card {
+					padding: 1rem;
+				}
+
+				.btn {
+					padding: 0.65rem 1.25rem;
+					font-size: 0.85rem;
+				}
+
+				.code-block {
+					padding: 1rem;
+					font-size: 0.8rem;
+				}
+
+				.tabs {
+					gap: 0.25rem;
+				}
+
+				.tab-btn {
+					padding: 0.5rem 0.75rem;
+					font-size: 0.8rem;
+				}
+
+				.flashcard {
+					height: 220px;
+					padding: 1rem;
+					font-size: 1rem;
+				}
+
+				.concept-box {
+					padding: 0.75rem;
+					border-left-width: 3px;
+				}
+
+				.concept-box h4 {
+					font-size: 0.9rem;
+				}
+
+				.concept-box p {
+					font-size: 0.85rem;
+				}
+			}
+
+			/* Utility */
+			.hidden {
+				display: none !important;
+			}
+
+			.badge {
+				display: inline-block;
+				padding: 0.25rem 0.75rem;
+				background: var(--color-primary);
+				color: var(--color-bg);
+				border-radius: 20px;
+				font-size: 0.8rem;
+				font-weight: 600;
+			}
+
+			.badge-success {
+				background: var(--color-success);
+			}
+
+			.grid-2 {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 1.5rem;
+			}
+			/* Back to Top Button */
+			.back-to-top {
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				background: var(--color-primary);
+				color: white;
+				border: none;
+				border-radius: 50%;
+				width: 60px;
+				height: 60px;
+				cursor: pointer;
+				transition: var(--transition);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+				font-size: 1.5rem;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+			}
+
+			.back-to-top:hover {
+				background: var(--color-primary-dark);
+				transform: translateY(-3px);
+				box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+			}
+
+			/* Responsive adjustments */
+			@media (max-width: 768px) {
+				.back-to-top {
+					bottom: 20px;
+					right: 20px;
+					width: 50px;
+					height: 50px;
+					font-size: 1.25rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1><a href="./index.html">📚</a> IAL IT Unit 3: Manipulating Data & Technologies</h1>
+				<p>Master Topics 12-16 • Interactive Learning & Exam Prep</p>
+				<p><a href="./index.html">( back to home )</a></p>
+			</header>
+
+			<div class="main-content">
+				<!-- Mobile Navigation Toggle -->
+				<button class="mobile-nav-toggle" id="mobileNavToggle">
+					<span>Browse Topics</span>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</button>
+
+				<!-- Mobile Navigation -->
+				<div class="mobile-nav" id="mobileNav">
+					<ul class="nav-list">
+						<li><button class="nav-btn active" data-topic="topic12">Topic 12: Manipulating Data</button></li>
+						<li><button class="nav-btn" data-topic="topic13">Topic 13: Enabling Technologies</button></li>
+						<li><button class="nav-btn" data-topic="topic14">Topic 14: IT Systems in Organisations</button></li>
+						<li><button class="nav-btn" data-topic="topic15">Topic 15: Systems Development</button></li>
+						<li><button class="nav-btn" data-topic="topic16">Topic 16: Emerging Technologies</button></li>
+						<li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
+						<li><button class="nav-btn" data-topic="quiz">✅ Quiz Mode</button></li>
+					</ul>
+				</div>
+
+				<!-- Sidebar Navigation (Desktop) -->
+				<aside class="sidebar">
+					<h3>Topics</h3>
+					<ul class="nav-list">
+						<li><button class="nav-btn active" data-topic="topic12">Topic 12: Manipulating Data</button></li>
+						<li><button class="nav-btn" data-topic="topic13">Topic 13: Enabling Technologies</button></li>
+						<li><button class="nav-btn" data-topic="topic14">Topic 14: IT Systems in Organisations</button></li>
+						<li><button class="nav-btn" data-topic="topic15">Topic 15: Systems Development</button></li>
+						<li><button class="nav-btn" data-topic="topic16">Topic 16: Emerging Technologies</button></li>
+						<li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
+						<li><button class="nav-btn" data-topic="quiz">✅ Quiz Mode</button></li>
+					</ul>
+				</aside>
+
+				<!-- Main Content -->
+				<main class="content">
+					<!-- Topic 12: Manipulating Data -->
+					<section id="topic12" class="topic-section active">
+						<div class="card">
+							<h2>Topic 12: Manipulating Data</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Master data integrity, validation, relational databases, and Big Data concepts.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="data-integrity">12.1 Data Integrity</button>
+								<button class="tab-btn" data-tab="databases">12.2 Relational Databases</button>
+								<button class="tab-btn" data-tab="big-data">12.3 Big Data</button>
+							</div>
+
+							<div id="data-integrity" class="tab-content active">
+								<h3>12.1.1 - What is Data Integrity?</h3>
+								<p>Data integrity refers to how reliable and trustworthy a set of data is. It ensures that data remains accurate, consistent, complete, and free from error throughout its lifecycle.</p>
+
+								<h3 style="margin-top: 2rem">Why is Data Integrity Important?</h3>
+								<ul>
+									<li>Ensures business decisions are based on reliable data</li>
+									<li>Prevents errors and inconsistencies</li>
+									<li>Maintains stakeholder and customer trust</li>
+									<li>Enables organizations to comply with legal requirements</li>
+								</ul>
+
+								<h3 style="margin-top: 2rem">Common Causes of Data Integrity Failures</h3>
+								<ul>
+									<li>Human error (incorrect entry or editing)</li>
+									<li>Software bugs or glitches</li>
+									<li>Hardware failure or data corruption</li>
+									<li>Lack of validation or inadequate controls</li>
+									<li>Malicious activities (e.g. hacking, sabotage)</li>
+								</ul>
+
+								<h3 style="margin-top: 2rem">Data Governance</h3>
+								<p>Data governance consists of systems, procedures, and policies designed to maintain data integrity.</p>
+								<ul>
+									<li><b>Access levels:</b> E.g., only managers can approve sensitive changes.</li>
+									<li><b>Audit logs:</b> Track who edited what, and when.</li>
+									<li><b>Data backup routines:</b> Nightly full backups, incremental backups during the day.</li>
+									<li><b>Legal compliance:</b> GDPR and similar require accuracy and correction procedures.</li>
+								</ul>
+
+								<h3 style="margin-top: 2rem">Components of Data Integrity</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Accuracy</h4>
+										<p>Data is correct and free from errors; reflects actual values</p>
+									</div>
+									<div class="concept-box">
+										<h4>Consistency</h4>
+										<p>Data follows set rules and formats</p>
+									</div>
+									<div class="concept-box">
+										<h4>Completeness</h4>
+										<p>All necessary data is included with no missing data points</p>
+									</div>
+									<div class="concept-box">
+										<h4>Reliability</h4>
+										<p>Users can trust the data; it's available when needed</p>
+									</div>
+									<div class="concept-box">
+										<h4>Security</h4>
+										<p>Data is protected from unauthorized access, modification, or deletion</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">12.1.4-12.1.5 Data Validation</h3>
+								<p>Data validation is the process of checking that data entered into a system follows pre-set rules and meets standards.</p>
+
+								<h4>The 7 Validation Rules:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Presence Check</h4>
+										<p>Ensures mandatory fields are not left blank</p>
+									</div>
+									<div class="concept-box">
+										<h4>Range Check</h4>
+										<p>Ensures data falls between two accepted values</p>
+									</div>
+									<div class="concept-box">
+										<h4>Lookup Check</h4>
+										<p>Verifies data exists in a predefined reference list</p>
+									</div>
+									<div class="concept-box">
+										<h4>List Check</h4>
+										<p>Restricts data to predefined acceptable entries</p>
+									</div>
+									<div class="concept-box">
+										<h4>Length Check</h4>
+										<p>Ensures data meets minimum/maximum length requirements</p>
+									</div>
+									<div class="concept-box">
+										<h4>Format Check</h4>
+										<p>Ensures data follows a specific pattern</p>
+									</div>
+									<div class="concept-box">
+										<h4>Check Digit</h4>
+										<p>Detects errors in data entry or transmission</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">Validation Examples in Real-Life Scenarios</h4>
+								<ul>
+									<li><b>Presence Check:</b> No leaving “email” blank on sign-up.</li>
+									<li><b>Range Check:</b> Age must be between 13 and 120 on social media.</li>
+									<li><b>Format Check:</b> Email must contain “@” and end with .com, .net, etc.</li>
+									<li><b>Lookup Check:</b> Product code must exist in stock database.</li>
+									<li><b>Check Digit:</b> Used in bank account, ISBN, barcodes to spot typos.</li>
+								</ul>
+
+								<h4>Important Exam Tip</h4>
+								<p><strong>Validation is not verification.</strong> Validation checks if data is reasonable; verification ensures it matches the original source (e.g., double entry of email and checking both match).</p>
+							</div>
+
+							<div id="databases" class="tab-content">
+								<h3>12.2 Relational Databases</h3>
+								<h4>Data Redundancy</h4>
+								<p>Data redundancy occurs when the same data is unnecessarily stored in multiple locations.</p>
+
+								<h4 style="margin-top: 1.5rem">Problems Caused by Data Redundancy</h4>
+								<ul>
+									<li>Increased storage costs</li>
+									<li>Data inconsistency</li>
+									<li>Maintenance issues</li>
+									<li>Update anomalies</li>
+								</ul>
+
+								<h4>Past Paper Key Insight</h4>
+								<p>Questions often ask you to identify problems caused by redundancy, or how normalisation solves them. Always mention “Update Anomalies”, “Inconsistency”, and “Wasted storage”.</p>
+
+								<h3 style="margin-top: 2rem">Normalization</h3>
+								<p>Normalization is the process of organizing data to remove redundancy and ensure data integrity.</p>
+
+								<h4>Three Normal Forms</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>First Normal Form (1NF)</h4>
+										<p>Remove repeating groups, ensure atomic values</p>
+									</div>
+									<div class="concept-box">
+										<h4>Second Normal Form (2NF)</h4>
+										<p>Remove partial dependencies</p>
+									</div>
+									<div class="concept-box">
+										<h4>Third Normal Form (3NF)</h4>
+										<p>Remove transitive dependencies</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 1.5rem">Worked Example: Applying 1NF, 2NF, 3NF</h4>
+								<ul>
+									<li><b>Un-Normalised:</b> <i>OrderID: 1, Name: Tom, Product: Apple, Banana, Date: 01/01/2024</i></li>
+									<li><b>1NF:</b> Split multiple products to separate rows; every cell stores only one value.</li>
+									<li><b>2NF:</b> Remove fields that don’t depend on the whole primary key (e.g. customer address split from order-product).</li>
+									<li><b>3NF:</b> Remove fields dependent on other non-key fields (e.g., town depends on postcode not customer).</li>
+								</ul>
+								<p><b>Tip:</b> Label every change clearly. Don’t mix up partial vs transitive dependencies in 2NF/3NF—this is a common exam error.</p>
+							</div>
+
+							<div id="big-data" class="tab-content">
+								<h3>12.3 Big Data</h3>
+								<p>Big Data refers to extremely large and complex datasets that are too large to manage with traditional data processing tools.</p>
+
+								<h3 style="margin-top: 2rem">Common Exam Traps</h3>
+								<ul>
+									<li>Don’t just list the 5Vs—explain each with an example.</li>
+									<li>Stress the <em>impact</em> of Big Data: “Big Data enables targeted adverts, real-time fraud detection, or analysis of health trends from millions of patients.”</li>
+								</ul>
+
+								<h3 style="margin-top: 2rem">The 5 V's of Big Data</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Volume</h4>
+										<p>Amount of data generated continuously</p>
+									</div>
+									<div class="concept-box">
+										<h4>Velocity</h4>
+										<p>Speed at which data is generated</p>
+									</div>
+									<div class="concept-box">
+										<h4>Variety</h4>
+										<p>Different types and formats of data</p>
+									</div>
+									<div class="concept-box">
+										<h4>Veracity</h4>
+										<p>Quality and reliability of data</p>
+									</div>
+									<div class="concept-box">
+										<h4>Value</h4>
+										<p>Ability to extract meaningful, actionable insights</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">12.3.4 Data Mining, Warehousing, and Analytics</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Data Mining</h4>
+										<p>Process of extracting meaningful information and patterns from large datasets</p>
+									</div>
+									<div class="concept-box">
+										<h4>Data Warehousing</h4>
+										<p>Collection, storage, and management of raw data from multiple sources</p>
+									</div>
+									<div class="concept-box">
+										<h4>Data Analytics</h4>
+										<p>Turning information from data mining into actionable intelligence</p>
+									</div>
+								</div>
+
+								<h4>Examples in Exam Context</h4>
+								<ul>
+									<li><b>Data Mining:</b> Supermarket analyzes receipts to find products often bought together (“market basket analysis”).</li>
+									<li><b>Data Warehousing:</b> Schools store student results from all years in one central system for analysis.</li>
+									<li><b>Descriptive Analytics:</b> What were sales last quarter?</li>
+									<li><b>Predictive Analytics:</b> Which customers are likely to cancel subscriptions?</li>
+									<li><b>Prescriptive Analytics:</b> What marketing campaign will retain the most profitable customers?</li>
+								</ul>
+
+								<aside class="exam-tips" style="border-left: 4px solid #fdc400; padding: 1em; margin-top: 2em">
+									<b>EXAM SPECIAL:</b>
+									<ul>
+										<li>Always define database terms <b>first</b>.</li>
+										<li>In ‘construct a data dictionary’ or ‘normalisation’ questions, <b>use layouts/tables and show every step.</b></li>
+										<li>For validation/verification—give real-life scenarios for each rule.</li>
+										<li>If asked ‘why normalise’, always cover <b>reducing redundancy, improving consistency, making updates easier, and enhancing integrity.</b></li>
+										<li>For Big Data—link each “V” to a real-world business case (e.g. volume in social media, veracity in medical data).</li>
+									</ul>
+								</aside>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 13: Enabling Technologies -->
+					<section id="topic13" class="topic-section">
+						<div class="card">
+							<h2>Topic 13: Enabling Technologies</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Explore virtualisation, distributed systems, HCI, data security, and encryption.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="virtualisation">13.1 Virtualisation</button>
+								<button class="tab-btn" data-tab="distributed">13.2 Distributed Systems</button>
+								<button class="tab-btn" data-tab="hci">13.3 HCI</button>
+								<button class="tab-btn" data-tab="encryption">13.5 Encryption</button>
+							</div>
+
+							<div id="virtualisation" class="tab-content active">
+								<h3>13.1 Virtualisation</h3>
+								<p>Virtualisation is creating virtual versions of physical resources (computing, storage, networking) using software.</p>
+
+								<h3 style="margin-top: 2rem">Why Use Virtualisation?</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Cost Savings</h4>
+										<p>Multiple virtual machines on one server; significantly reduced hardware and energy costs.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Resource Efficiency</h4>
+										<p>Improves hardware utilization by allocating resources dynamically based on demand.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Scalability</h4>
+										<p>Easily add or remove virtual resources to match workload requirements.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Disaster Recovery</h4>
+										<p>Enables quick backup, migration, and recovery of entire systems with minimal downtime.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Environment Isolation</h4>
+										<p>Virtual machines or containers operate in isolated environments reducing conflicts and risks.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">13.1.2 Two Ways to Achieve Virtualisation</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Containerisation</h4>
+										<p>Lightweight, portable packages containing an application plus all its dependencies, sharing the host OS (e.g., Docker).</p>
+									</div>
+									<div class="concept-box">
+										<h4>Virtual Machines (VMs)</h4>
+										<p>Full OS virtualization, where each VM runs its complete operating system on virtualized hardware.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">Virtualisation Use Cases</h4>
+								<ul>
+									<li>Testing software in isolated environments without affecting production.</li>
+									<li>Server consolidation to reduce physical space and energy consumption.</li>
+									<li>Disaster recovery setups with rapid failover.</li>
+									<li>Cloud computing infrastructure supporting multiple tenants securely.</li>
+								</ul>
+							</div>
+
+							<div id="distributed" class="tab-content">
+								<h3>13.2 Distributed Systems</h3>
+								<p>A distributed system is computing spread across multiple machines/nodes communicating over networks, working together as a single logical system.</p>
+
+								<h3 style="margin-top: 2rem">Why Needed?</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Scalability</h4>
+										<p>Handle growing amounts of data or users by adding more nodes.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Redundancy</h4>
+										<p>If one node fails, others take over, increasing system availability.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Resource Sharing</h4>
+										<p>Share databases, computation, and storage resources across organization.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Performance</h4>
+										<p>Parallel processing enables faster problem solving and data analysis.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">13.2.2 Issues with Distributed Systems</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Failure</h4>
+										<p>Hard to detect partial failures; network partitions can cause inconsistencies.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Concurrency</h4>
+										<p>Multiple nodes accessing/modifying data simultaneously can cause race conditions or data corruption.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Replication</h4>
+										<p>Keeping copies of data synchronized is complex and may lead to delays or conflicts.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Performance</h4>
+										<p>Network latency and communication overheads reduce responsiveness.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">Distributed Systems Examples</h4>
+								<ul>
+									<li>Cloud storage systems distributing data across multiple servers.</li>
+									<li>Search engines crawling and indexing web data distributed across data centers.</li>
+									<li>Financial systems processing transactions on multiple redundant nodes.</li>
+								</ul>
+							</div>
+
+							<div id="hci" class="tab-content">
+								<h3>13.3 Human Computer Interaction (HCI)</h3>
+								<p>Good HCI improves usability, efficiency, user satisfaction, and reduces errors and frustration.</p>
+
+								<h3 style="margin-top: 2rem">Three Ways HCI is Implemented</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Visual</h4>
+										<p>Screen layouts, icons, colors, typography, and animations for intuitive interfaces.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Audio</h4>
+										<p>Sound alerts, voice commands, and feedback to enhance interaction and accessibility.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Haptic</h4>
+										<p>Vibrations and tactile feedback to provide physical sensations during user inputs.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">13.3.3 Ergonomic Principles</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Comfort</h4>
+										<p>Reduce physical strain; support good posture to avoid injuries.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Efficiency</h4>
+										<p>Minimize effort required; optimize workflows and navigation.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Health</h4>
+										<p>Prevent eye strain, repetitive strain injuries, and fatigue.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Accessibility</h4>
+										<p>Design inclusive interfaces for users with diverse abilities.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">Good HCI Enhances</h4>
+								<ul>
+									<li>Faster task completion.</li>
+									<li>Lower error rates.</li>
+									<li>Improved user satisfaction and adoption.</li>
+									<li>Reduced training time and frustration.</li>
+								</ul>
+							</div>
+
+							<div id="encryption" class="tab-content">
+								<h3>13.5 Encryption</h3>
+								<h4>13.5.1 Symmetric Encryption</h4>
+								<p>Same key encrypts and decrypts data. Fast and efficient but key distribution is a problem.</p>
+
+								<h4 style="margin-top: 1.5rem">13.5.2 Asymmetric (Public-Key) Encryption</h4>
+								<p>Two keys: public key (encrypts) and private key (decrypts). Solves key distribution problem but slower than symmetric.</p>
+
+								<h4 style="margin-top: 1.5rem">13.5.3 Certificate-Based Encryption</h4>
+								<p>Digital certificates verify identity and contain public key. Used for secure websites (SSL/TLS), email, code signing.</p>
+
+								<h4 style="margin-top: 2rem">Encryption Applications</h4>
+								<ul>
+									<li>Securing data transmissions over the internet (HTTPS).</li>
+									<li>Email encryption ensuring privacy and authenticity.</li>
+									<li>Authentication using public-key certificates.</li>
+									<li>Protecting sensitive files using encryption software.</li>
+								</ul>
+
+								<h4>Past Paper Tips</h4>
+								<p>When explaining encryption types, include advantages and limitations, e.g., symmetric is fast but key distribution is an issue; asymmetric solves key distribution but slower.</p>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 14: Using IT Systems in Organisations -->
+					<section id="topic14" class="topic-section">
+						<div class="card">
+							<h2>Topic 14: Using IT Systems in Organisations</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understand transaction processing, CRM, MIS, ITS, expert systems, and operational issues.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="roles">14.1 Role of IT Systems</button>
+								<button class="tab-btn" data-tab="crm">14.3 CRM</button>
+								<button class="tab-btn" data-tab="operational">14.7 Operational Issues</button>
+							</div>
+
+							<div id="roles" class="tab-content active">
+								<h3>14.1.1 Five Key Roles</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Operational Support</h4>
+										<p>Run daily operations efficiently including inventory, scheduling, and payment processing to keep business flowing smoothly.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Collaboration</h4>
+										<p>Enable effective teamwork across locations via communication tools, shared document management, and project platforms.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Knowledge Management</h4>
+										<p>Store, organize, and retrieve organizational knowledge, preserving best practices, documentation, and training materials.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Product Development</h4>
+										<p>Design, prototype, test, and improve new products through CAD software, simulation tools, and project management systems.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Service Delivery</h4>
+										<p>Deliver services to customers efficiently via online platforms, mobile apps, and automated fulfillment.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">14.1.2 Transaction Processing (TP) Systems</h3>
+								<p>TP systems handle reliable, secure, and fast processing of daily business transactions, recording every operation.</p>
+
+								<h4>TP System Types:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Electronic Point of Sale (EPOS)</h4>
+										<p>Retail checkout systems processing sales, updating inventory and handling payments in real time.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Order Processing</h4>
+										<p>Manages customer orders from entry, payment, warehouse picking to shipment and tracking.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Financial Transactions</h4>
+										<p>Handles banking operations, transfers, deposits and withdrawals with high security and accuracy.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Bacs</h4>
+										<p>UK’s automated clearing system enabling bank-to-bank payments in batches like payroll and supplier payments.</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="crm" class="tab-content">
+								<h3>14.1.3 Customer Relationship Management (CRM)</h3>
+								<p>CRM systems manage customer interactions throughout the lifecycle with a focus on satisfaction, retention, and business growth.</p>
+
+								<h4>Six Key CRM Functions:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Synchronise Marketing</h4>
+										<p>Coordinate marketing campaigns across channels to deliver consistent messaging and maximize impact.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Loyalty Schemes</h4>
+										<p>Track customer loyalty and reward program participation to enhance retention and repeat purchases.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Buying Trends Analysis</h4>
+										<p>Analyze patterns and preferences to tailor marketing strategies and stock decisions.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Customer Service</h4>
+										<p>Track support requests and resolve issues efficiently to improve customer satisfaction.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Customer Retention</h4>
+										<p>Implement strategies to keep existing customers engaged and reduce churn.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Upselling</h4>
+										<p>Recommend complementary or premium products to increase sales value per customer.</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="operational" class="tab-content">
+								<h3>14.2 Operational Issues</h3>
+								<h4>14.2.1 IT Governance & Policy</h4>
+								<p>Governance structures ensure effective IT management, risk mitigation, and compliance with policies.</p>
+
+								<h4 style="margin-top: 1.5rem">Four Key Components:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Business Continuity</h4>
+										<p>Plans to maintain operations during disruptions through redundancy and failover systems.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Disaster Recovery</h4>
+										<p>Procedures to restore IT systems and data following major incidents with minimal downtime.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Risk Management</h4>
+										<p>Identifying IT threats and implementing controls to reduce vulnerabilities and potential impact.</p>
+									</div>
+									<div class="concept-box">
+										<h4>User Policy</h4>
+										<p>Defines acceptable use, security measures, and compliance requirements for IT system users.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">14.2.2 IT Changeover Methods</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Phased</h4>
+										<p>Gradual migration in stages, reducing risk at the cost of longer implementation time.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Direct</h4>
+										<p>Instant replacement of old with new system, fast but higher risk of failure or disruption.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Parallel</h4>
+										<p>Run old and new systems simultaneously, enabling testing but doubling resource requirements.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Pilot</h4>
+										<p>Testing new system with a small group before full rollout, minimizing large scale failures.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">Additional Operational Considerations</h4>
+								<ul>
+									<li><b>System Maintenance:</b> Includes corrective (fix errors), adaptive (change to environment), and perfective (enhancement) maintenance.</li>
+									<li><b>Archiving Data:</b> Moving old/infrequently accessed data to secondary storage to optimize performance and comply with legal retention policies.</li>
+									<li><b>Disaster Recovery Plan:</b> Should include identification of critical data, risk analysis, clear team roles, and management commitment.</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 15: Systems Development -->
+					<section id="topic15" class="topic-section">
+						<div class="card">
+							<h2>Topic 15: Systems Development</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Learn project management, waterfall method, agile approach, and system design diagrams.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="project">15.1 Project Management</button>
+								<button class="tab-btn" data-tab="waterfall">15.2 Waterfall Method</button>
+								<button class="tab-btn" data-tab="agile">15.3 Agile Approach</button>
+							</div>
+
+							<div id="project" class="tab-content active">
+								<h3>15.1 PROJECT MANAGEMENT</h3>
+								<p>Success or failure of IT projects depends heavily on project management skills. Proper planning prevents poor outcomes and maximizes resource use.</p>
+
+								<h3 style="margin-top: 2rem">Characteristics of Successful IT Projects</h3>
+								<ul>
+									<li>Clear, documented objectives and requirements agreed by stakeholders</li>
+									<li>Realistic and achievable timelines and deadlines</li>
+									<li>Adequate budget and resources allocated</li>
+									<li>Effective communication and regular reporting among teams and stakeholders</li>
+									<li>Risk management strategies and contingency plans in place</li>
+									<li>Quality assurance and thorough testing to detect and fix issues early</li>
+									<li>Stakeholder involvement and user acceptance testing to ensure requirements met</li>
+								</ul>
+
+								<h3 style="margin-top: 2rem">15.1.3-15.1.4 SMART TARGETS</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Specific</h4>
+										<p>Goals must be precise and clear, defining exactly what to achieve.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Measurable</h4>
+										<p>Progress and success can be tracked using concrete criteria.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Achievable</h4>
+										<p>Goals must be realistic and attainable, considering available resources.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Relevant</h4>
+										<p>Goals should align directly with overall project or business objectives.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Time-bound</h4>
+										<p>Set deadlines to focus efforts and allow scheduling.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">15.1.5-15.1.6 Project Management Tools</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Gantt Charts</h4>
+										<p>Visual timelines showing tasks, durations, dependencies, and progress.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Requirements</h4>
+										<p>Both functional and non-functional requirements documented and approved.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Critical Path Analysis</h4>
+										<p>Identifies the sequence of tasks that determine the shortest project duration.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Precedence Tables</h4>
+										<p>List tasks and their dependencies specifying what must be completed first.</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="waterfall" class="tab-content">
+								<h3>15.2 WATERFALL METHOD</h3>
+								<p>A traditional linear, sequential development method where each phase must be completed before the next begins.</p>
+
+								<h3 style="margin-top: 2rem">Six Phases:</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Requirements/Analysis</h4>
+										<p>Gather and formally document ALL system requirements from stakeholders.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Design</h4>
+										<p>Create the system architecture, user interfaces, and database design.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Implementation</h4>
+										<p>Develop and code the system components per the design specifications.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Testing/Debugging</h4>
+										<p>Thoroughly test the system, find defects, and correct them.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Installation</h4>
+										<p>Deploy the system live, including user training and data migration.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Maintenance</h4>
+										<p>Ongoing support: fixing issues, performance tuning, and updates.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">Characteristics of Waterfall</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Strengths</h4>
+										<p>Thorough documentation, ideal for well-defined projects with fixed requirements.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Weaknesses</h4>
+										<p>Inflexible to changes, with problems found late causing costly fixes.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">When to Use Waterfall</h4>
+								<ul>
+									<li>Projects with clear, stable requirements and minimal changes expected.</li>
+									<li>Highly regulated industries like finance or healthcare, requiring exhaustive documentation.</li>
+									<li>Large projects where phases require formal handoffs and approvals.</li>
+								</ul>
+							</div>
+
+							<div id="agile" class="tab-content">
+								<h3>15.3 AGILE APPROACH</h3>
+								<p>Iterative and incremental development in short cycles (sprints), allowing flexibility and continuous feedback incorporation.</p>
+
+								<h3 style="margin-top: 2rem">Five Phases (Repeating Cycles):</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Requirements</h4>
+										<p>Define prioritized features to build during the sprint.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Plan</h4>
+										<p>Break features into tasks and estimate effort required.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Design</h4>
+										<p>Create design for current iteration with scope for adaptations.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Develop</h4>
+										<p>Build working components during the sprint (usually 2-4 weeks).</p>
+									</div>
+									<div class="concept-box">
+										<h4>Release</h4>
+										<p>Demonstrate completed work and gather stakeholder feedback.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">Scrum Framework</h3>
+								<p>Agile framework assigning roles like Product Owner, Scrum Master, and Team with ceremonies such as daily standups, sprint reviews, and retrospectives.</p>
+
+								<h3 style="margin-top: 2rem">Characteristics of Agile</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Strengths</h4>
+										<p>Flexible to changes, early delivery of working software, close customer collaboration.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Weaknesses</h4>
+										<p>Requires active customer involvement, less focus on formal documentation, harder to estimate timelines.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">When to Use Agile</h4>
+								<ul>
+									<li>Projects with evolving or unclear requirements.</li>
+									<li>Environments requiring frequent releases and rapid adaptations.</li>
+									<li>Teams that collaborate closely and customers willing to participate actively.</li>
+								</ul>
+
+								<h4 style="margin-top: 2rem">Waterfall vs Agile Comparison</h4>
+								<table class="comparison-table" style="width: 100%; border-collapse: collapse; text-align: left">
+									<thead>
+										<tr>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Aspect</th>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Waterfall</th>
+											<th style="border-bottom: 2px solid var(--color-border); padding: 8px">Agile</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Requirements</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Fixed upfront</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Evolving</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Timeline</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Linear phases</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Short sprints</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Testing</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">After implementation</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Continuous and iterative</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Customer Feedback</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">At end</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Frequent and ongoing</td>
+										</tr>
+										<tr>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Documentation</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Comprehensive</td>
+											<td style="border-bottom: 1px solid var(--color-border); padding: 8px">Minimal and flexible</td>
+										</tr>
+										<tr>
+											<td style="padding: 8px">Change Flexibility</td>
+											<td style="padding: 8px">Difficult and costly</td>
+											<td style="padding: 8px">Welcomed and expected</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 16: Emerging Technologies -->
+					<section id="topic16" class="topic-section">
+						<div class="card">
+							<h2>Topic 16: Emerging Technologies</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Discover machine learning, virtual/augmented reality, and Internet of Things.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="ml">16.1 Machine Learning</button>
+								<button class="tab-btn" data-tab="vr-ar">16.2 VR & AR</button>
+								<button class="tab-btn" data-tab="iot">16.3 Internet of Things</button>
+							</div>
+
+							<div id="ml" class="tab-content active">
+								<h3>16.1 MACHINE LEARNING</h3>
+								<p>Systems that learn patterns from data without explicit programming, improving performance through experience.</p>
+
+								<h3 style="margin-top: 2rem">Two Types of Machine Learning:</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Supervised Learning</h4>
+										<p>Learning from labeled data (correct answers provided), training the system to classify or predict.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Unsupervised Learning</h4>
+										<p>Learning from unlabeled data, discovering hidden patterns or groupings without prior knowledge.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">16.1.2 Impact & Applications of Machine Learning</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Natural Language Processing (NLP)</h4>
+										<p>Understanding, interpreting, and generating human language—used in chatbots, translation, and sentiment analysis.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Speech Recognition</h4>
+										<p>Converting spoken language into text for voice commands and transcription.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Image Recognition</h4>
+										<p>Identifying objects, faces, or patterns in images—applications in security and healthcare.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Pattern Recognition</h4>
+										<p>Detecting trends, anomalies, or recurring sequences in datasets—used in fraud detection and recommendations.</p>
+									</div>
+								</div>
+
+								<h4>Exam Tip</h4>
+								<p>Explain clearly the differences between supervised and unsupervised learning with examples relevant to real-world applications.</p>
+							</div>
+
+							<div id="vr-ar" class="tab-content">
+								<h3>16.2 Virtual and Augmented Reality</h3>
+
+								<h4>16.2.1 Virtual Reality (VR)</h4>
+								<p>Fully immersive digital environment using headsets that entirely replace the user's physical surroundings.</p>
+
+								<h4 style="margin-top: 1.5rem">Uses:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Entertainment</h4>
+										<p>Immersive games and interactive media experiences.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Training</h4>
+										<p>Flight simulators, medical surgery practice, emergency responder drills.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Education</h4>
+										<p>Virtual field trips and simulations for hands-on learning.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Design</h4>
+										<p>Architectural walkthroughs, prototype visualizations, and modeling.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">16.2.2 Augmented Reality (AR)</h3>
+								<p>Digital information or images overlaid on the real world, still allowing the user to see their real environment.</p>
+
+								<h4 style="margin-top: 1.5rem">Uses:</h4>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Navigation</h4>
+										<p>Real-world directions and landmarks enhanced through phone or AR glasses.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Gaming</h4>
+										<p>Games like Pokémon GO mixing virtual objects with real locations.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Education</h4>
+										<p>Interactive 3D models over textbooks and immersive learning tools.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Maintenance</h4>
+										<p>Overlaying repair instructions directly onto machinery for technicians.</p>
+									</div>
+								</div>
+
+								<h4>Key Difference:</h4>
+								<p>VR fully immerses users in a virtual environment, while AR supplements the real world with virtual overlays.</p>
+							</div>
+
+							<div id="iot" class="tab-content">
+								<h3>16.3 Internet of Things (IoT)</h3>
+								<p>A network of physical devices embedded with sensors, software, and connectivity enabling them to collect and exchange data.</p>
+
+								<h3 style="margin-top: 2rem">16.3.2 Impact of IoT</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>On Individuals</h4>
+										<p>Automated homes, health monitoring wearables, improved convenience and cost savings.</p>
+									</div>
+									<div class="concept-box">
+										<h4>On Organisations</h4>
+										<p>Equipment monitoring for predictive maintenance, operational efficiency, and enhanced decision-making through data.</p>
+									</div>
+									<div class="concept-box">
+										<h4>On Data</h4>
+										<p>Massive data volume, variety, and velocity pose challenges on storage, processing, and privacy.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">16.3.4 IoT Security Issues</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Vulnerable Devices</h4>
+										<p>Many devices have weak security and default passwords, making them targets for hackers.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Network Attacks</h4>
+										<p>Interception, man-in-the-middle attacks, and denial of service attacks threaten IoT networks.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Data Privacy</h4>
+										<p>Collection of sensitive personal data raises concerns around consent and misuse.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Firmware Updates</h4>
+										<p>Many IoT devices lack mechanisms for automatic updates, leaving security gaps unpatched.</p>
+									</div>
+								</div>
+
+								<h4 style="margin-top: 2rem">IoT Security Best Practices</h4>
+								<ul>
+									<li>Change default passwords immediately</li>
+									<li>Use strong encryption for data transmission and storage</li>
+									<li>Segment IoT networks to isolate trusted devices</li>
+									<li>Monitor network traffic for unusual activity</li>
+									<li>Regularly update device firmware</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<!-- Flashcards Section -->
+					<section id="flashcards" class="topic-section">
+						<div class="card">
+							<h2>⭐ Interactive Flashcards</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Click cards to flip. Test your knowledge with key concepts from all topics.</p>
+
+							<div style="margin-bottom: 2rem">
+								<label for="flashcard-category" style="color: var(--color-text); margin-right: 1rem; font-weight: 600">Select Topic:</label>
+								<select id="flashcard-category" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-light); color: var(--color-text)">
+									<option value="all">All Topics</option>
+									<option value="topic12">Topic 12: Manipulating Data</option>
+									<option value="topic13">Topic 13: Enabling Technologies</option>
+									<option value="topic14">Topic 14: IT Systems in Organisations</option>
+									<option value="topic15">Topic 15: Systems Development</option>
+									<option value="topic16">Topic 16: Emerging Technologies</option>
+								</select>
+							</div>
+
+							<div class="flashcard-container" id="flashcard">
+								<div class="flashcard">
+									<div class="flashcard-content" id="flashcard-question">Click to load flashcard...</div>
+									<div class="flashcard-back" id="flashcard-answer">Answer appears here</div>
+								</div>
+							</div>
+
+							<div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap">
+								<button class="btn btn-secondary" id="prev-card">← Previous</button>
+								<span id="card-counter" style="align-self: center; font-weight: 600">Card 1 of N</span>
+								<button class="btn btn-secondary" id="next-card">Next →</button>
+							</div>
+						</div>
+					</section>
+
+					<!-- Quiz Mode -->
+					<section id="quiz" class="topic-section">
+						<div class="card">
+							<h2>✅ Quiz Mode</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Test your knowledge with interactive quizzes for each topic.</p>
+
+							<div style="margin-bottom: 2rem">
+								<label for="quiz-category" style="color: var(--color-text); margin-right: 1rem; font-weight: 600">Select Topic:</label>
+								<select id="quiz-category" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-light); color: var(--color-text)">
+									<option value="topic12">Topic 12: Manipulating Data</option>
+									<option value="topic13">Topic 13: Enabling Technologies</option>
+									<option value="topic14">Topic 14: IT Systems in Organisations</option>
+									<option value="topic15">Topic 15: Systems Development</option>
+									<option value="topic16">Topic 16: Emerging Technologies</option>
+								</select>
+							</div>
+
+							<div id="quiz-container">
+								<div id="quiz-question" style="font-size: 1.2rem; margin-bottom: 1.5rem">Select a topic and click "Start Quiz" to begin.</div>
+								<div id="quiz-options" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem">
+									<!-- Quiz options will be populated by JavaScript -->
+								</div>
+								<div id="quiz-feedback" style="margin-bottom: 1.5rem"></div>
+								<div style="display: flex; gap: 1rem; justify-content: center">
+									<button class="btn" id="start-quiz">Start Quiz</button>
+									<button class="btn btn-secondary" id="next-question" style="display: none">Next Question</button>
+								</div>
+								<div id="quiz-score" style="text-align: center; margin-top: 1rem; font-weight: 600"></div>
+							</div>
+						</div>
+					</section>
+				</main>
+			</div>
+		</div>
+
+		<script>
+			// Navigation functionality
+			const navButtons = document.querySelectorAll('.nav-btn')
+			const topicSections = document.querySelectorAll('.topic-section')
+
+			navButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					const topic = button.dataset.topic
+
+					// Remove active from all
+					navButtons.forEach(btn => btn.classList.remove('active'))
+					topicSections.forEach(section => section.classList.remove('active'))
+
+					// Add active to clicked
+					button.classList.add('active')
+					document.getElementById(topic).classList.add('active')
+
+					// Reset flashcards if switching from flashcard view
+					if (topic === 'flashcards') {
+						initFlashcards()
+					}
+
+					// Reset quiz if switching from quiz view
+					if (topic === 'quiz') {
+						resetQuiz()
+					}
+
+					// Close mobile nav if open
+					const mobileNav = document.getElementById('mobileNav')
+					const mobileNavToggle = document.getElementById('mobileNavToggle')
+					if (mobileNav.classList.contains('active')) {
+						mobileNav.classList.remove('active')
+						mobileNavToggle.classList.remove('active')
+					}
+
+					// Scroll to top
+					window.scrollTo({ top: 0, behavior: 'smooth' })
+				})
+			})
+
+			// Tab functionality
+			function resetAllTabs() {
+				// Remove active class from all tab buttons and tab contents
+				document.querySelectorAll('.tab-btn').forEach(btn => {
+					btn.classList.remove('active')
+				})
+				document.querySelectorAll('.tab-content').forEach(content => {
+					content.classList.remove('active')
+				})
+
+				// Reactivate the first tab in the active topic section
+				const activeSection = document.querySelector('.topic-section.active')
+				if (activeSection) {
+					const firstTabBtn = activeSection.querySelector('.tab-btn')
+					const firstTabContent = activeSection.querySelector('.tab-content')
+					if (firstTabBtn && firstTabContent) {
+						firstTabBtn.classList.add('active')
+						firstTabContent.classList.add('active')
+					}
+				}
+			}
+
+			const tabButtons = document.querySelectorAll('.tab-btn')
+			tabButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					const tab = button.dataset.tab
+					const tabGroup = button.parentElement
+
+					// Find all tabs in this specific tab group only
+					const tabs = tabGroup.parentElement.querySelectorAll('.tab-content')
+					const buttons = tabGroup.querySelectorAll('.tab-btn')
+
+					// Remove active from all buttons and contents in this tab group
+					buttons.forEach(btn => btn.classList.remove('active'))
+					tabs.forEach(t => t.classList.remove('active'))
+
+					// Add active to clicked button and corresponding content
+					button.classList.add('active')
+					document.getElementById(tab).classList.add('active')
+				})
+			})
+
+			// Update the navigation functionality to reset tabs when switching topics
+			navButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					const topic = button.dataset.topic
+
+					// Remove active from all
+					navButtons.forEach(btn => btn.classList.remove('active'))
+					topicSections.forEach(section => section.classList.remove('active'))
+
+					// Add active to clicked
+					button.classList.add('active')
+					document.getElementById(topic).classList.add('active')
+
+					// Reset all tabs to their first tab
+					resetAllTabs()
+
+					// Reset flashcards if switching from flashcard view
+					if (topic === 'flashcards') {
+						initFlashcards()
+					}
+
+					// Reset quiz if switching from quiz view
+					if (topic === 'quiz') {
+						resetQuiz()
+					}
+
+					// Close mobile nav if open
+					const mobileNav = document.getElementById('mobileNav')
+					const mobileNavToggle = document.getElementById('mobileNavToggle')
+					if (mobileNav.classList.contains('active')) {
+						mobileNav.classList.remove('active')
+						mobileNavToggle.classList.remove('active')
+					}
+
+					// Scroll to top
+					window.scrollTo({ top: 0, behavior: 'smooth' })
+				})
+			})
+
+			// Mobile navigation toggle
+			const mobileNavToggle = document.getElementById('mobileNavToggle')
+			const mobileNav = document.getElementById('mobileNav')
+
+			mobileNavToggle.addEventListener('click', () => {
+				mobileNav.classList.toggle('active')
+				mobileNavToggle.classList.toggle('active')
+			})
+
+			// Flashcard data
+			const flashcardData = {
+				all: [
+					{ q: 'Define data integrity', a: 'Data is accurate, complete, reliable, and consistent throughout its lifecycle' },
+					{ q: 'What are the 7 validation rules?', a: 'Presence, Range, Lookup, List, Length, Format, Check digit' },
+					{ q: 'What is normalization?', a: 'Process of organizing relational data to remove redundancy and ensure data integrity' },
+					{ q: "What are the 5 V's of Big Data?", a: 'Volume, Velocity, Variety, Veracity, Value' },
+					{ q: 'Why use virtualisation?', a: 'Cost savings, resource efficiency, scalability, disaster recovery, testing isolation' },
+					{ q: "Containerisation vs Virtual Machines - what's the difference?", a: 'Containers are lightweight with shared OS; VMs have full OS, more resource-intensive' },
+					{ q: 'Name 4 issues with distributed systems', a: 'Failure, Concurrency, Replication, Performance' },
+					{ q: 'What are the 3 types of HCI implementation?', a: 'Visual (screens, icons), Audio (sound, alerts), Haptic (vibrations, tactile)' },
+					{ q: 'Difference between symmetric and asymmetric encryption', a: 'Symmetric: same key for encrypt/decrypt, fast, key distribution problem. Asymmetric: public/private keys, slower, solves key distribution' },
+					{ q: 'What does EPOS stand for?', a: 'Electronic Point of Sale - retail checkout systems' },
+					{ q: 'Name 6 key CRM functions', a: 'Marketing sync, Loyalty schemes, Buying trends, Customer service, Retention, Upselling' },
+					{ q: 'What are the 4 IT changeover methods?', a: 'Phased (gradual), Direct (immediate), Parallel (simultaneous), Pilot (test group first)' },
+					{ q: 'Types of system maintenance', a: 'Perfective (improve), Adaptive (adjust to changes), Corrective (fix bugs)' },
+					{ q: 'What does a disaster recovery plan include?', a: 'Key data identification, Risk analysis, Team actions/roles, Management structure' },
+					{ q: 'What does SMART targets mean?', a: 'Specific, Measurable, Achievable, Relevant, Time-bound' },
+					{ q: 'What are the 6 phases of waterfall?', a: 'Requirements, Design, Implementation, Testing, Installation, Maintenance' },
+					{ q: 'What is a sprint in Agile?', a: 'Fixed time-box iteration (2-4 weeks) with defined goals and deliverable demo' },
+					{ q: 'Waterfall vs Agile - when to use each?', a: 'Waterfall: fixed requirements, regulated industries. Agile: evolving requirements, need early working software' },
+					{ q: 'Supervised vs Unsupervised learning - difference?', a: 'Supervised: learns from labeled data with correct answers. Unsupervised: finds patterns in unlabeled data' },
+					{ q: "VR vs AR - what's the difference?", a: 'VR: fully immersive digital world. AR: digital overlay on real world' },
+					{ q: 'What is Internet of Things?', a: 'Network of physical devices with sensors connected to internet collecting and sharing data' },
+					{ q: 'Name 4 IoT security issues', a: 'Vulnerable devices, Network attacks, Data privacy concerns, Outdated firmware' },
+				],
+				topic12: [
+					{ q: 'Define data integrity', a: 'Data is accurate, complete, reliable, and consistent throughout its lifecycle' },
+					{ q: 'What are the 7 validation rules?', a: 'Presence, Range, Lookup, List, Length, Format, Check digit' },
+					{ q: 'What is normalization?', a: 'Process of organizing relational data to remove redundancy and ensure data integrity' },
+					{ q: "What are the 5 V's of Big Data?", a: 'Volume, Velocity, Variety, Veracity, Value' },
+					{ q: 'Difference between data mining and data warehousing', a: 'Mining finds patterns in data; Warehousing is centralized repository integrating data' },
+				],
+				topic13: [
+					{ q: 'Why use virtualisation?', a: 'Cost savings, resource efficiency, scalability, disaster recovery, testing isolation' },
+					{ q: "Containerisation vs Virtual Machines - what's the difference?", a: 'Containers are lightweight with shared OS; VMs have full OS, more resource-intensive' },
+					{ q: 'Name 4 issues with distributed systems', a: 'Failure, Concurrency, Replication, Performance' },
+					{ q: 'What are the 3 types of HCI implementation?', a: 'Visual (screens, icons), Audio (sound, alerts), Haptic (vibrations, tactile)' },
+					{ q: 'Difference between symmetric and asymmetric encryption', a: 'Symmetric: same key for encrypt/decrypt, fast, key distribution problem. Asymmetric: public/private keys, slower, solves key distribution' },
+				],
+				topic14: [
+					{ q: 'What does EPOS stand for?', a: 'Electronic Point of Sale - retail checkout systems' },
+					{ q: 'Name 6 key CRM functions', a: 'Marketing sync, Loyalty schemes, Buying trends, Customer service, Retention, Upselling' },
+					{ q: 'What are the 4 IT changeover methods?', a: 'Phased (gradual), Direct (immediate), Parallel (simultaneous), Pilot (test group first)' },
+					{ q: 'Types of system maintenance', a: 'Perfective (improve), Adaptive (adjust to changes), Corrective (fix bugs)' },
+					{ q: 'What does a disaster recovery plan include?', a: 'Key data identification, Risk analysis, Team actions/roles, Management structure' },
+				],
+				topic15: [
+					{ q: 'What does SMART targets mean?', a: 'Specific, Measurable, Achievable, Relevant, Time-bound' },
+					{ q: 'What are the 6 phases of waterfall?', a: 'Requirements, Design, Implementation, Testing, Installation, Maintenance' },
+					{ q: 'What is a sprint in Agile?', a: 'Fixed time-box iteration (2-4 weeks) with defined goals and deliverable demo' },
+					{ q: 'Waterfall vs Agile - when to use each?', a: 'Waterfall: fixed requirements, regulated industries. Agile: evolving requirements, need early working software' },
+					{ q: 'What do Gantt charts show?', a: 'Timeline of tasks, duration, dependencies, and critical path for projects' },
+				],
+				topic16: [
+					{ q: 'Supervised vs Unsupervised learning - difference?', a: 'Supervised: learns from labeled data with correct answers. Unsupervised: finds patterns in unlabeled data' },
+					{ q: "VR vs AR - what's the difference?", a: 'VR: fully immersive digital world. AR: digital overlay on real world' },
+					{ q: 'What is Internet of Things?', a: 'Network of physical devices with sensors connected to internet collecting and sharing data' },
+					{ q: 'Name 4 IoT security issues', a: 'Vulnerable devices, Network attacks, Data privacy concerns, Outdated firmware' },
+					{ q: 'What are the 4 components of IoT infrastructure?', a: 'Sensors (collect), Networks (communicate), Embedded systems (process), Storage (cloud/local)' },
+				],
+			}
+
+			let currentCard = 0
+			let currentCategory = 'all'
+			let currentCards = []
+
+			function initFlashcards() {
+				currentCard = 0
+				currentCategory = document.getElementById('flashcard-category').value
+				currentCards = flashcardData[currentCategory]
+				displayCard()
+			}
+
+			function displayCard() {
+				if (currentCards.length === 0) return
+
+				const card = currentCards[currentCard]
+				const flashcardContainer = document.getElementById('flashcard')
+
+				// Reset flip state
+				flashcardContainer.querySelector('.flashcard').classList.remove('flipped')
+				document.getElementById('flashcard-question').textContent = card.q
+				document.getElementById('flashcard-answer').textContent = card.a
+				document.getElementById('card-counter').textContent = `Card ${currentCard + 1} of ${currentCards.length}`
+			}
+
+			// Flashcard flip
+			document.getElementById('flashcard').addEventListener('click', function () {
+				this.querySelector('.flashcard').classList.toggle('flipped')
+			})
+
+			// Navigation
+			document.getElementById('next-card').addEventListener('click', () => {
+				if (currentCard < currentCards.length - 1) {
+					currentCard++
+					displayCard()
+				}
+			})
+
+			document.getElementById('prev-card').addEventListener('click', () => {
+				if (currentCard > 0) {
+					currentCard--
+					displayCard()
+				}
+			})
+
+			document.getElementById('flashcard-category').addEventListener('change', initFlashcards)
+
+			// Quiz functionality
+			const quizData = {
+				topic12: [
+					{
+						q: 'Which validation rule checks if a value exists in a predefined list?',
+						options: ['Length', 'Range', 'Lookup', 'Format'],
+						correct: 2,
+						explain: 'Lookup validation checks if the value exists in a predefined list',
+					},
+					{
+						q: 'What is the main problem with data redundancy?',
+						options: ['Faster processing', 'Inconsistency and update anomalies', 'Better security', 'Reduced storage'],
+						correct: 1,
+						explain: 'Redundancy causes inconsistency and makes updates complex',
+					},
+					{
+						q: "In Big Data, what does 'Veracity' refer to?",
+						options: ['Size of data', 'Data quality and reliability', 'Speed of processing', 'Types of data'],
+						correct: 1,
+						explain: 'Veracity addresses data quality and reliability concerns',
+					},
+				],
+				topic13: [
+					{
+						q: 'Which technology creates isolated application environments using shared OS?',
+						options: ['Virtual Machines', 'Containerisation', 'Cloud Storage', 'Encryption'],
+						correct: 1,
+						explain: 'Containerisation (Docker) is lightweight and shares the host OS',
+					},
+					{
+						q: 'Which distributed systems issue concerns data consistency across nodes?',
+						options: ['Failure', 'Concurrency', 'Performance', 'Replication'],
+						correct: 1,
+						explain: 'Concurrency deals with ensuring data consistency when multiple nodes access data',
+					},
+					{
+						q: 'Haptic feedback in HCI refers to:',
+						options: ['Visual information', 'Sound notifications', 'Vibrations and tactile feedback', 'Text communication'],
+						correct: 2,
+						explain: 'Haptic refers to touch/vibration feedback from devices',
+					},
+				],
+				topic14: [
+					{
+						q: 'Which IT changeover method runs old and new systems simultaneously?',
+						options: ['Phased', 'Direct', 'Parallel', 'Pilot'],
+						correct: 2,
+						explain: 'Parallel changeover runs both systems at same time, safe but expensive',
+					},
+					{
+						q: 'What does CRM stand for?',
+						options: ['Critical Resource Management', 'Customer Relationship Management', 'Computer Response Module', 'Centralized Record Management'],
+						correct: 1,
+						explain: 'CRM = Customer Relationship Management systems',
+					},
+					{ q: 'Which type of maintenance fixes bugs and errors?', options: ['Perfective', 'Adaptive', 'Corrective', 'Preventive'], correct: 2, explain: 'Corrective maintenance fixes existing bugs and problems' },
+				],
+				topic15: [
+					{
+						q: 'In Agile methodology, what is a sprint?',
+						options: ['Full project completion', 'Fixed time-box iteration with defined goals', 'Code review process', 'Testing phase'],
+						correct: 1,
+						explain: 'A sprint is a fixed time-boxed iteration (usually 2-4 weeks) in Agile',
+					},
+					{
+						q: 'Which project management tool shows task dependencies and critical path?',
+						options: ['Requirements document', 'Budget spreadsheet', 'Gantt chart', 'Risk register'],
+						correct: 2,
+						explain: 'Gantt charts visualize tasks, timelines, dependencies, and critical path',
+					},
+					{
+						q: 'Waterfall method is best when:',
+						options: ['Requirements are evolving', 'Requirements are clear and fixed', 'Customer needs frequent changes', 'Speed is more important than planning'],
+						correct: 1,
+						explain: 'Waterfall works best with clear, fixed requirements',
+					},
+				],
+				topic16: [
+					{
+						q: 'Machine learning that finds patterns in unlabeled data is called:',
+						options: ['Supervised learning', 'Unsupervised learning', 'Deep learning', 'Transfer learning'],
+						correct: 1,
+						explain: 'Unsupervised learning discovers patterns without labeled training data',
+					},
+					{
+						q: 'Which technology provides fully immersive digital environment?',
+						options: ['Augmented Reality', 'Virtual Reality', 'Mixed Reality', 'Extended Reality'],
+						correct: 1,
+						explain: 'Virtual Reality (VR) fully immerses user in digital world',
+					},
+					{
+						q: 'What is the primary security concern with IoT devices?',
+						options: ['Too expensive', "Don't work", 'Vulnerable devices with default passwords', 'Use too much electricity'],
+						correct: 2,
+						explain: 'IoT security risks include vulnerable devices, outdated firmware, default passwords',
+					},
+				],
+			}
+
+			let currentQuizIndex = 0
+			let quizScore = 0
+			let currentQuizQuestions = []
+
+			function resetQuiz() {
+				currentQuizIndex = 0
+				quizScore = 0
+				document.getElementById('quiz-question').textContent = 'Select a topic and click "Start Quiz" to begin.'
+				document.getElementById('quiz-options').innerHTML = ''
+				document.getElementById('quiz-feedback').innerHTML = ''
+				document.getElementById('quiz-score').innerHTML = ''
+				document.getElementById('start-quiz').style.display = 'inline-block'
+				document.getElementById('next-question').style.display = 'none'
+			}
+
+			function startQuiz() {
+				const category = document.getElementById('quiz-category').value
+				currentQuizQuestions = quizData[category] || []
+				currentQuizIndex = 0
+				quizScore = 0
+
+				if (currentQuizQuestions.length === 0) {
+					document.getElementById('quiz-question').textContent = 'No quiz questions available for this topic.'
+					return
+				}
+
+				displayQuizQuestion()
+				document.getElementById('start-quiz').style.display = 'none'
+				document.getElementById('next-question').style.display = 'inline-block'
+				document.getElementById('quiz-score').innerHTML = ''
+			}
+
+			function displayQuizQuestion() {
+				if (currentQuizIndex >= currentQuizQuestions.length) {
+					showQuizResults()
+					return
+				}
+
+				const question = currentQuizQuestions[currentQuizIndex]
+				document.getElementById('quiz-question').textContent = question.q
+
+				const optionsContainer = document.getElementById('quiz-options')
+				optionsContainer.innerHTML = ''
+
+				question.options.forEach((option, index) => {
+					const button = document.createElement('button')
+					button.className = 'btn btn-secondary'
+					button.textContent = option
+					button.style.textAlign = 'left'
+					button.addEventListener('click', () => checkAnswer(index))
+					optionsContainer.appendChild(button)
+				})
+
+				document.getElementById('quiz-feedback').innerHTML = ''
+			}
+
+			function checkAnswer(selectedIndex) {
+				const question = currentQuizQuestions[currentQuizIndex]
+				const options = document.querySelectorAll('#quiz-options button')
+
+				// Disable all buttons
+				options.forEach(button => {
+					button.disabled = true
+				})
+
+				// Highlight correct and incorrect answers
+				options.forEach((button, index) => {
+					if (index === question.correct) {
+						button.style.backgroundColor = 'rgba(16, 185, 129, 0.2)'
+						button.style.borderColor = '#10b981'
+					} else if (index === selectedIndex && index !== question.correct) {
+						button.style.backgroundColor = 'rgba(239, 68, 68, 0.2)'
+						button.style.borderColor = '#ef4444'
+					}
+				})
+
+				// Show feedback
+				const feedback = document.getElementById('quiz-feedback')
+				if (selectedIndex === question.correct) {
+					feedback.innerHTML = `<div style="color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px;">✓ Correct! ${question.explain}</div>`
+					quizScore++
+				} else {
+					feedback.innerHTML = `<div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px;">✗ Incorrect. ${question.explain}</div>`
+				}
+			}
+
+			function showQuizResults() {
+				const percentage = Math.round((quizScore / currentQuizQuestions.length) * 100)
+				document.getElementById('quiz-question').textContent = 'Quiz Complete!'
+				document.getElementById('quiz-options').innerHTML = ''
+				document.getElementById('quiz-feedback').innerHTML = ''
+
+				let message = ''
+				if (percentage >= 80) {
+					message = '🎉 Excellent work! You have a strong understanding of this topic.'
+				} else if (percentage >= 60) {
+					message = '👍 Good job! Review the areas you missed to improve further.'
+				} else {
+					message = '📚 Keep studying! Review the content and try again.'
+				}
+
+				document.getElementById('quiz-score').innerHTML = `
+                <div style="margin-bottom: 1rem;">${message}</div>
+                <div>You scored ${quizScore} out of ${currentQuizQuestions.length} (${percentage}%)</div>
+            `
+
+				document.getElementById('next-question').style.display = 'none'
+				document.getElementById('start-quiz').style.display = 'inline-block'
+				document.getElementById('start-quiz').textContent = 'Restart Quiz'
+			}
+
+			// Quiz event listeners
+			document.getElementById('start-quiz').addEventListener('click', startQuiz)
+			document.getElementById('next-question').addEventListener('click', () => {
+				currentQuizIndex++
+				displayQuizQuestion()
+			})
+
+			// Initialize first tab as active
+			document.addEventListener('DOMContentLoaded', () => {
+				const firstTabBtn = document.querySelector('.tab-btn')
+				if (firstTabBtn) {
+					firstTabBtn.classList.add('active')
+				}
+			})
+
+			// Back to Top functionality
+			const backToTopBtn = document.getElementById('backToTop')
+
+			window.addEventListener('scroll', () => {
+				if (window.pageYOffset > 300) {
+					backToTopBtn.style.display = 'flex'
+				} else {
+					backToTopBtn.style.display = 'none'
+				}
+			})
+
+			backToTopBtn.addEventListener('click', () => {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth',
+				})
+			})
+		</script>
+		<!-- Back to Top Button -->
+		<button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
+	</body>
+</html>

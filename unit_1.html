@@ -1,0 +1,2611 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IAL IT Unit 1 - Learning Dashboard</title>
+		<style>
+			:root {
+				--color-primary: #10b981;
+				--color-primary-dark: #059669;
+				--color-success: #10b981;
+				--color-warning: #f59e0b;
+				--color-error: #ef4444;
+				--color-bg: #0f172a;
+				--color-surface: #1e293b;
+				--color-surface-light: #334155;
+				--color-text: #f1f5f9;
+				--color-text-secondary: #cbd5e1;
+				--color-border: #475569;
+				--radius: 12px;
+				--transition: all 0.3s ease;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				background-color: var(--color-bg);
+				color: var(--color-text);
+				line-height: 1.6;
+			}
+
+			/* Main Layout */
+			.container {
+				display: grid;
+				grid-template-columns: 1fr;
+				min-height: 100vh;
+			}
+
+			a {
+				color: var(--color-text);
+			}
+
+			header {
+				background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+				padding: 2rem;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+
+			header h1 {
+				font-size: 2rem;
+				margin-bottom: 0.5rem;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			}
+
+			header p {
+				font-size: 0.95rem;
+				opacity: 0.95;
+			}
+
+			.main-content {
+				display: grid;
+				grid-template-columns: 280px 1fr;
+				gap: 2rem;
+				padding: 2rem;
+				max-width: 1400px;
+				margin: 0 auto;
+				width: 100%;
+			}
+
+			/* Sidebar Navigation */
+			.sidebar {
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 1.5rem;
+				height: fit-content;
+				border: 1px solid var(--color-border);
+				position: relative;
+				top: 20px;
+			}
+
+			.sidebar h3 {
+				font-size: 1rem;
+				margin-bottom: 1rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--color-primary);
+			}
+
+			.nav-list {
+				list-style: none;
+			}
+
+			.nav-list li {
+				margin-bottom: 0.5rem;
+			}
+
+			.nav-btn {
+				width: 100%;
+				padding: 1rem;
+				background: var(--color-surface-light);
+				border: 2px solid transparent;
+				color: var(--color-text-secondary);
+				border-radius: 8px;
+				cursor: pointer;
+				transition: var(--transition);
+				text-align: left;
+				font-size: 0.95rem;
+				font-weight: 500;
+			}
+
+			.nav-btn:hover {
+				background: var(--color-border);
+				transform: translateX(5px);
+			}
+
+			.nav-btn.active {
+				background: var(--color-primary);
+				color: white;
+				border-color: var(--color-primary);
+			}
+
+			/* Mobile Navigation */
+			.mobile-nav-toggle {
+				display: none;
+				background: var(--color-primary);
+				color: white;
+				border: none;
+				border-radius: 8px;
+				padding: 1rem 1.5rem;
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				width: 100%;
+				margin-bottom: 1rem;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.mobile-nav-toggle svg {
+				transition: transform 0.3s ease;
+			}
+
+			.mobile-nav-toggle.active svg {
+				transform: rotate(180deg);
+			}
+
+			.mobile-nav {
+				display: none;
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 1rem;
+				border: 1px solid var(--color-border);
+				margin-bottom: 1.5rem;
+			}
+
+			.mobile-nav.active {
+				display: block;
+			}
+
+			/* Content Area */
+			.content {
+				display: grid;
+				gap: 2rem;
+			}
+
+			.topic-section {
+				display: none;
+				animation: fadeIn 0.3s ease;
+			}
+
+			.topic-section.active {
+				display: grid;
+				gap: 2rem;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Card Components */
+			.card {
+				background: var(--color-surface);
+				border-radius: var(--radius);
+				padding: 2rem;
+				border: 1px solid var(--color-border);
+				transition: var(--transition);
+				overflow: hidden;
+			}
+
+			.card:hover {
+				border-color: var(--color-primary);
+				box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
+			}
+
+			.card h2 {
+				color: var(--color-primary);
+				margin-bottom: 1rem;
+				font-size: 1.5rem;
+			}
+
+			.card h3 {
+				margin-top: 1.5rem;
+				margin-bottom: 0.75rem;
+				color: var(--color-text);
+				font-size: 1.1rem;
+			}
+
+			.card h3:first-child {
+				margin-top: 0;
+			}
+
+			/* Learning Section */
+			.learning-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 1.5rem;
+			}
+
+			.concept-box {
+				background: var(--color-surface-light);
+				border-left: 4px solid var(--color-primary);
+				padding: 1.5rem;
+				border-radius: 8px;
+				transition: var(--transition);
+			}
+
+			.concept-box:hover {
+				transform: translateX(8px);
+				border-left-color: var(--color-success);
+			}
+
+			.concept-box h4 {
+				color: var(--color-primary);
+				margin-bottom: 0.5rem;
+				font-size: 1rem;
+			}
+
+			.concept-box p {
+				color: var(--color-text-secondary);
+				font-size: 0.95rem;
+				line-height: 1.5;
+			}
+
+			/* Tabs */
+			.tabs {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 2rem;
+				border-bottom: 1px solid var(--color-border);
+				flex-wrap: wrap;
+			}
+
+			.tab-btn {
+				padding: 1rem 1.5rem;
+				background: transparent;
+				border: none;
+				color: var(--color-text-secondary);
+				cursor: pointer;
+				font-size: 1rem;
+				font-weight: 600;
+				border-bottom: 3px solid transparent;
+				transition: var(--transition);
+				position: relative;
+				bottom: -1px;
+			}
+
+			.tab-btn:hover {
+				color: var(--color-text);
+			}
+
+			.tab-btn.active {
+				color: var(--color-primary);
+				border-bottom-color: var(--color-primary);
+			}
+
+			.tab-content {
+				display: none;
+			}
+
+			.tab-content.active {
+				display: block;
+			}
+
+			/* Lists */
+			ul {
+				margin-left: 1.5rem;
+				color: var(--color-text-secondary);
+			}
+
+			ul li {
+				margin-bottom: 0.75rem;
+			}
+
+			/* Example Box */
+			.example-box {
+				background: rgba(16, 185, 129, 0.1);
+				border-left: 4px solid var(--color-success);
+				padding: 1rem;
+				border-radius: 8px;
+				margin: 1rem 0;
+			}
+
+			.example-box strong {
+				color: var(--color-success);
+			}
+
+			/* Progress Indicator */
+			.progress-bar {
+				height: 8px;
+				background: var(--color-surface-light);
+				border-radius: 4px;
+				overflow: hidden;
+				margin-bottom: 1rem;
+			}
+
+			.progress-fill {
+				height: 100%;
+				background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-success) 100%);
+				width: 0%;
+				transition: width 0.3s ease;
+			}
+
+			/* Flashcard */
+			.flashcard-container {
+				perspective: 1000px;
+				cursor: pointer;
+				height: 300px;
+			}
+
+			.flashcard {
+				width: 100%;
+				height: 100%;
+				background: var(--color-surface-light);
+				border: 2px solid var(--color-primary);
+				border-radius: var(--radius);
+				padding: 2rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				font-size: 1.1rem;
+				font-weight: 600;
+				transition: transform 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
+			}
+
+			.flashcard.flipped {
+				transform: rotateY(180deg);
+			}
+
+			.flashcard-content {
+				backface-visibility: hidden;
+			}
+
+			.flashcard-back {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transform: rotateY(180deg);
+				backface-visibility: hidden;
+				padding: 2rem;
+				text-align: center;
+				color: var(--color-success);
+			}
+
+			/* Buttons */
+			.btn {
+				display: inline-block;
+				padding: 0.75rem 1.5rem;
+				background: var(--color-primary);
+				color: white;
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 0.95rem;
+				font-weight: 600;
+				transition: var(--transition);
+				text-decoration: none;
+			}
+
+			.btn:hover {
+				background: var(--color-primary-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+			}
+
+			.btn-secondary {
+				background: var(--color-surface-light);
+				color: var(--color-text);
+			}
+
+			.btn-secondary:hover {
+				background: var(--color-border);
+			}
+
+			.btn-small {
+				padding: 0.5rem 1rem;
+				font-size: 0.85rem;
+			}
+
+			/* Tool Card */
+			.tool-card {
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				max-width: 600px;
+			}
+
+			.tool-title {
+				font-size: 1.5rem;
+				font-weight: 600;
+				margin-bottom: 1.5rem;
+				color: var(--color-primary);
+			}
+
+			.tool-form {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.form-group {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+
+			.form-label {
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: var(--color-text);
+			}
+
+			.form-input,
+			.form-select {
+				padding: 0.75rem;
+				border: 1px solid var(--color-border);
+				border-radius: 8px;
+				background: var(--color-bg);
+				color: var(--color-text);
+				font-size: 0.95rem;
+				font-family: inherit;
+			}
+
+			.form-input:focus,
+			.form-select:focus {
+				outline: 2px solid var(--color-primary);
+				border-color: var(--color-primary);
+			}
+
+			.tool-result {
+				margin-top: 1.5rem;
+				padding: 1.5rem;
+				background: rgba(16, 185, 129, 0.1);
+				border-radius: 8px;
+				border: 1px solid var(--color-border);
+			}
+
+			.result-label {
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: var(--color-text-secondary);
+				margin-bottom: 0.5rem;
+			}
+
+			.result-value {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: var(--color-text);
+				font-family: 'Courier New', monospace;
+			}
+
+			.result-steps {
+				margin-top: 1rem;
+				font-size: 0.95rem;
+				color: var(--color-text);
+				line-height: 1.6;
+			}
+
+			/* Quiz */
+			.quiz-container {
+				max-width: 800px;
+			}
+
+			.quiz-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.5rem;
+				padding: 1.5rem;
+				background: var(--color-surface);
+				border-radius: 8px;
+				border: 1px solid var(--color-border);
+			}
+
+			.quiz-score {
+				font-size: 1.1rem;
+				font-weight: 600;
+			}
+
+			.question-card {
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				margin-bottom: 1rem;
+			}
+
+			.question-text {
+				font-size: 1.1rem;
+				font-weight: 600;
+				margin-bottom: 1.5rem;
+				line-height: 1.5;
+			}
+
+			.question-options {
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+
+			.option-btn {
+				padding: 1rem;
+				background: var(--color-surface-light);
+				border: 2px solid var(--color-border);
+				border-radius: 8px;
+				color: var(--color-text);
+				font-size: 0.95rem;
+				text-align: left;
+				cursor: pointer;
+				transition: var(--transition);
+			}
+
+			.option-btn:hover {
+				background: var(--color-border);
+				border-color: var(--color-primary);
+			}
+
+			.option-btn.selected {
+				border-color: var(--color-primary);
+				background: rgba(16, 185, 129, 0.1);
+			}
+
+			.option-btn.correct {
+				border-color: var(--color-success);
+				background: rgba(16, 185, 129, 0.1);
+			}
+
+			.option-btn.incorrect {
+				border-color: var(--color-error);
+				background: rgba(239, 68, 68, 0.1);
+			}
+
+			.option-btn:disabled {
+				cursor: not-allowed;
+			}
+
+			.quiz-feedback {
+				margin-top: 1rem;
+				padding: 1rem;
+				border-radius: 8px;
+				font-size: 0.95rem;
+				line-height: 1.6;
+			}
+
+			.quiz-feedback.correct {
+				background: rgba(16, 185, 129, 0.1);
+				border: 1px solid var(--color-success);
+				color: var(--color-text);
+			}
+
+			.quiz-feedback.incorrect {
+				background: rgba(239, 68, 68, 0.1);
+				border: 1px solid var(--color-error);
+				color: var(--color-text);
+			}
+
+			.quiz-actions {
+				display: flex;
+				gap: 0.75rem;
+				margin-top: 1rem;
+			}
+
+			.quiz-summary {
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				padding: 2rem;
+				text-align: center;
+			}
+
+			.summary-score {
+				font-size: 2rem;
+				font-weight: 700;
+				color: var(--color-primary);
+				margin-bottom: 1rem;
+			}
+
+			.summary-text {
+				font-size: 1.1rem;
+				margin-bottom: 1.5rem;
+				color: var(--color-text);
+			}
+
+			/* Responsive Design */
+			@media (max-width: 1024px) {
+				.main-content {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+					padding: 1.5rem;
+				}
+
+				.sidebar {
+					position: relative;
+					top: 0;
+				}
+
+				header h1 {
+					font-size: 1.5rem;
+				}
+			}
+
+			@media (max-width: 768px) {
+				header {
+					padding: 1.5rem;
+				}
+
+				header h1 {
+					font-size: 1.25rem;
+				}
+
+				header p {
+					font-size: 0.9rem;
+				}
+
+				.main-content {
+					grid-template-columns: 1fr;
+					padding: 1rem;
+					gap: 1rem;
+				}
+
+				.sidebar {
+					display: none;
+				}
+
+				.mobile-nav-toggle {
+					display: flex;
+				}
+
+				.card {
+					padding: 1.5rem;
+				}
+
+				.learning-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.tabs {
+					gap: 0.5rem;
+				}
+
+				.tab-btn {
+					padding: 0.75rem 1rem;
+					font-size: 0.9rem;
+				}
+
+				.flashcard {
+					height: 250px;
+					padding: 1rem;
+				}
+
+				.concept-box {
+					padding: 1rem;
+				}
+			}
+
+			@media (max-width: 480px) {
+				header {
+					padding: 1rem;
+				}
+
+				header h1 {
+					font-size: 1.1rem;
+				}
+
+				header p {
+					font-size: 0.85rem;
+				}
+
+				.main-content {
+					padding: 0.5rem;
+					gap: 0.5rem;
+				}
+
+				.card {
+					padding: 1rem;
+				}
+
+				.btn {
+					padding: 0.65rem 1.25rem;
+					font-size: 0.85rem;
+				}
+
+				.tabs {
+					gap: 0.25rem;
+				}
+
+				.tab-btn {
+					padding: 0.5rem 0.75rem;
+					font-size: 0.8rem;
+				}
+
+				.flashcard {
+					height: 220px;
+					padding: 1rem;
+					font-size: 1rem;
+				}
+
+				.concept-box {
+					padding: 0.75rem;
+					border-left-width: 3px;
+				}
+
+				.concept-box h4 {
+					font-size: 0.9rem;
+				}
+
+				.concept-box p {
+					font-size: 0.85rem;
+				}
+			}
+
+			/* Utility */
+			.hidden {
+				display: none !important;
+			}
+
+			.badge {
+				display: inline-block;
+				padding: 0.25rem 0.75rem;
+				background: var(--color-primary);
+				color: white;
+				border-radius: 20px;
+				font-size: 0.8rem;
+				font-weight: 600;
+			}
+
+			.badge-success {
+				background: var(--color-success);
+			}
+
+			.grid-2 {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 1.5rem;
+			}
+			/* Back to Top Button */
+			.back-to-top {
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				background: var(--color-primary);
+				color: white;
+				border: none;
+				border-radius: 50%;
+				width: 60px;
+				height: 60px;
+				cursor: pointer;
+				transition: var(--transition);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+				font-size: 1.5rem;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+			}
+
+			.back-to-top:hover {
+				background: var(--color-primary-dark);
+				transform: translateY(-3px);
+				box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+			}
+
+			/* Responsive adjustments */
+			@media (max-width: 768px) {
+				.back-to-top {
+					bottom: 20px;
+					right: 20px;
+					width: 50px;
+					height: 50px;
+					font-size: 1.25rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1><a href="./index.html">📚</a> IAL IT Unit 1 Master Dashboard</h1>
+				<p>Master Hardware, Software, Networks & IT Systems • Topics 1-6 • Interactive Learning & Exam Prep</p>
+				<p><a href="./index.html">( back to home )</a></p>
+			</header>
+
+			<div class="main-content">
+				<!-- Mobile Navigation Toggle -->
+				<button class="mobile-nav-toggle" id="mobileNavToggle">
+					<span>Browse Topics</span>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</button>
+
+				<!-- Mobile Navigation -->
+				<div class="mobile-nav" id="mobileNav">
+					<ul class="nav-list">
+						<li><button class="nav-btn active" data-topic="topic1">Topic 1: Hardware & Software</button></li>
+						<li><button class="nav-btn" data-topic="topic2">Topic 2: Networks</button></li>
+						<li><button class="nav-btn" data-topic="topic3">Topic 3: Online Environment</button></li>
+						<li><button class="nav-btn" data-topic="topic4">Topic 4: IT Systems</button></li>
+						<li><button class="nav-btn" data-topic="topic5">Topic 5: Data & Databases</button></li>
+						<li><button class="nav-btn" data-topic="topic6">Topic 6: Wider Issues</button></li>
+						<li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
+						<li><button class="nav-btn" data-topic="quiz">📝 Quiz</button></li>
+						<li><button class="nav-btn" data-topic="tools">🔧 Tools</button></li>
+					</ul>
+				</div>
+
+				<!-- Sidebar Navigation (Desktop) -->
+				<aside class="sidebar">
+					<h3>Topics</h3>
+					<ul class="nav-list">
+						<li><button class="nav-btn active" data-topic="topic1">Topic 1: Hardware & Software</button></li>
+						<li><button class="nav-btn" data-topic="topic2">Topic 2: Networks</button></li>
+						<li><button class="nav-btn" data-topic="topic3">Topic 3: Online Environment</button></li>
+						<li><button class="nav-btn" data-topic="topic4">Topic 4: IT Systems</button></li>
+						<li><button class="nav-btn" data-topic="topic5">Topic 5: Data & Databases</button></li>
+						<li><button class="nav-btn" data-topic="topic6">Topic 6: Wider Issues</button></li>
+						<li><button class="nav-btn" data-topic="flashcards">⭐ Flashcards</button></li>
+						<li><button class="nav-btn" data-topic="quiz">📝 Quiz</button></li>
+						<li><button class="nav-btn" data-topic="tools">🔧 Tools</button></li>
+					</ul>
+				</aside>
+
+				<!-- Main Content -->
+				<main class="content">
+					<!-- Topic 1: Hardware and Software -->
+					<section id="topic1" class="topic-section active">
+						<div class="card">
+							<h2>Topic 1: Hardware and Software</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding the components of computing systems and how they work together.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="hardware">1.1 Hardware</button>
+								<button class="tab-btn" data-tab="software">1.2 Software</button>
+							</div>
+
+							<div id="hardware" class="tab-content active">
+								<h3>1.1.1 - Features and Functions of Devices</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Features vs Functions</h4>
+										<p>
+											A <strong>feature</strong> is a distinctive characteristic or part of a device, such as its size, weight, or biometric scanner. A <strong>function</strong> describes how a device operates or its purpose, like
+											making calls or browsing the internet.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>Key Features</h4>
+										<p>Portability, Performance, Storage, User Interface, Connectivity, Media Support, Energy Consumption, Expansion Capability, Security Features</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.2 - Technologies Used by Devices</h3>
+								<div class="example-box">
+									<strong>Key Technologies:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>GPS</strong>: Small satellite-based navigation increasing power usage but enabling location tracking and mapping.</li>
+										<li><strong>Biometrics</strong>: Devices like fingerprint and facial recognition provide strong security.</li>
+										<li><strong>Touchscreen</strong>: Combines display and input, saving space and improving usability.</li>
+										<li><strong>Sensors</strong>: Include light sensors for brightness adjustment, accelerometers for orientation, motion and temperature sensors for contextual operations.</li>
+										<li><strong>Memory (RAM)</strong>: Volatile memory affecting multitasking and speed; higher RAM generally improves performance but adds to size.</li>
+										<li><strong>Storage</strong>: Non-volatile storage devices like SSDs, HDDs, optical drives; type impacts speed, capacity, and portability.</li>
+										<li><strong>Battery Power</strong>: Balances device usage time vs size/weight; innovations include solid-state batteries for better efficiency.</li>
+										<li><strong>Miniaturisation</strong>: More transistors on integrated circuits allow smaller devices without losing performance e.g., Raspberry Pi.</li>
+										<li><strong>Processor</strong>: CPU speed (GHz) and cores determine processing power and multitasking capabilities.</li>
+										<li><strong>RFID</strong>: Tags for tracking items, useful for security and inventory.</li>
+										<li><strong>NFC</strong>: Near-field communication for secure short-range data sharing, contactless payments.</li>
+										<li><strong>QR Codes</strong>: Barcodes containing data accessible via device cameras for quick information access.</li>
+										<li><strong>Connectivity Hardware</strong>: Includes USB ports, HDMI, wireless network interface cards (WNIC), and Bluetooth chips affecting device size and performance.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.3 - Technological Convergence</h3>
+								<p>Technological convergence is when two or more devices combine into one to offer multiple functionalities. This has led to the rise of the Internet of Things (IoT), connecting daily objects over the internet.</p>
+								<div class="example-box">
+									<strong>Examples:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Smart TV: Combines television, internet, apps, and sometimes built-in cameras.</li>
+										<li>Smartphone: Phone, camera, GPS, music player, and computer all integrated.</li>
+										<li>Tablet: Combines a computer with a touchscreen interface.</li>
+										<li>Smart Watch: Functions as a watch, fitness tracker, and phone notification device.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.4 - Embedded Systems</h3>
+								<p>Embedded systems perform dedicated or limited functions, often within other devices. They use microprocessors to process data but have lower performance compared to general computers.</p>
+								<div class="example-box">
+									<strong>Characteristics:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Single or limited functions</li>
+										<li>Dedicated hardware</li>
+										<li>Not easily reprogrammed by users</li>
+										<li>Built into a single chip</li>
+										<li>Contains a microprocessor (small processor variant)</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.5 - Firmware</h3>
+								<p>Firmware is essential software embedded in devices to control hardware startup and basic operations.</p>
+								<div class="example-box">
+									<strong>Includes:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>BIOS</strong>: Basic Input/Output System, initializes hardware during boot-up.</li>
+										<li><strong>Bootloader</strong>: Loads the operating system at startup.</li>
+									</ul>
+									<p><em>Stored in ROM in computers; stored within chip in embedded systems.</em></p>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.6 - Performance Assessment Factors</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Speed</h4>
+										<p>Measured in GHz; faster clock speeds and more cores provide higher processing performance.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Capacity</h4>
+										<p>Storage size; larger capacity supports more data, important for tasks like video editing or large databases.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Portability</h4>
+										<p>Small, lightweight devices are more portable; essential for mobile phones and laptops but less for desktops.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Bandwidth</h4>
+										<p>Network data transmission speed; affects performance where network connectivity matters.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Power Efficiency</h4>
+										<p>Slower energy usage leads to longer battery life, cost savings, and positive environmental impact.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.7 - Binary and Denary Conversion</h3>
+								<p>Denary (decimal) uses base 10 (digits 0-9), binary uses base 2 (digits 0 and 1). Conversion involves using powers of 2 and marking binary digits accordingly.</p>
+								<div class="example-box">
+									<strong>Denary to Binary Steps:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Use powers of 2 (128, 64, 32, 16, 8, 4, 2, 1)</li>
+										<li>Mark '1' if power is included, '0' if not</li>
+										<li>Start with highest power less than or equal to the number</li>
+										<li>Example: 13 converts to 1101 (8 + 4 + 1)</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.1.8 - Data File Sizes</h3>
+								<div class="example-box">
+									<strong>Units of Data:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>1 bit = smallest unit of data</li>
+										<li>1 nibble = 4 bits</li>
+										<li>1 byte = 8 bits</li>
+										<li>1 KiB (kibibyte) = 1024 bytes</li>
+										<li>1 MiB (mebibyte) = 1024 KiB</li>
+										<li>1 GiB (gibibyte) = 1024 MiB</li>
+										<li>1 TiB (tebibyte) = 1024 GiB</li>
+									</ul>
+									<p>Important distinction from SI units (e.g., kB=1000 bytes). Use IEC units for accuracy in computing. Example Calculation: A 10 MiB file size implies 10 × 8 × 1024 × 1024 bits for transmission.</p>
+								</div>
+							</div>
+
+							<div id="software" class="tab-content">
+								<h3>1.2.1 - Systems vs Application Software</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>SYSTEMS SOFTWARE</h4>
+										<p>Software that runs and maintains the computer itself. Examples include operating systems, antivirus, firewalls, drivers, disk defragmentation software.</p>
+									</div>
+									<div class="concept-box">
+										<h4>APPLICATION SOFTWARE</h4>
+										<p>Software designed for end-users to perform specific tasks. Examples include word processors, spreadsheets, databases, photo and video editors, web browsers, and games.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.2.2 - Operating System Roles</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Managing Devices</h4>
+										<p>Operating system uses drivers to manage peripherals and process interrupts efficiently.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Managing Processes</h4>
+										<p>Controls memory allocation, multitasking (switching between tasks), and data transfers between storage and RAM.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Managing Users</h4>
+										<p>Provides GUI, multiple user accounts, handles file operations, and controls user permissions.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Managing Security</h4>
+										<p>Maintains user authentication, data access levels, and runs security utilities like antivirus and firewalls.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.2.3 - Software Sources</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Free Software</h4>
+										<p>Can be studied, modified, and shared; can be free or paid.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Open-Source Software</h4>
+										<p>Source code available for study and modification, usually free; community-driven development.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Proprietary Software</h4>
+										<p>Source code is closed and protected; user cannot modify or redistribute; typically supported by vendor.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Creative Commons</h4>
+										<p>Licenses that specify permissions for software use, such as attribution, non-commercial use, and share-alike conditions.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.2.4 - Software Licensing</h3>
+								<div class="example-box">
+									<strong>License Types:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><em>Single User:</em> For one user on one device.</li>
+										<li><em>Multiple User:</em> Licensed for a fixed number of devices/users.</li>
+										<li><em>Institutional:</em> Organization-wide use, based on number of users or devices.</li>
+										<li><em>Fixed Term:</em> Limited time license, e.g., annual subscriptions.</li>
+										<li><em>Indefinite (Perpetual):</em> One-time purchase; use indefinitely without renewal fees.</li>
+										<li><em>Network:</em> Installed on a central server for network-wide access.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">1.2.5 - Software Updates</h3>
+								<p>Updates improve software by fixing bugs, adding features, enhancing security, or modifying the user interface.</p>
+								<div class="example-box">
+									<strong>Update Types:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><em>Patch:</em> Quick fixes for urgent bugs or vulnerabilities.</li>
+										<li><em>Automatic Update:</em> Software updates installed without user intervention.</li>
+										<li><em>Upgrade:</em> Major new versions with new features that replace old versions.</li>
+									</ul>
+									<p>Compatibility issues can arise if updates do not support older hardware or software environments.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 2: Networks -->
+					<section id="topic2" class="topic-section">
+						<div class="card">
+							<h2>Topic 2: Networks</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how devices connect and communicate with each other.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="network-models">2.1 Network Models & Protocols</button>
+								<button class="tab-btn" data-tab="network-design">2.2 Network Design & Implementation</button>
+								<button class="tab-btn" data-tab="network-security">2.3 Network Security</button>
+							</div>
+
+							<div id="network-models" class="tab-content active">
+								<h3>2.1.1 - Network Models</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>CLIENT-SERVER</h4>
+										<p>
+											Central server provides services/data to client computers. Server acts as a point of control. Benefits include centralized security, automatic updates, and centralized backups. Drawback: If server fails, clients
+											lose access.
+										</p>
+										<p><em>Examples: File servers, web servers, print servers</em></p>
+									</div>
+									<div class="concept-box">
+										<h4>PEER-TO-PEER (P2P)</h4>
+										<p>
+											All computers (peers) have equal status. Each can act as both client and server, sharing files and resources. No single point of failure. Benefits: Cheap setup, no specialist technicians needed. Drawback: Less
+											secure, each user manages own security.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>AD HOC NETWORKS</h4>
+										<p>Temporary network created spontaneously without infrastructure (no router needed). Devices connect directly. Used when sharing resources temporarily, e.g., students sharing project files in a park.</p>
+									</div>
+									<div class="concept-box">
+										<h4>TETHERING</h4>
+										<p>
+											Mobile device shares its internet connection with other devices (turns phone into a hotspot). Useful for internet access while travelling. Can be done via Wi-Fi, Bluetooth, or USB. Drawback: Drains battery and
+											uses mobile data plan.
+										</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.1.2 - Network Protocols</h3>
+								<div class="example-box">
+									<strong>Communication Protocols:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Wi-Fi</strong>: Wireless LAN using radio waves. 802.11 standard. Uses 2.4 GHz (up to 45m range) or 5 GHz (up to 15m range, faster speeds up to 10 Gbps). Cheap, compatible with many devices.</li>
+										<li>
+											<strong>ZigBee®</strong>: Low-power wireless for home automation and IoT devices. Uses 2.4 GHz radio waves. Range up to 100m but slower speeds (250 Kbps). Requires ZigBee hub. Used for smart bulbs, thermostats.
+										</li>
+										<li>
+											<strong>Bluetooth®</strong>: Short-range wireless (10m). Uses 2.4 GHz radio waves. Up to 3 Mbps. Devices connect via "pairing" process. Used for headphones, keyboards, connecting phone to car. Can connect up to
+											7 devices to host device.
+										</li>
+										<li>
+											<strong>Cellular (GSM/3G/4G/5G)</strong>: Mobile networks using base stations arranged in honeycomb cells. Uses radio waves (phone to base station) and microwaves (between base stations). 2G (0.1 Mbps), 3G (42
+											Mbps), 4G (150 Mbps), 5G (10 Gbps).
+										</li>
+										<li><strong>Infrared</strong>: Line-of-sight wireless using infrared light. Short range, weak signal. Used in remote controls and rarely for peripheral connections (keyboards, mice).</li>
+										<li><strong>Ethernet</strong>: Wired connection for LANs. Uses twisted pair, coaxial, or fiber optic cables. Speeds up to 100 Gbps. Cheap, secure, reliable with error detection, easy to install.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.1.3 - Network Standards</h3>
+								<div class="example-box">
+									<strong>Key Standards and Protocols:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>
+											<strong>TCP/IP</strong>: Foundation of internet. TCP ensures reliable data delivery by breaking data into segments, checking for errors, and requesting re-sends. IP handles addressing and routing using IP
+											addresses.
+										</li>
+										<li><strong>VOIP (Voice Over Internet Protocol)</strong>: Makes voice calls over the internet. Converts voice to digital data, compresses it, and transmits. Used by Skype, FaceTime.</li>
+										<li><strong>SIP (Session Initiation Protocol)</strong>: Works with VOIP. Establishes, maintains, and terminates communication sessions.</li>
+										<li>
+											<strong>OSI Model (7-Layer)</strong>: Theoretical framework for network communication.
+											<ul>
+												<li>7. Application: User interface, HTTP, FTP</li>
+												<li>6. Presentation: Data formatting, encoding, encryption, compression</li>
+												<li>5. Session: Opens, maintains, closes communication sessions</li>
+												<li>4. Transport: Segments data, controls transmission speed, error checking (TCP)</li>
+												<li>3. Network: Packets data, routes between networks using routers (IP)</li>
+												<li>2. Data Link: Frames data, MAC addresses, switches. Two sublayers: Logical Link Control and Media Access Control</li>
+												<li>1. Physical: Cables, wireless signals, transmits bits</li>
+											</ul>
+											<em>Memory tip: "All People Seem To Need Data Processing"</em>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div id="network-design" class="tab-content">
+								<h3>2.2.1 - Transmission Media</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>WIRELESS MEDIA</h4>
+										<ul>
+											<li><strong>Microwave</strong>: Point-to-point, line of sight. High frequency (1-300 GHz). Short wavelength. Used between cell towers.</li>
+											<li><strong>Radio</strong>: Omnidirectional, no line of sight needed. Lower frequency (3 kHz - 1 GHz). Travels through walls. Used in wireless LANs.</li>
+											<li><strong>Light (Infrared)</strong>: Line of sight required. Longer wavelength than visible light. Short range, weak signal.</li>
+											<li><strong>Satellite</strong>: Uses radio waves between ground station and satellite. Used in GPS (triangulation with 3+ satellites).</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>WIRED MEDIA</h4>
+										<ul>
+											<li>
+												<strong>Copper Twisted Pair</strong>: Two insulated copper wires twisted together. Electrical signals. Up to 10 Gbps. Cheap, easy to install. Prone to electromagnetic interference. Short distances. Used in
+												phone lines and LANs.
+											</li>
+											<li>
+												<strong>Copper Coaxial Cable</strong>: Central copper wire with insulation, metal conductor, plastic layer. Radio frequency signals. Up to 10 Mbps. Less interference than twisted pair. Stiff, hard to bend. Used
+												in cable TV and internet.
+											</li>
+											<li><strong>Fibre Optic</strong>: Glass/plastic strands transmit light. Up to 1 Gbps. Expensive, fragile. No electromagnetic interference. Long distances. Used for internet and long-distance transmission.</li>
+											<li><strong>Powerline</strong>: Uses existing electrical wiring. Up to 2 Gbps. Easy (plug into socket). Prone to interference, depends on wiring condition. Used to extend internet in large buildings.</li>
+										</ul>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.2.2 - Network Metrics</h3>
+								<div class="example-box">
+									<strong>Key Metrics for Performance Measurement:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Speed</strong>: Rate of data transfer from one device to another (bps or Bps)</li>
+										<li><strong>Bandwidth</strong>: Maximum data capacity per second. Shared between devices on network. Higher bandwidth = faster speeds.</li>
+										<li><strong>Throughput</strong>: Actual data transmitted vs maximum bandwidth. Often less due to interference and congestion.</li>
+										<li><strong>Scalability</strong>: Network's ability to handle larger data volumes. Can bandwidth increase when needed? Important for events like online sales.</li>
+										<li><strong>Latency</strong>: Delay in transmission measured as round-trip time (send request, receive response). Lower latency = better performance.</li>
+										<li><strong>Error Rate</strong>: Percentage of errors (packet loss, corruption, collisions). High error rate reduces performance due to re-sends.</li>
+										<li><strong>Packet Loss</strong>: Percentage of packets sent but not received. Even 1% affects performance.</li>
+										<li><strong>Availability</strong>: Percentage of time network is operational. Measured as uptime vs expected uptime.</li>
+										<li><strong>Jitter</strong>: Variation in latency due to network congestion. Can cause packet loss.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.2.3 - Network Components</h3>
+								<div class="example-box">
+									<strong>Key Components and Their Roles:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>NIC (Network Interface Card)</strong>: Hardware allowing wired connection. WNIC allows wireless connection. Built into devices.</li>
+										<li><strong>Hub</strong>: Basic device connecting multiple devices in LAN. Sends data to ALL connected devices. Inefficient, causes data collisions. Wired connections (ethernet or USB).</li>
+										<li><strong>Switch</strong>: Improved hub. Records MAC addresses in table. Sends data only to intended destination device. Reduces traffic and collisions. More efficient than hub.</li>
+										<li><strong>Bridge</strong>: Connects two LANs to create larger LAN. Reads MAC addresses to forward data to correct LAN. Used in organizations with multiple building LANs.</li>
+										<li><strong>Gateway</strong>: Connects two different networks using different protocols. Translates between protocols (like a translator between languages). Connects LAN to WAN.</li>
+										<li><strong>Router</strong>: Forwards data between networks using IP addresses and routing table. Selects best route to destination. Connects LANs to internet.</li>
+										<li><strong>Multi-function Device</strong>: Home "router" often combines modem + router + gateway + wireless access point + switch.</li>
+										<li><strong>Modem (Modulator-Demodulator)</strong>: Converts between analogue and digital signals. Connects to ISP. Built into modern devices.</li>
+										<li><strong>Repeater</strong>: Boosts and reconstructs weakened electrical signals. Extends signal range across network.</li>
+										<li><strong>Server</strong>: Accepts and responds to requests for data/services. Examples: web server (stores web pages), file server, print server. Often stacked in racks.</li>
+										<li><strong>Wireless Access Point (WAP)</strong>: Transmits and receives radio wave signals for wireless connections. Devices with WNIC connect to WAP.</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.2.4 - Network Design</h3>
+								<p>When designing networks, consider location of devices, number of users, speed requirements, media type, reliability, cost, security, and maintenance accessibility. Design for current and future needs.</p>
+
+								<h3 style="margin-top: 2rem">2.2.5 - IP Addressing</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>IPv4</h4>
+										<p>32-bit addresses in denary. Four sets of digits separated by dots. Example: 128.11.32.40. Addresses running out.</p>
+									</div>
+									<div class="concept-box">
+										<h4>IPv6</h4>
+										<p>128-bit addresses in hexadecimal. Eight sets of digits separated by colons. Example: AB01:EF01:2368:BB30:4324:10DB:0455:BA10. More addresses available.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Static IP</h4>
+										<p>Fixed address that doesn't change. Used for servers that need consistent addresses.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Dynamic IP</h4>
+										<p>Changes when device reconnects. Temporarily assigned by DHCP (Dynamic Host Configuration Protocol). Router or dedicated DHCP server assigns IPs automatically.</p>
+									</div>
+									<div class="concept-box">
+										<h4>MAC Addressing</h4>
+										<p>
+											Physical hardware address assigned by manufacturer to NIC. 12 hexadecimal digits in pairs separated by colons. First 3 pairs = manufacturer ID, last 3 pairs = device serial number. Example: 3C:5A:B4:01:63:D2.
+											Used within LANs.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="network-security" class="tab-content">
+								<h3>2.3.1 - Network Security Threats</h3>
+								<div class="example-box">
+									<strong>Threats and Impacts:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Unauthorized access (Hacking)</strong>: Gaining access without permission to steal or corrupt data</li>
+										<li><strong>Malware</strong>: Malicious software (viruses, ransomware, spyware, trojans) designed to damage device or data. Often downloaded unknowingly from infected files.</li>
+										<li><strong>Data theft</strong>: Sensitive information stolen for fraud, identity theft, or intellectual property theft</li>
+										<li><strong>Denial of Service (DoS)</strong>: Network overloaded, becomes unavailable</li>
+										<li><strong>Man-in-the-middle attacks</strong>: Hacker intercepts communications between two parties</li>
+									</ul>
+									<p><strong>Open Networks</strong>: Unsecured networks (no password) are particularly vulnerable. Anyone in range can connect. Common in shopping malls, restaurants.</p>
+								</div>
+
+								<h3 style="margin-top: 2rem">2.3.2 - Network Security Controls</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>HARDWARE CONTROLS</h4>
+										<p>
+											<strong>Firewall</strong>: Physical device between computer and network. Examines incoming/outgoing traffic against criteria (blacklist/whitelist of IP addresses). Accepts or blocks traffic. Protects from
+											hackers and malware before reaching computer.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>SOFTWARE CONTROLS</h4>
+										<ul>
+											<li><strong>Software Firewall</strong>: Installed on computer. Examines traffic and dismisses malicious data after it enters.</li>
+											<li><strong>Security Settings</strong>: Configure privacy (who sees your data), enable two-factor authentication</li>
+											<li><strong>Anti-malware</strong>: Scans device for malware (viruses, spyware). Deletes or quarantines threats. Can scan files before download. Must update regularly for new malware.</li>
+											<li><strong>Access Rights</strong>: Attached to username. Limits what data users can see/edit. Prevents accidental deletion and limits hacker access.</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>AUTHENTICATION TYPES</h4>
+										<ul>
+											<li><strong>Passwords</strong>: Character-based. Strong passwords are long, complex (letters, numbers, symbols)</li>
+											<li><strong>Two-Factor (2FA)</strong>: Password + second verification (code sent to phone/app). Harder to hack.</li>
+											<li><strong>Biometrics</strong>: Biological data as password (fingerprint, iris, facial recognition, voice). Very difficult to fake.</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>ENCRYPTION</h4>
+										<p>
+											Scrambles data to make it meaningless without key. Symmetric encryption uses same key to encrypt/decrypt. Asymmetric uses different keys. Example: Move each letter 3 places forward (ICT is awesome → LFW lv
+											dzhvrph). Doesn't prevent theft but makes stolen data useless.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>PHYSICAL CONTROLS</h4>
+										<p>Physical security measures: Locks on doors, alarm systems, keycard entry, CCTV cameras. Acts as deterrent against device theft and unauthorized physical access. Common in workplaces.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 3: The Online Environment -->
+					<section id="topic3" class="topic-section">
+						<div class="card">
+							<h2>Topic 3: The Online Environment</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how the internet works and its impact on society.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="internet-www">3.1 Internet & WWW</button> <button class="tab-btn" data-tab="operating-online">3.2 Operating Online</button>
+								<button class="tab-btn" data-tab="online-communities">3.3 Online Communities</button> <button class="tab-btn" data-tab="cloud">3.4 The Cloud</button>
+							</div>
+							<div id="internet-www" class="tab-content active">
+								<h3>3.1.1 - Internet Structure</h3>
+								<p>The internet is a vast global network of interconnected computers and other devices using the TCP/IP protocol suite for communication.</p>
+								<div class="example-box">
+									<strong>Structure:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Each device connected to the internet is identified by a unique <strong>IP address</strong>.</li>
+										<li>
+											The <strong>Domain Name System (DNS)</strong> translates human-readable domain names (like <a href="https://www.google.com" target="_blank">www.google.com</a>) into IP addresses (e.g., 172.217.161.46) that
+											computers use to communicate.
+										</li>
+										<li>DNS is hierarchical with distributed servers to handle billions of domain names efficiently.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.1.2 - World Wide Web</h3>
+								<p>The World Wide Web is a service layered on top of the internet, consisting of interconnected webpages and resources accessed via HTTP or HTTPS protocols.</p>
+								<div class="example-box">
+									<strong>Potential and Impact:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Enables global sharing of information.</li>
+										<li>Supports e-commerce — buying and selling goods online.</li>
+										<li>Facilitates social connectivity via social media platforms and forums.</li>
+										<li>Supports remote education and remote work environments.</li>
+										<li>Entertainment through streaming services and online games.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.1.3 - Static vs Dynamic Web Pages</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>STATIC WEB PAGES</h4>
+										<p>Static web pages display the same content to every user unless manually updated. They are built using HTML and CSS, are fast to load, easy to cache, and cost-effective to create.</p>
+									</div>
+									<div class="concept-box">
+										<h4>DYNAMIC WEB PAGES</h4>
+										<p>
+											Content on dynamic web pages changes based on user input or other factors. They require server-side processing, generate personalized content (e.g., language, user preferences), and are scalable for large sites.
+										</p>
+									</div>
+								</div>
+								<h3 style="margin-top: 2rem">3.1.4 - Client-Side Scripting</h3>
+								<p>Client-side scripts (commonly JavaScript) run in the user's browser. They enhance interactivity, validate forms, enable animations, and reduce server load.</p>
+								<div class="example-box">
+									<strong>Advantages:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Faster user response since no server communication is needed.</li>
+										<li>Works offline after initial load.</li>
+										<li>Users can view and learn from the source code.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.1.5 - Server-Side Scripting</h3>
+								<p>Server-side scripts (e.g., PHP, Python, Node.js) execute on the web server to generate dynamic content by processing user input, accessing databases, and managing sessions.</p>
+								<div class="example-box">
+									<strong>Advantages:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Code is hidden from the user, increasing security.</li>
+										<li>Enables complex processing and database interaction.</li>
+										<li>Works regardless of client browser capabilities.</li>
+									</ul>
+								</div>
+							</div>
+							<div id="operating-online" class="tab-content">
+								<h3>3.2.1 - Online Environment Impact</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>IMPACT ON INDIVIDUALS</h4>
+										<p>
+											Online environments increase productivity through remote collaboration, provide global information access, facilitate social interaction and convenience in shopping, but also expose users to cybersecurity risks.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>IMPACT ON ORGANIZATIONS</h4>
+										<p>Organizations benefit from wider customer reach, cost savings from remote work, 24/7 availability, and easy access to data, but face risks from cyber attacks and data breaches.</p>
+									</div>
+								</div>
+								<h3 style="margin-top: 2rem">3.2.2 - Personal Data Protection Online</h3>
+								<div class="example-box">
+									<strong>Protection Methods:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Use strong, unique passwords and change them regularly.</li>
+										<li>Enable two-factor authentication (2FA) for additional security.</li>
+										<li>Use updated antivirus and anti-malware software.</li>
+										<li>Employ firewalls to prevent unauthorized access.</li>
+										<li>Use encryption to protect sensitive data.</li>
+										<li>Utilize VPNs to secure internet traffic.</li>
+										<li>Access websites with HTTPS and ensure SSL certificates.</li>
+										<li>Regularly back up data to recover from loss or attacks.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.2.3 - Digital Footprint</h3>
+								<p>A digital footprint is a trail of all online activities, including browsing, posting, purchases, and data sharing.</p>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>ACTIVE FOOTPRINT</h4>
+										<p>Data deliberately shared online such as posts, comments, photos, emails, and purchases.</p>
+									</div>
+									<div class="concept-box">
+										<h4>PASSIVE FOOTPRINT</h4>
+										<p>Data collected without direct user input such as cookies, IP logs, location data, and metadata.</p>
+									</div>
+								</div>
+							</div>
+							<div id="online-communities" class="tab-content">
+								<h3>3.3.1 - Online Community Concept</h3>
+								<p>An online community is a virtual space where people with common interests connect for social or professional purposes.</p>
+								<div class="example-box">
+									<strong>Purposes:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Social:</strong> Hobbies, entertainment, friendships, support networks, gaming.</li>
+										<li><strong>Professional:</strong> Career networking, industry groups, professional development, collaboration, knowledge sharing.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.3.3 - Monetisation</h3>
+								<div class="example-box">
+									<strong>Monetisation Methods:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Targeted Advertising: Ads based on user behavior and interests within the community.</li>
+										<li>Pay-Per-Click Advertising: Revenue generated when users click on ads.</li>
+										<li>Data Selling: Community owners may sell user data to marketers with permission.</li>
+										<li>Subscriptions (Paywalls): Premium content access for paid members.</li>
+										<li>Sponsored Content: Brands pay for promotional content placements.</li>
+									</ul>
+								</div>
+							</div>
+							<div id="cloud" class="tab-content">
+								<h3>3.4.1 - Cloud Storage</h3>
+								<p>Cloud storage stores data on remote servers accessible via the internet rather than local devices.</p>
+								<div class="example-box">
+									<strong>Benefits:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Access files from any device and location with internet.</li>
+										<li>Automatic backups handled by cloud providers.</li>
+										<li>Easy file sharing and collaborative editing.</li>
+										<li>Scalable storage where you pay for what you use.</li>
+										<li>Reduces hardware maintenance costs.</li>
+									</ul>
+								</div>
+								<h3 style="margin-top: 2rem">3.4.2 - Cloud Computing</h3>
+								<p>Cloud computing allows remote use of software and computing resources hosted on cloud servers.</p>
+								<div class="example-box">
+									<strong>Types:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>SaaS (Software as a Service):</strong> Online software access e.g., Gmail, Slack.</li>
+										<li><strong>PaaS (Platform as a Service):</strong> Platforms for building and deploying applications.</li>
+										<li><strong>IaaS (Infrastructure as a Service):</strong> Renting computing infrastructure like servers and storage.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 4: IT Systems -->
+					<section id="topic4" class="topic-section">
+						<div class="card">
+							<h2>Topic 4: IT Systems</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how IT systems are designed and implemented.</p>
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="systems-design">4.1 Systems Design</button>
+							</div>
+
+							<div id="systems-design" class="tab-content active">
+								<h3>4 - IT System Components</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Hardware</h4>
+										<p>Physical devices that are part of the system such as computers, peripheral devices (keyboards, printers), and storage devices.</p>
+										<p><em>Example:</em> In an airport check-in system, hardware includes barcode scanners, weighing scales, computers, and printers.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Software</h4>
+										<p>Application and systems software used to operate the hardware and perform tasks.</p>
+										<p><em>Example:</em> Operating systems, databases, interfaces for entering information and managing bookings.</p>
+									</div>
+									<div class="concept-box">
+										<h4>Processes</h4>
+										<p>Procedures and workflows defining how data flows through the system and how tasks are performed.</p>
+										<p><em>Example:</em> Scanning a boarding pass, weighing luggage, storing customer data.</p>
+									</div>
+									<div class="concept-box">
+										<h4>People</h4>
+										<p>Users, administrators, and developers who interact with or manage the system.</p>
+										<p><em>Example:</em> Passengers checking in, airline staff managing data, IT staff maintaining the system.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">4.2.1 - Dataflow Diagrams</h3>
+								<p>Dataflow diagrams (DFDs) visually represent how data moves through a system. They show data inputs, processing steps, data stores, and data outputs.</p>
+								<div class="example-box">
+									<strong>Symbols:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Rounded Rectangle:</strong> External entity (source or sink of data outside the system)</li>
+										<li><strong>Circle/Bubble:</strong> Process that transforms data</li>
+										<li><strong>Rectangle:</strong> Data store such as a database or file</li>
+										<li><strong>Arrow:</strong> Direction of data flow between elements</li>
+									</ul>
+								</div>
+								<p><em>Example:</em> For an airport check-in system, data flows from the barcode scanner (external entity), through processes such as scanning and weighing, to data stores with customer and luggage information.</p>
+
+								<h3 style="margin-top: 2rem">4.3.1 - Flowcharts</h3>
+								<p>Flowcharts visually represent the sequence of steps, decisions, inputs, and outputs within a process or system.</p>
+								<div class="example-box">
+									<strong>Symbols:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Oval:</strong> Represents Start or End of process</li>
+										<li><strong>Rectangle:</strong> Represents a Process or action step</li>
+										<li><strong>Diamond:</strong> Decision point where yes/no or true/false branching occurs</li>
+										<li><strong>Arrow:</strong> Flow direction</li>
+										<li><strong>Parallelogram:</strong> Input/Output (data entry or display)</li>
+									</ul>
+								</div>
+								<p>Using these symbols correctly makes the flowchart easy to follow and helps visualize complex workflows.</p>
+								<p><em>Example:</em> A teacher’s music quiz system flowchart might start with inputting student names and scores, followed by decisions to determine certificate levels and outputs for printing certificates.</p>
+
+								<h3 style="margin-top: 2rem">4.4 - System Design and Evaluation</h3>
+								<p>When designing an IT system, decomposition helps break down a complex system into manageable sub-systems.</p>
+								<p><strong>Fit for Purpose</strong> means the system meets all its intended requirements as defined in the design brief.</p>
+								<p>Evaluating the system involves considering the included digital, peripheral, and storage devices, the processes it performs, and if all design goals are met.</p>
+								<p>
+									<em>Example:</em> A restaurant order system with QR codes for ordering should allow easy menu updates and order transmissions. Evaluation checks if the system is reliable, meets user needs, and is cost-effective.
+								</p>
+
+								<h3 style="margin-top: 2rem">4.5 - Advantages and Disadvantages of IT Systems</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>Advantages</h4>
+										<ul>
+											<li>Automation reduces manual work and human errors</li>
+											<li>Speeds up processing and data access</li>
+											<li>Large data storage and easy access across locations</li>
+											<li>Improves consistency and integration of processes</li>
+										</ul>
+									</div>
+									<div class="concept-box">
+										<h4>Disadvantages</h4>
+										<ul>
+											<li>Initial high cost of setup</li>
+											<li>Staff require training</li>
+											<li>System failures disrupt business</li>
+											<li>Security and privacy risks</li>
+											<li>Dependence on technology may cause vulnerability</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 5: Data and Databases -->
+					<section id="topic5" class="topic-section">
+						<div class="card">
+							<h2>Topic 5: Data and Databases</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding how data is organized, stored, and managed.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="data-info">5.1 Data & Information</button>
+								<button class="tab-btn" data-tab="structured-data">5.2 Structured Data</button>
+								<button class="tab-btn" data-tab="sql">5.3 SQL</button>
+							</div>
+
+							<div id="data-info" class="tab-content active">
+								<h3>5.1.1 - Data vs Information</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>DATA</h4>
+										<p>
+											Raw, unprocessed facts such as numbers, text, images, or sounds. Alone, data has no meaning or context.
+											<br />
+											<em>Example: 25, "John", "blue"</em>
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>INFORMATION</h4>
+										<p>
+											Processed data given context and meaning, making it useful for decision-making.
+											<br />
+											<em>Example: "25-year-old John likes blue."</em>
+										</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">5.1.2 - Structured vs Unstructured Data</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>STRUCTURED DATA</h4>
+										<p>
+											Data organized in fixed formats (e.g., tables with rows and columns) that follow defined schemas for easy searching and analysis.
+											<br />
+											<em>Example: Spreadsheets, relational database tables.</em>
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>UNSTRUCTURED DATA</h4>
+										<p>
+											Data without a predefined format or structure. More challenging to analyze directly.
+											<br />
+											<em>Example: Emails, social media posts, videos, images.</em>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="structured-data" class="tab-content">
+								<h3>5.2.1 - Databases</h3>
+								<p>
+									Databases are organized collections of related structured data designed for efficient storage, retrieval, and management. They help maintain data integrity, allow multiple users to access data, and support backup
+									and security.
+								</p>
+								<div class="example-box">
+									<strong>Benefits of Databases:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Efficient data storage</li>
+										<li>Quick data searching and retrieval</li>
+										<li>Maintaining data accuracy</li>
+										<li>Multiple concurrent user access</li>
+										<li>Security controls for sensitive data</li>
+										<li>Backup and recovery options</li>
+										<li>Overall better data organization</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">5.2.2 - Relational Database Structure</h3>
+								<div class="example-box">
+									<strong>Key Concepts:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Table:</strong> Data arranged in rows and columns (like a spreadsheet)</li>
+										<li><strong>Record (Row):</strong> Represents a single data item or entry</li>
+										<li><strong>Field (Column):</strong> Data category or attribute</li>
+										<li><strong>Primary Key:</strong> Unique identifier for records to prevent duplicates</li>
+										<li><strong>Foreign Key:</strong> Links to a primary key in a different table creating relationships</li>
+										<li><strong>Composite Key:</strong> A primary key made from multiple fields combined</li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">5.2.3 - Entity Relationships</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>ONE-TO-ONE</h4>
+										<p>
+											One record in Table A links to one record in Table B.
+											<br />
+											<em>Example:</em> One student linked to one emergency contact.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>ONE-TO-MANY</h4>
+										<p>
+											One record in Table A links to many records in Table B.
+											<br />
+											<em>Example:</em> One teacher teaches many students.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>MANY-TO-MANY</h4>
+										<p>
+											Many records in Table A link to many records in Table B via a joining table.
+											<br />
+											<em>Example:</em> Students enroll in many courses; courses have many students.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="sql" class="tab-content">
+								<h3>5.3.1 - SQL Purpose</h3>
+								<p>SQL (Structured Query Language) is the programming language used to manage and query data in relational databases.</p>
+								<div class="example-box">
+									<strong>Uses of SQL:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Retrieve data (<code>SELECT</code>)</li>
+										<li>Add data (<code>INSERT</code>)</li>
+										<li>Modify data (<code>UPDATE</code>)</li>
+										<li>Remove data (<code>DELETE</code>)</li>
+										<li>Create or modify database structure (<code>CREATE TABLE</code>)</li>
+										<li>Combine tables (<code>JOIN</code>)</li>
+										<li>Aggregate functions like <code>COUNT</code>, <code>SUM</code>, <code>AVG</code></li>
+									</ul>
+								</div>
+
+								<h3 style="margin-top: 2rem">5.3.2 - SQL Commands</h3>
+								<div class="example-box">
+									<strong>Key SQL Commands:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><code>SELECT</code>: Retrieve data from a table, e.g., <code>SELECT Name, Age FROM Students;</code></li>
+										<li><code>WHERE</code>: Filter results, e.g., <code>SELECT Name FROM Students WHERE Age &gt; 18;</code></li>
+										<li><code>INSERT INTO</code>: Add new records, e.g., <code>INSERT INTO Students (Name, Age) VALUES ('John', 25);</code></li>
+										<li><code>UPDATE</code>: Modify existing data, e.g., <code>UPDATE Students SET Age = 26 WHERE Name = 'John';</code></li>
+										<li><code>DELETE FROM</code>: Remove records, e.g., <code>DELETE FROM Students WHERE Age &lt; 18;</code></li>
+										<li><code>JOIN</code>: Combines rows from two or more tables based on a related column.</li>
+										<li><code>GROUP BY</code>: Groups rows sharing a property, e.g., count per category.</li>
+										<li><code>ORDER BY</code>: Sorts results in ascending (<code>ASC</code>) or descending (<code>DESC</code>) order.</li>
+										<li><code>LIKE</code>: Used with wildcards (%) to search patterns in text fields.</li>
+									</ul>
+								</div>
+
+								<p><em>Exam Tip:</em> Pay attention to correct spelling and capitalization of field names and tables in SQL commands for the queries to work correctly.</p>
+
+								<div class="example-box">
+									<strong>SQL Examples:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>
+											<strong>INNER JOIN:</strong><br />
+											<code>SELECT Students.Name, Courses.Title FROM Students INNER JOIN Enrollments ON Students.ID = Enrollments.StudentID INNER JOIN Courses ON Enrollments.CourseID = Courses.ID;</code>
+										</li>
+										<li>
+											<strong>GROUP BY:</strong><br />
+											<code>SELECT Department, COUNT(*) AS NumEmployees FROM Employees GROUP BY Department;</code>
+										</li>
+										<li>
+											<strong>ORDER BY:</strong><br />
+											<code>SELECT Name, Age FROM Students ORDER BY Age DESC;</code>
+										</li>
+										<li>
+											<strong>LIKE (pattern matching):</strong><br />
+											<code>SELECT Name FROM Customers WHERE Name LIKE 'A%';</code>
+										</li>
+									</ul>
+									<p style="margin-top: 1rem; color: var(--color-text-secondary)"><em>These queries show how to join tables, group results, sort data, and search for patterns in SQL.</em></p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Topic 6: Wider Issues -->
+					<section id="topic6" class="topic-section">
+						<div class="card">
+							<h2>Topic 6: Wider Issues</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Understanding the broader impact of technology on society and the environment.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="environmental">6.1 Environmental</button>
+								<button class="tab-btn" data-tab="legal-ethical">6.2 Legal, Moral & Ethical</button>
+								<button class="tab-btn" data-tab="society">6.3 Society</button>
+							</div>
+
+							<div id="environmental" class="tab-content active">
+								<h3>6.1.1 - Environmental Impact</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>CONSTRUCTION</h4>
+										<p>
+											Building factories to create technology devices often involves clearing natural habitats, disrupting ecosystems, and causing pollution such as noise and harmful gases. Raw materials like precious metals (gold,
+											silver, palladium) are limited and their extraction pollutes soil and water.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>USE</h4>
+										<p>Technology consumes significant electricity, especially data centers and network equipment. Many energy sources still rely on fossil fuels, contributing to carbon emissions and global warming.</p>
+									</div>
+									<div class="concept-box">
+										<h4>DISPOSAL</h4>
+										<p>
+											E-waste (discarded electronics) can leak toxic substances into the environment if improperly disposed of in landfills. Recycling can recover precious materials but is not always implemented effectively, creating
+											pollution and health risks.
+										</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">6.1.2 - Positive Environmental Impact</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>ENVIRONMENTAL MONITORING</h4>
+										<p>Sensors collect data on air and water quality, temperature, and pollution levels, enabling early detection of environmental problems and promoting conservation efforts.</p>
+									</div>
+									<div class="concept-box">
+										<h4>SMART HOUSES</h4>
+										<p>Automated systems control lighting, heating, and appliances to reduce unnecessary energy use, boosting efficiency and reducing carbon footprint.</p>
+									</div>
+									<div class="concept-box">
+										<h4>SMART CITIES</h4>
+										<p>IT systems optimize traffic flow, manage energy grids efficiently, monitor public transport, and improve waste management to reduce environmental impact and improve urban living.</p>
+									</div>
+								</div>
+							</div>
+
+							<div id="legal-ethical" class="tab-content">
+								<h3>6.2.1 - Legal Issues</h3>
+								<div class="learning-grid">
+									<div class="concept-box">
+										<h4>DATA PROTECTION</h4>
+										<p>
+											Laws like GDPR (Europe) and CCPA (California) regulate the collection, storage, and use of personal data, ensuring consent, security, limited access, and data accuracy. Cross-border cloud storage can complicate
+											data protection.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>COPYRIGHT</h4>
+										<p>
+											Copyright protects creators' rights over artistic and intellectual works. Unauthorized copying or distribution without permission infringes rights and legal protections like the Berne Convention ensure
+											international recognition.
+										</p>
+									</div>
+									<div class="concept-box">
+										<h4>COMPUTER MISUSE</h4>
+										<p>Laws deter unauthorized access (hacking), data interception, creation/spread of malware, and sabotage of systems. Proving intent is essential in prosecution.</p>
+									</div>
+									<div class="concept-box">
+										<h4>INTELLECTUAL PROPERTY</h4>
+										<p>Patents protect inventions, trademarks protect brand names and logos, and trade secrets protect confidential processes or information vital for competitive advantage.</p>
+									</div>
+								</div>
+
+								<h3 style="margin-top: 2rem">6.2.2 - Ethical Issues</h3>
+								<div class="example-box">
+									<strong>Key Ethical Concerns:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li><strong>Privacy:</strong> Balancing convenience of data tracking (location, online activity) with individuals’ rights to control their information and avoid unauthorized surveillance.</li>
+										<li><strong>Inclusion:</strong> Ensuring equitable access to technology across different demographics and accommodating disabled users through accessibility features (screen readers, speech recognition).</li>
+										<li><strong>Civil Liberties:</strong> Freedom of expression online versus risks of censorship and harmful content moderation.</li>
+										<li><strong>Access & Accessibility:</strong> Addressing the digital divide to prevent exclusion of elderly, remote, or disadvantaged populations from essential digital services.</li>
+										<li><strong>Expression & Association:</strong> Protecting rights to express opinions and form online communities while combating extremism and harmful speech.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div id="society" class="tab-content">
+								<h3>6.3.1 - Ubiquitous Wireless Access</h3>
+								<p>Wireless internet access is widespread, enabling constant connectivity, supporting IoT devices, and powering smart cities.</p>
+								<div class="example-box">
+									<strong>Smart Cities Benefits:</strong>
+									<ul style="margin-top: 0.5rem">
+										<li>Connected infrastructure</li>
+										<li>Real-time monitoring and optimization</li>
+										<li>Traffic: Sensors optimize flow, reduce congestion</li>
+										<li>Energy: Smart grid manages distribution</li>
+										<li>Public safety: Real-time emergency response</li>
+										<li>Waste management: Optimize collection routes</li>
+										<li>Air quality: Monitor and alert</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Flashcards Section -->
+					<section id="flashcards" class="topic-section">
+						<div class="card">
+							<h2>⭐ Interactive Flashcards</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Click cards to flip. Test your knowledge with key concepts from all topics.</p>
+
+							<div style="margin-bottom: 2rem">
+								<label for="flashcard-category" style="color: var(--color-text); margin-right: 1rem; font-weight: 600">Select Topic:</label>
+								<select id="flashcard-category" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-light); color: var(--color-text)">
+									<option value="all">All Topics</option>
+									<option value="topic1">Topic 1: Hardware & Software</option>
+									<option value="topic2">Topic 2: Networks</option>
+									<option value="topic3">Topic 3: Online Environment</option>
+									<option value="topic4">Topic 4: IT Systems</option>
+									<option value="topic5">Topic 5: Data & Databases</option>
+									<option value="topic6">Topic 6: Wider Issues</option>
+								</select>
+							</div>
+
+							<div class="flashcard-container" id="flashcard">
+								<div class="flashcard">
+									<div class="flashcard-content" id="flashcard-question">Click to load flashcard...</div>
+									<div class="flashcard-back" id="flashcard-answer">Answer appears here</div>
+								</div>
+							</div>
+
+							<div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap">
+								<button class="btn btn-secondary" id="prev-card">← Previous</button>
+								<span id="card-counter" style="align-self: center; font-weight: 600">Card 1 of N</span>
+								<button class="btn btn-secondary" id="next-card">Next →</button>
+							</div>
+						</div>
+					</section>
+
+					<!-- Quiz Section -->
+					<section id="quiz" class="topic-section">
+						<div class="card">
+							<h2>📝 Quiz Mode</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Test your knowledge with topic-specific quizzes.</p>
+
+							<div style="margin-bottom: 2rem">
+								<label for="quiz-category" style="color: var(--color-text); margin-right: 1rem; font-weight: 600">Select Topic:</label>
+								<select id="quiz-category" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-light); color: var(--color-text)">
+									<option value="all">All Topics</option>
+									<option value="topic1">Topic 1: Hardware & Software</option>
+									<option value="topic2">Topic 2: Networks</option>
+									<option value="topic3">Topic 3: Online Environment</option>
+									<option value="topic4">Topic 4: IT Systems</option>
+									<option value="topic5">Topic 5: Data & Databases</option>
+									<option value="topic6">Topic 6: Wider Issues</option>
+								</select>
+							</div>
+
+							<div class="quiz-container">
+								<div class="quiz-header">
+									<div class="quiz-score" id="quizScore">Score: 0/0</div>
+									<button class="btn btn-secondary" id="resetQuiz">Reset Quiz</button>
+								</div>
+								<div id="quizContent"></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Tools Section -->
+					<section id="tools" class="topic-section">
+						<div class="card">
+							<h2>🔧 Learning Tools</h2>
+							<p style="color: var(--color-text-secondary); margin-bottom: 1.5rem">Useful tools to help with your IT studies.</p>
+
+							<div class="tabs">
+								<button class="tab-btn active" data-tab="binary-tool">Binary Converter</button>
+								<button class="tab-btn" data-tab="filesize-tool">File Size Calculator</button>
+							</div>
+
+							<div id="binary-tool" class="tab-content active">
+								<div class="tool-card">
+									<h3 class="tool-title">Binary ↔ Denary Converter</h3>
+									<div class="tool-form">
+										<div class="form-group">
+											<label class="form-label">Conversion Direction</label>
+											<select class="form-select" id="conversionDirection">
+												<option value="toDenary">Binary → Denary</option>
+												<option value="toBinary">Denary → Binary</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="form-label" id="inputLabel">Enter Binary Number</label>
+											<input type="text" class="form-input" id="binaryInput" placeholder="e.g., 1010" />
+										</div>
+										<button class="btn" id="convertBtn">Convert</button>
+										<div class="tool-result hidden" id="binaryResult">
+											<div class="result-label">Result:</div>
+											<div class="result-value" id="binaryResultValue">-</div>
+											<div class="result-steps" id="binaryResultSteps"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="filesize-tool" class="tab-content">
+								<div class="tool-card">
+									<h3 class="tool-title">File Size Converter</h3>
+									<div class="tool-form">
+										<div class="form-group">
+											<label class="form-label">Value</label>
+											<input type="number" class="form-input" id="filesizeValue" placeholder="e.g., 1024" />
+										</div>
+										<div class="form-group">
+											<label class="form-label">From Unit</label>
+											<select class="form-select" id="filesizeFromUnit">
+												<option value="bit">bit</option>
+												<option value="byte">byte</option>
+												<option value="KiB" selected>KiB</option>
+												<option value="MiB">MiB</option>
+												<option value="GiB">GiB</option>
+												<option value="TiB">TiB</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="form-label">To Unit</label>
+											<select class="form-select" id="filesizeToUnit">
+												<option value="bit">bit</option>
+												<option value="byte">byte</option>
+												<option value="KiB">KiB</option>
+												<option value="MiB" selected>MiB</option>
+												<option value="GiB">GiB</option>
+												<option value="TiB">TiB</option>
+											</select>
+										</div>
+										<button class="btn" id="filesizeConvertBtn">Convert</button>
+										<div class="tool-result hidden" id="filesizeResult">
+											<div class="result-label">Result:</div>
+											<div class="result-value" id="filesizeResultValue">-</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</main>
+			</div>
+		</div>
+
+		<script>
+			// Navigation functionality
+			const navButtons = document.querySelectorAll('.nav-btn')
+			const topicSections = document.querySelectorAll('.topic-section')
+
+			// Initialize first topic as active
+			document.getElementById('topic1').classList.add('active')
+
+			navButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					const topic = button.dataset.topic
+
+					// Remove active from all
+					navButtons.forEach(btn => btn.classList.remove('active'))
+					topicSections.forEach(section => section.classList.remove('active'))
+
+					// Add active to clicked
+					button.classList.add('active')
+					document.getElementById(topic).classList.add('active')
+
+					// Close mobile nav if open
+					const mobileNav = document.getElementById('mobileNav')
+					const mobileNavToggle = document.getElementById('mobileNavToggle')
+					if (mobileNav.classList.contains('active')) {
+						mobileNav.classList.remove('active')
+						mobileNavToggle.classList.remove('active')
+					}
+
+					// Scroll to top
+					window.scrollTo({ top: 0, behavior: 'smooth' })
+				})
+			})
+
+			// Tab functionality
+			const tabButtons = document.querySelectorAll('.tab-btn')
+			tabButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					const tab = button.dataset.tab
+					const tabGroup = button.parentElement
+					const tabContainer = tabGroup.parentElement
+
+					// Remove active class from all tab buttons in this group
+					const allButtonsInGroup = tabGroup.querySelectorAll('.tab-btn')
+					allButtonsInGroup.forEach(btn => btn.classList.remove('active'))
+
+					// Remove active class from all tab contents in this container
+					const allTabContents = tabContainer.querySelectorAll('.tab-content')
+					allTabContents.forEach(tabContent => tabContent.classList.remove('active'))
+
+					// Add active class to clicked button and corresponding content
+					button.classList.add('active')
+					document.getElementById(tab).classList.add('active')
+				})
+			})
+
+			// Mobile navigation toggle
+			const mobileNavToggle = document.getElementById('mobileNavToggle')
+			const mobileNav = document.getElementById('mobileNav')
+
+			mobileNavToggle.addEventListener('click', () => {
+				mobileNav.classList.toggle('active')
+				mobileNavToggle.classList.toggle('active')
+			})
+
+			// Initialize first tab in each section as active
+			document.addEventListener('DOMContentLoaded', () => {
+				const tabGroups = document.querySelectorAll('.tabs')
+				tabGroups.forEach(group => {
+					const firstTabBtn = group.querySelector('.tab-btn')
+					if (firstTabBtn) {
+						// Remove active from all in this group first
+						const allButtonsInGroup = group.querySelectorAll('.tab-btn')
+						allButtonsInGroup.forEach(btn => btn.classList.remove('active'))
+
+						// Remove active from all tab contents in this container
+						const tabContainer = group.parentElement
+						const allTabContents = tabContainer.querySelectorAll('.tab-content')
+						allTabContents.forEach(tabContent => tabContent.classList.remove('active'))
+
+						// Add active to first tab
+						firstTabBtn.classList.add('active')
+						const tabId = firstTabBtn.dataset.tab
+						const tabContent = document.getElementById(tabId)
+						if (tabContent) {
+							tabContent.classList.add('active')
+						}
+					}
+				})
+			})
+
+			// Flashcard data
+			const flashcardData = {
+				all: [
+					{ q: 'What is the difference between a feature and a function of a device?', a: 'A feature is a distinctive part/characteristic of a device. A function is how a device is used or what it is used for.' },
+					{ q: 'Name three features of a modern smartphone.', a: 'Examples: touchscreen, camera, GPS, biometric scanner, rechargeable battery, Bluetooth, fast processor' },
+					{ q: 'What is portability and why is it important?', a: 'Portability is how easy a device is to carry. Important for devices meant to be mobile like phones, tablets, and laptops.' },
+					{
+						q: 'Explain the difference between magnetic storage and solid-state storage.',
+						a: 'Magnetic storage has moving parts, is slower, but cheap for large capacity. Solid-state has no moving parts, is faster, more expensive, and more reliable.',
+					},
+					{ q: 'What does RAM stand for and what is its role?', a: 'RAM = Random Access Memory. It is volatile memory that stores current programs and data. If power is lost, data is lost.' },
+					{ q: 'What is technological convergence?', a: 'When two or more devices are combined to create a single device/product/service. Example: smartphone combines phone, camera, GPS, computer.' },
+					{ q: 'What is an embedded system?', a: 'A system with a single or limited purpose, dedicated hardware, built onto a single chip, uses a microprocessor. Examples: alarm clock, smart watch.' },
+					{ q: 'What is firmware?', a: 'Basic instructions that allow a system to function. Contains BIOS and bootloader. Stored in ROM on computers or on single chip in embedded systems.' },
+					{ q: 'Name the five factors used to assess device performance.', a: 'Speed, Capacity, Portability, Bandwidth, Power Efficiency' },
+					{ q: 'How many bytes are in 1 KiB?', a: '1024 bytes' },
+					{
+						q: 'Explain the difference between systems software and application software.',
+						a: 'Systems software maintains the computer and allows it to run efficiently. Application software provides services for the user to perform tasks.',
+					},
+					{ q: 'What are the four main roles of the operating system?', a: '1. Managing devices, 2. Managing processes, 3. Managing users, 4. Managing security' },
+					{ q: 'What is open-source software?', a: 'Software where users can study, modify, and share the source code. Usually provided without fee. Relies on community for development.' },
+					{ q: 'What is the difference between a software patch and an upgrade?', a: 'A patch is a quick fix for errors or security issues. An upgrade is a new version with new features and functionality.' },
+				],
+				topic1: [
+					{ q: 'What is the difference between a feature and a function of a device?', a: 'A feature is a distinctive part/characteristic of a device. A function is how a device is used or what it is used for.' },
+					{ q: 'Name three features of a modern smartphone.', a: 'Examples: touchscreen, camera, GPS, biometric scanner, rechargeable battery, Bluetooth, fast processor' },
+					{ q: 'What is portability and why is it important?', a: 'Portability is how easy a device is to carry. Important for devices meant to be mobile like phones, tablets, and laptops.' },
+					{
+						q: 'Explain the difference between magnetic storage and solid-state storage.',
+						a: 'Magnetic storage has moving parts, is slower, but cheap for large capacity. Solid-state has no moving parts, is faster, more expensive, and more reliable.',
+					},
+					{ q: 'What does RAM stand for and what is its role?', a: 'RAM = Random Access Memory. It is volatile memory that stores current programs and data. If power is lost, data is lost.' },
+					{ q: 'What is technological convergence?', a: 'When two or more devices are combined to create a single device/product/service. Example: smartphone combines phone, camera, GPS, computer.' },
+					{ q: 'What is an embedded system?', a: 'A system with a single or limited purpose, dedicated hardware, built onto a single chip, uses a microprocessor. Examples: alarm clock, smart watch.' },
+					{ q: 'What is firmware?', a: 'Basic instructions that allow a system to function. Contains BIOS and bootloader. Stored in ROM on computers or on single chip in embedded systems.' },
+					{ q: 'Name the five factors used to assess device performance.', a: 'Speed, Capacity, Portability, Bandwidth, Power Efficiency' },
+					{ q: 'How many bytes are in 1 KiB?', a: '1024 bytes' },
+					{
+						q: 'Explain the difference between systems software and application software.',
+						a: 'Systems software maintains the computer and allows it to run efficiently. Application software provides services for the user to perform tasks.',
+					},
+					{ q: 'What are the four main roles of the operating system?', a: '1. Managing devices, 2. Managing processes, 3. Managing users, 4. Managing security' },
+					{ q: 'What is open-source software?', a: 'Software where users can study, modify, and share the source code. Usually provided without fee. Relies on community for development.' },
+					{ q: 'What is the difference between a software patch and an upgrade?', a: 'A patch is a quick fix for errors or security issues. An upgrade is a new version with new features and functionality.' },
+				],
+				topic2: [
+					{
+						q: 'What is the difference between client-server and peer-to-peer networks?',
+						a: 'Client-server: Central server provides services, if it fails, clients lose access. P2P: All computers equal, act as client and server, no single point of failure.',
+					},
+					{ q: 'Name three types of wireless transmission media.', a: 'Microwave, Radio, Light, Satellite' },
+					{ q: 'What does bandwidth measure?', a: 'The maximum amount of data that can be transmitted over a network in a given time (usually per second). Measured in Gbps or Mbps.' },
+					{ q: 'What is the role of a router in a network?', a: 'Directs traffic between networks using IP addresses. Connects LANs to the internet. Routes data to correct destination.' },
+					{ q: 'What is the difference between IPv4 and IPv6?', a: 'IPv4 uses 32-bit addresses (e.g., 192.168.1.1) and addresses are running out. IPv6 uses 128-bit addresses with many more available.' },
+					{ q: 'What is DHCP?', a: 'Dynamic Host Configuration Protocol. Automatically assigns temporary IP addresses to devices on a network. Address returned to pool when device disconnects.' },
+					{ q: 'What is a firewall?', a: 'Hardware/software that monitors and controls network traffic. Blocks unauthorized access, allows authorized traffic.' },
+					{ q: 'Name three types of authentication methods.', a: 'Passwords, Two-factor (password + SMS/app), Biometrics (fingerprint, facial recognition)' },
+					{ q: 'What is encryption and why is it important?', a: 'Encryption converts data into unreadable form using a key. Important for protecting sensitive data from being understood if intercepted.' },
+					{ q: 'What is the OSI Model?', a: '7-layer model describing how networks communicate: Physical, Data Link, Network, Transport, Session, Presentation, Application' },
+				],
+				topic3: [
+					{ q: 'What is the role of DNS?', a: 'Domain Name System translates human-readable domain names (www.google.com) to IP addresses (172.217.161.46)' },
+					{ q: 'What is the difference between static and dynamic web pages?', a: "Static: Same content for all users, doesn't change without manual editing. Dynamic: Content changes based on user input or factors." },
+					{ q: 'What is the role of client-side scripting?', a: "Code runs on user's browser. Enhances user experience, validates forms, creates interactive elements. Works immediately without server." },
+					{ q: 'What is the role of server-side scripting?', a: 'Code runs on web server. Processes user input, accesses databases, generates personalized content, maintains security.' },
+					{ q: 'What is an active digital footprint?', a: 'Information you deliberately share online: social media posts, comments, photos, website registrations, online purchases.' },
+					{ q: 'What is a passive digital footprint?', a: 'Information collected about you without direct action: cookies, IP logs, location data, metadata in files.' },
+					{ q: 'What is an online community?', a: 'Group of people connected via internet with common interests. Can be for social purposes (hobbies, socializing) or professional purposes (networking, career).' },
+					{ q: 'Name three ways online platforms monetize online communities.', a: 'Targeted advertising, pay-per-click ads, selling customer data, subscriptions/paywalls, sponsored content' },
+					{ q: 'What is cloud storage?', a: 'Storing files on remote servers accessed via internet. Benefits: accessible anywhere, automatic backup, easy sharing. Risks: internet dependency, privacy concerns.' },
+					{ q: 'What is SaaS?', a: 'Software as a Service. Use software online without installation. Examples: Gmail, Office 365, Slack. Benefits: automatic updates, no installation needed.' },
+				],
+				topic4: [
+					{ q: 'What are the four components of an IT system?', a: 'Hardware (physical devices), Software (applications/OS), Processes (workflows/procedures), People (users/administrators)' },
+					{ q: 'What is system decomposition?', a: 'Breaking a complex system into smaller sub-systems and components. Makes system easier to understand and manage.' },
+					{ q: "What does 'fitness for purpose' mean?", a: 'Does the system meet the original requirements? Is it suitable for intended use?' },
+					{ q: 'What do DFD symbols represent?', a: 'Rounded rectangle = external entity, Circle = process, Rectangle = data store, Arrow = data flow' },
+					{ q: 'What are the levels of DFDs?', a: 'Level 0 (Context): Whole system as single process. Level 1: System broken into processes. Level 2+: Further decomposition.' },
+					{ q: 'What are the main symbols in a flowchart?', a: 'Oval = start/end, Rectangle = process, Diamond = decision, Parallelogram = input/output, Arrow = flow direction' },
+				],
+				topic5: [
+					{ q: 'What is the difference between data and information?', a: "Data is raw facts with no context (25, 'John'). Information is processed data with meaning (25-year-old John likes blue)." },
+					{ q: 'What is structured data?', a: 'Data organized in specific format following defined schema. Easy to search and analyze. Examples: databases, spreadsheets.' },
+					{ q: 'What is unstructured data?', a: 'Data with no predefined format. Difficult to search/analyze. Examples: emails, documents, images, videos.' },
+					{ q: 'Why are databases used?', a: 'Efficient storage, quick retrieval, data integrity, multiple user access, security, backup/recovery, organization' },
+					{ q: 'What is a primary key?', a: 'Unique identifier for each record in a table. No duplicates allowed. Every record must have one.' },
+					{ q: 'What is a foreign key?', a: 'A field that links to primary key in another table. Creates relationships between tables. Maintains data consistency.' },
+					{ q: 'What is a one-to-many relationship?', a: 'One record in Table A relates to many records in Table B. Most common relationship. Example: One teacher teaches many students.' },
+					{ q: 'What is a many-to-many relationship?', a: 'Many records in Table A relate to many in Table B. Requires junction/linking table. Example: Students enroll in many courses, courses have many students.' },
+					{ q: 'What SQL command retrieves data?', a: 'SELECT. Example: SELECT Name FROM Students WHERE Age > 18;' },
+					{ q: 'What does a JOIN do in SQL?', a: 'Combines data from multiple tables based on a relationship. Allows querying across related tables.' },
+					{ q: 'What are SQL wildcards?', a: "% = any characters, _ = single character. Used in LIKE for pattern matching. Example: WHERE Name LIKE 'J%' finds names starting with J." },
+				],
+				topic6: [
+					{ q: 'What is an environmental impact of IT construction?', a: 'Raw material extraction (mining), manufacturing energy consumption, transportation emissions, packaging waste' },
+					{ q: 'How can IT help the environment?', a: 'Environmental monitoring (sensors track changes), smart houses (automated energy efficiency), smart cities (optimize traffic/energy)' },
+					{ q: 'What is GDPR?', a: 'General Data Protection Regulation. European data protection law. Requires consent for data collection, right to access/delete data, penalties for violations.' },
+					{ q: 'What is copyright?', a: 'Legal protection for original works (software, music, videos). Author has exclusive rights. Cannot copy without permission.' },
+					{ q: 'What is computer misuse?', a: 'Unauthorized access, hacking, creating/spreading malware, denial of service attacks. Illegal with penalties including fines and imprisonment.' },
+					{ q: 'What ethical issue is raised by constant surveillance?', a: 'Privacy. People have right to keep personal information private. Balance needed between privacy and functionality.' },
+					{ q: 'What is the digital divide?', a: 'Inequality in access to technology. Not everyone has equal access due to cost, location, or ability.' },
+					{ q: 'What is a smart city?', a: 'City with connected infrastructure using IoT. Optimizes traffic, energy, public safety, waste. Benefits: efficiency, better quality of life. Risks: privacy, security.' },
+					{ q: 'What is location awareness?', a: 'Devices know their location (GPS, cellular). Used for navigation, emergency services, location-based advertising. Privacy implications.' },
+				],
+			}
+
+			// Quiz data
+			const quizQuestions = [
+				{
+					id: 1,
+					topic: 'topic1',
+					q: 'Which of these is NOT a feature of a device?',
+					options: ['Portability', 'Processing speed', 'How it makes you feel', 'Storage capacity'],
+					answer: 2,
+					explanation: 'How a device makes you feel is subjective and not a technical feature. Portability, processing speed, and storage capacity are all technical features.',
+				},
+				{
+					id: 2,
+					topic: 'topic1',
+					q: 'What is a microprocessor?',
+					options: ['A small version of a full processor', 'A type of ROM', 'A wireless connection device', 'Storage for firmware'],
+					answer: 0,
+					explanation: 'A microprocessor is a smaller version of a full processor used in embedded systems. It performs similar functions but with less power.',
+				},
+				{ id: 3, topic: 'topic1', q: 'Convert denary 10 to binary', options: ['0110', '1010', '1100', '0101'], answer: 1, explanation: '10 = 8 + 2. Powers of 2: 8(1), 4(0), 2(1), 1(0) = 1010' },
+				{
+					id: 4,
+					topic: 'topic1',
+					q: 'What is the main purpose of systems software?',
+					options: ['To help users complete specific tasks', 'To allow computer to run efficiently', 'To store user files', 'To connect to the internet'],
+					answer: 1,
+					explanation: 'Systems software maintains and manages the computer. Application software helps users complete tasks.',
+				},
+				{
+					id: 5,
+					topic: 'topic2',
+					q: 'In a client-server network, what happens if the server fails?',
+					options: ['Nothing, clients work independently', 'Clients can still communicate with each other', 'Clients cannot access server resources', 'The network automatically creates a new server'],
+					answer: 2,
+					explanation: 'In client-server networks, the server is the central point. If it fails, clients cannot access its services or resources.',
+				},
+				{
+					id: 6,
+					topic: 'topic2',
+					q: 'What is the role of a router?',
+					options: ['Stores data on the network', 'Directs traffic between networks', 'Amplifies network signals', 'Manages user permissions'],
+					answer: 1,
+					explanation: 'A router directs data packets between networks using IP addresses, connecting LANs to the internet.',
+				},
+				{
+					id: 7,
+					topic: 'topic3',
+					q: 'What does DNS do?',
+					options: ['Encrypts internet traffic', 'Translates domain names to IP addresses', 'Stores website files', 'Manages user passwords'],
+					answer: 1,
+					explanation: 'DNS (Domain Name System) translates human-readable domain names like google.com into IP addresses that computers can use.',
+				},
+				{
+					id: 8,
+					topic: 'topic3',
+					q: 'What is a passive digital footprint?',
+					options: ['Photos you post on social media', 'Comments you make online', 'Cookies tracking your browsing', 'Emails you send'],
+					answer: 2,
+					explanation: 'Passive footprint is information collected about you without direct action (cookies, IP logs, location data). Active is what you deliberately share.',
+				},
+				{
+					id: 9,
+					topic: 'topic4',
+					q: 'How many components does an IT system have?',
+					options: ['Two: hardware and software', 'Three: hardware, software, users', 'Four: hardware, software, processes, people', 'Five: hardware, software, data, people, networks'],
+					answer: 2,
+					explanation: 'An IT system has four components: Hardware (devices), Software (applications/OS), Processes (workflows), People (users/administrators).',
+				},
+				{
+					id: 10,
+					topic: 'topic5',
+					q: 'What is information?',
+					options: ['Raw numbers and text', 'Processed data with meaning', 'A list of facts', 'Computer files'],
+					answer: 1,
+					explanation: 'Information is data that has been processed and organized to have meaning and context, making it useful for decision-making.',
+				},
+				{
+					id: 11,
+					topic: 'topic5',
+					q: 'What is a primary key?',
+					options: ['A password for the database', 'Unique identifier for each record', 'The most important field', 'Link to another table'],
+					answer: 1,
+					explanation: 'A primary key uniquely identifies each record in a table. No duplicates allowed. Every record must have one.',
+				},
+				{
+					id: 12,
+					topic: 'topic5',
+					q: 'Which SQL command adds new data to a table?',
+					options: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+					answer: 1,
+					explanation: 'INSERT adds new records/rows to a table. SELECT retrieves, UPDATE modifies, DELETE removes.',
+				},
+				{
+					id: 13,
+					topic: 'topic6',
+					q: 'How can smart cities reduce environmental impact?',
+					options: ['By using more electronic devices', 'By optimizing traffic and energy use', 'By increasing manufacturing', 'By storing all data in the cloud'],
+					answer: 1,
+					explanation: 'Smart cities use IoT to optimize traffic flow, energy distribution, and resource management, reducing overall environmental impact.',
+				},
+				{
+					id: 14,
+					topic: 'topic6',
+					q: 'What does GDPR protect?',
+					options: ['Software copyrights', 'Personal data', 'Patents', 'Trade names'],
+					answer: 1,
+					explanation: 'GDPR (General Data Protection Regulation) is European law protecting personal data. It requires consent for collection and gives people data rights.',
+				},
+			]
+
+			// Flashcard functionality
+			let currentCard = 0
+			let currentCategory = 'all'
+			let currentCards = []
+
+			function initFlashcards() {
+				currentCard = 0
+				currentCategory = document.getElementById('flashcard-category').value
+				currentCards = flashcardData[currentCategory]
+				displayCard()
+			}
+
+			function displayCard() {
+				if (currentCards.length === 0) return
+
+				const card = currentCards[currentCard]
+				const flashcardContainer = document.getElementById('flashcard')
+
+				// Reset flip state
+				flashcardContainer.querySelector('.flashcard').classList.remove('flipped')
+				document.getElementById('flashcard-question').textContent = card.q
+				document.getElementById('flashcard-answer').textContent = card.a
+				document.getElementById('card-counter').textContent = `Card ${currentCard + 1} of ${currentCards.length}`
+			}
+
+			// Flashcard flip
+			document.getElementById('flashcard').addEventListener('click', function () {
+				this.querySelector('.flashcard').classList.toggle('flipped')
+			})
+
+			// Navigation
+			document.getElementById('next-card').addEventListener('click', () => {
+				if (currentCard < currentCards.length - 1) {
+					currentCard++
+					displayCard()
+				}
+			})
+
+			document.getElementById('prev-card').addEventListener('click', () => {
+				if (currentCard > 0) {
+					currentCard--
+					displayCard()
+				}
+			})
+
+			document.getElementById('flashcard-category').addEventListener('change', initFlashcards)
+
+			// Quiz functionality
+			let currentQuizIndex = 0
+			let quizScore = 0
+			let quizAnswered = false
+			let currentQuiz = []
+
+			function initQuiz() {
+				const category = document.getElementById('quiz-category').value
+				currentQuiz = quizQuestions.filter(q => category === 'all' || q.topic === category)
+				currentQuizIndex = 0
+				quizScore = 0
+				quizAnswered = false
+				updateQuizScore()
+				showQuizQuestion()
+			}
+
+			function showQuizQuestion() {
+				if (currentQuizIndex >= currentQuiz.length) {
+					showQuizSummary()
+					return
+				}
+
+				const question = currentQuiz[currentQuizIndex]
+				const container = document.getElementById('quizContent')
+
+				container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-text">${currentQuizIndex + 1}. ${question.q}</div>
+                    <div class="question-options">
+                        ${question.options
+																									.map(
+																										(opt, idx) => `
+                            <button class="option-btn" data-index="${idx}">${opt}</button>
+                        `
+																									)
+																									.join('')}
+                    </div>
+                    <div id="quizFeedback"></div>
+                </div>
+                <div class="quiz-actions">
+                    <button class="btn" id="nextQuestionBtn" style="display: none;">Next Question →</button>
+                </div>
+            `
+
+				quizAnswered = false
+				setupQuizListeners()
+			}
+
+			function setupQuizListeners() {
+				const options = document.querySelectorAll('.option-btn')
+				options.forEach(opt => {
+					opt.addEventListener('click', () => handleQuizAnswer(parseInt(opt.dataset.index)))
+				})
+
+				const nextBtn = document.getElementById('nextQuestionBtn')
+				if (nextBtn) {
+					nextBtn.addEventListener('click', () => {
+						currentQuizIndex++
+						showQuizQuestion()
+					})
+				}
+			}
+
+			function handleQuizAnswer(selectedIndex) {
+				if (quizAnswered) return
+
+				quizAnswered = true
+				const question = currentQuiz[currentQuizIndex]
+				const options = document.querySelectorAll('.option-btn')
+				const feedback = document.getElementById('quizFeedback')
+				const nextBtn = document.getElementById('nextQuestionBtn')
+
+				options.forEach((opt, idx) => {
+					opt.disabled = true
+					if (idx === question.answer) {
+						opt.classList.add('correct')
+					} else if (idx === selectedIndex) {
+						opt.classList.add('incorrect')
+					}
+				})
+
+				const isCorrect = selectedIndex === question.answer
+				if (isCorrect) {
+					quizScore++
+					feedback.innerHTML = `<div class="quiz-feedback correct">✓ Correct! ${question.explanation}</div>`
+				} else {
+					feedback.innerHTML = `<div class="quiz-feedback incorrect">✗ Incorrect. ${question.explanation}</div>`
+				}
+
+				updateQuizScore()
+				nextBtn.style.display = 'block'
+			}
+
+			function updateQuizScore() {
+				document.getElementById('quizScore').textContent = `Score: ${quizScore}/${currentQuizIndex}`
+			}
+
+			function showQuizSummary() {
+				const container = document.getElementById('quizContent')
+				const percentage = Math.round((quizScore / currentQuiz.length) * 100)
+
+				container.innerHTML = `
+                <div class="quiz-summary">
+                    <div class="summary-score">${quizScore}/${currentQuiz.length}</div>
+                    <div class="summary-text">You scored ${percentage}% on this quiz!</div>
+                    <button class="btn" id="restartQuizBtn">Try Again</button>
+                </div>
+            `
+
+				document.getElementById('restartQuizBtn').addEventListener('click', initQuiz)
+			}
+
+			document.getElementById('quiz-category').addEventListener('change', initQuiz)
+			document.getElementById('resetQuiz').addEventListener('click', initQuiz)
+
+			// Tool functionality
+			document.getElementById('conversionDirection').addEventListener('change', e => {
+				const label = document.getElementById('inputLabel')
+				const input = document.getElementById('binaryInput')
+				if (e.target.value === 'toBinary') {
+					label.textContent = 'Enter Denary Number'
+					input.placeholder = 'e.g., 13'
+				} else {
+					label.textContent = 'Enter Binary Number'
+					input.placeholder = 'e.g., 1010'
+				}
+				input.value = ''
+				document.getElementById('binaryResult').classList.add('hidden')
+			})
+
+			document.getElementById('convertBtn').addEventListener('click', convertBinary)
+
+			function convertBinary() {
+				const direction = document.getElementById('conversionDirection').value
+				const input = document.getElementById('binaryInput').value.trim()
+				const resultDiv = document.getElementById('binaryResult')
+				const resultValue = document.getElementById('binaryResultValue')
+				const resultSteps = document.getElementById('binaryResultSteps')
+
+				if (!input) {
+					alert('Please enter a value')
+					return
+				}
+
+				if (direction === 'toBinary') {
+					const denary = parseInt(input)
+					if (isNaN(denary) || denary < 0) {
+						alert('Please enter a valid positive number')
+						return
+					}
+
+					let binary = ''
+					let steps = '<strong>Steps:</strong><br>'
+					let remaining = denary
+					const powers = [128, 64, 32, 16, 8, 4, 2, 1]
+
+					powers.forEach(power => {
+						if (remaining >= power) {
+							binary += '1'
+							steps += `${remaining} ≥ ${power}, so use 1. Remaining: ${remaining - power}<br>`
+							remaining -= power
+						} else {
+							binary += '0'
+							steps += `${remaining} < ${power}, so use 0<br>`
+						}
+					})
+
+					resultValue.textContent = binary
+					resultSteps.innerHTML = steps
+				} else {
+					const binary = input
+					if (!/^[01]+$/.test(binary)) {
+						alert('Please enter a valid binary number (only 0s and 1s)')
+						return
+					}
+
+					let denary = 0
+					let steps = '<strong>Steps:</strong><br>'
+					const bits = binary.split('').reverse()
+					const calculations = []
+
+					bits.forEach((bit, idx) => {
+						const value = parseInt(bit) * Math.pow(2, idx)
+						if (bit === '1') {
+							denary += value
+							calculations.push(`2^${idx} = ${Math.pow(2, idx)}`)
+						}
+					})
+
+					steps += `Add up powers of 2 where bit is 1:<br>${calculations.join(' + ')} = ${denary}`
+
+					resultValue.textContent = denary
+					resultSteps.innerHTML = steps
+				}
+
+				resultDiv.classList.remove('hidden')
+			}
+
+			document.getElementById('filesizeConvertBtn').addEventListener('click', convertFileSize)
+
+			function convertFileSize() {
+				const value = parseFloat(document.getElementById('filesizeValue').value)
+				const fromUnit = document.getElementById('filesizeFromUnit').value
+				const toUnit = document.getElementById('filesizeToUnit').value
+				const resultDiv = document.getElementById('filesizeResult')
+				const resultValue = document.getElementById('filesizeResultValue')
+
+				if (isNaN(value) || value < 0) {
+					alert('Please enter a valid positive number')
+					return
+				}
+
+				const units = {
+					bit: 1,
+					byte: 8,
+					KiB: 8 * 1024,
+					MiB: 8 * 1024 * 1024,
+					GiB: 8 * 1024 * 1024 * 1024,
+					TiB: 8 * 1024 * 1024 * 1024 * 1024,
+				}
+
+				const bits = value * units[fromUnit]
+				const result = bits / units[toUnit]
+
+				resultValue.textContent = `${result.toFixed(6)} ${toUnit}`
+				resultDiv.classList.remove('hidden')
+			}
+
+			// Initialize
+			initFlashcards()
+			initQuiz()
+
+			// Back to Top functionality
+			const backToTopBtn = document.getElementById('backToTop')
+
+			window.addEventListener('scroll', () => {
+				if (window.pageYOffset > 300) {
+					backToTopBtn.style.display = 'flex'
+				} else {
+					backToTopBtn.style.display = 'none'
+				}
+			})
+
+			backToTopBtn.addEventListener('click', () => {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth',
+				})
+			})
+		</script>
+		<!-- Back to Top Button -->
+		<button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
+	</body>
+</html>
